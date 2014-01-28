@@ -66,6 +66,7 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
+    	alert("bindEvents");
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
     
@@ -76,6 +77,8 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+    
+    	alert("onDeviceReady");
         myApp = new MyApplication();
         
         // masque la barre de status sous iOS7
@@ -110,6 +113,9 @@ function MyApplication(){
   
   // constructeur
   this.initialise = function() {
+  
+    
+    	alert("MyApplication:initialise");
     //navigator.splashscreen.show();
     connexion = new Connexion();    
     
@@ -138,6 +144,8 @@ function MyApplication(){
   }
   
   this.verifieDonneesServeur = function(){
+  
+    	alert("MyApplication:verifieDonneesServeur");
     $("#eventManager").on('versionVerifiee', function() { onVersionVerifiee(); } );
     
     if(!connexion.verifieVersion())

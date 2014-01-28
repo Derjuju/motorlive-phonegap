@@ -31,6 +31,8 @@ function Connexion() {
     {
       etatApplication = true;
       
+    	alert("Connexion:verifieVersion");
+      
         $.ajax({
                   type: 'POST',
                   url: webservice_version,
@@ -65,6 +67,8 @@ function Connexion() {
   };
   
   function compareVersionAppEtData(appVersion,dataVersion){
+      
+    	alert("Connexion:compareVersionAppEtData");
     // test si différence de version de l'application
     if(appVersion != self.getAppVersion())
     {
