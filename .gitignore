@@ -1,0 +1,10 @@
+# OS X
+.DS_Store
+www/cordova*
+www/statusbar.js
+/nbproject/private/
+/platforms
+/plugins
+/www/plugins
+/www/spec.html
+/www/spec

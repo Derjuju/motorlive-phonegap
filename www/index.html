@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />      
+	<link rel="stylesheet" type="text/css" href="css/loader.css">
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>motorliveTV</title>
+    </head>
+    <body data-role="page"  class="app container">
+      <!--<div id="app">-->
+      <div id="eventManager"></div>
+      <div id="detailManager"></div>
+        <!-- application : start -->
+      
+          
+          <!-- navigation : start -->
+          <div data-role="navbar" class="navigation">
+            <!-- // menu navigation : start -->
+		<div class="meny">
+                  <div id="wrapperMenu">
+                        <div class="fondListe">
+                          <div id="pullDown">
+                            <span class="pullDownIcon"></span><span class="pullDownLabel">actualiser</span>
+                          </div>
+                          <ul class="menu-list"></ul>
+			</div>	
+                  </div>
+		</div>
+		<!-- // menu navigation : end -->
+          </div>
+          <!-- navigation : end -->
+          
+          <!-- contenu : start -->
+          <div data-role="content" class="contents">
+            <!-- // mainContent : start -->
+            <div class="mainContent">
+              <div class="rubriqueContent">
+                <div class="zoneLogin"></div>
+                <div id="wrapper">
+                  <div class="zoneContenu"></div>
+                </div>
+              </div>
+            </div>
+            <!-- // mainContent : end -->
+          </div>
+          <!-- contenu : start -->
+            
+        <!--</div>-->
+        <!-- application : end -->
+        
+        <!-- javascript : start -->
+          <!-- dev local : start -->
+          <!-- // pour prod : phonegap.js
+                  pour dev  : cordova.js
+          -->
+          <script type="text/javascript" src="phonegap.js"></script>
+          
+         <!-- dev local : end -->
+        
+        <script data-main="js/app" src="js/require.js"></script>
+        <!-- javascript : end -->
+    </body>
+</html>

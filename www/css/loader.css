@@ -1,0 +1,77 @@
+.bowlG{
+	bottom: 0px;
+	position: absolute;
+	left: 50%;
+width:130px;
+height:130px;
+}
+
+.ball_holderG{
+position:absolute;
+width:130px;
+height:130px;
+left:6px;
+top:-16px;
+-webkit-animation-name:ball_moveG;
+-webkit-animation-duration:.8s;
+-webkit-animation-iteration-count:infinite;
+-webkit-animation-timing-function:linear;
+}
+
+
+
+@-webkit-keyframes ball_moveG{
+	0%{ -webkit-transform:rotate(0deg)}
+	100%{ -webkit-transform:rotate(360deg)}
+}
+
+
+.ball {
+	background-color: rgba(0,0,0,0);
+	border:5px solid rgba(0,183,229,0.9);
+	opacity:.9;
+	border-top:5px solid rgba(0,0,0,0);
+	border-left:5px solid rgba(0,0,0,0);
+	border-radius:50px;
+	box-shadow: 0 0 35px #2187e7;
+	width:50px;
+	height:50px;
+	margin:0 auto;
+	-moz-animation:spin 1s linear infinite;
+	-webkit-animation:spin 1s linear infinite;
+	bottom:0px;
+}
+.ball.alignBottomCenter {
+	bottom: 50px;
+	position: absolute;
+	left: 50%;
+}
+.ball1 {
+	background-color: rgba(0,0,0,0);
+	border:5px solid rgba(0,183,229,0.9);
+	opacity:.9;
+	border-top:5px solid rgba(0,0,0,0);
+	border-left:5px solid rgba(0,0,0,0);
+	border-radius:50px;
+	box-shadow: 0 0 35px #2187e7;
+	width:50px;
+	height:50px;
+	margin:0 auto;
+	-moz-animation:spin 1s linear infinite;
+	-webkit-animation:spin 1s linear infinite;
+	bottom:0px;
+}
+.ball1.alignBottomCenter {
+	bottom: 50px;
+	position: absolute;
+	left: 50%;
+}
+
+@-moz-keyframes spin {
+	0% { -moz-transform:rotate(0deg); }
+	100% { -moz-transform:rotate(360deg); }
+}
+@-webkit-keyframes spin {
+	0% { -webkit-transform:rotate(0deg); }
+	100% { -webkit-transform:rotate(360deg);}
+}
