@@ -44,8 +44,8 @@ function ContenuPrincipal() {
     self.premierChargement = true;
     
     self.largeurEcran = Math.floor(window.innerWidth * 0.9);
-    self.largeurVignette = Math.floor(self.largeurEcran * 0.5);
-    self.hauteurVignette = Math.floor(400 * self.largeurVignette / 300);
+    self.largeurVignette = self.largeurEcran;//Math.floor(self.largeurEcran * 0.5);
+    self.hauteurVignette = Math.floor(170 * self.largeurVignette / 300);
     
     //updateHeightInner();
     
@@ -134,14 +134,15 @@ function ContenuPrincipal() {
     
     zoneCible.html(html);
     
-    zoneCible.find('img').bind('click', function(){ /*clickSurVignette(this);*/ });
+    zoneCible.find('img').bind('click', function(){ clickSurVignette(this); });
     
     var zoneRetourMenu;
-    if(typeContenu == "accueil") {
+    /*if(typeContenu == "accueil") {
       zoneRetourMenu = self.zoneContenuSelector.find('#retourMenuAccueil a');
     }else{
       zoneRetourMenu = self.zoneContenuSelector.find('#retourMenu a');
-    }
+    }*/
+    zoneRetourMenu = $('#retourMenu a');
     zoneRetourMenu.bind('click', function(event){ 
       event.preventDefault();
       self.parent.menuNav.ouvreMenu();
@@ -238,15 +239,15 @@ function ContenuPrincipal() {
       
       var idShare = elementVignette["id"];
             
-      var titre = elementVignette["texte"].split('<br>')[0];
+      var titre = elementVignette["titre"].split('<br>')[0];
       var reg=new RegExp("(<br>)", "g")
       self.messagePerso = "";//elementVignette["texte"].replace(reg, ' ');
       
-      var imagePreview = cdn_visuel+'images/preview/'+elementVignette["preview"];
-      var imageVierge = cdn_visuel+'images/image/'+elementVignette["preview"];
+      //var imagePreview = cdn_visuel+'images/preview/'+elementVignette["preview"];
+      //var imageVierge = cdn_visuel+'images/image/'+elementVignette["preview"];
       
       // customisation de la fiche detail
-      //self.detailSelector.find('.titre').html('<h1>'+titre+'...</h1>');
+      self.detailSelector.find('.titre').html('<h1>'+titre+'...</h1>');
       //self.detailSelector.find('.titre').html('<h1>&nbsp;</h1>');
       
       // modification dimension en fonction du téléphone
@@ -254,17 +255,24 @@ function ContenuPrincipal() {
       var hauteurPossible = window.innerHeight - hauteurElementsUI;
       var largeurPossible = window.innerWidth;
       
-      var largeurImposee = 240;
-      var hauteurImposee = 320;
+      var largeurImposee = 300;
+      var hauteurImposee = 170;
       
-      if(largeurPossible > 300){
-        if(hauteurPossible > 400){
-          largeurImposee = 300;
-          hauteurImposee = 400;
+      if(largeurPossible > 560){
+        if(hauteurPossible > 315){
+          largeurImposee = 560;
+          hauteurImposee = 315;
         }
       }
       
-      self.detailSelector.find('.visuel').html('<img src="'+imagePreview+'" width="'+largeurImposee+'" height="'+hauteurImposee+'">');
+      
+      var codeVideo = elementVignette["idvideo"];
+      var playerVideo = '';
+      if(elementVignette["videosrc"] == "youtube")
+      {
+        playerVideo = '<iframe width="'+largeurImposee+'" height="'+hauteurImposee+'" src="//www.youtube.com/embed/'+codeVideo+'" frameborder="0" allowfullscreen></iframe> ';
+      }
+      self.detailSelector.find('.visuel').html(playerVideo);
       
       // liaison des boutons
       self.detailSelector.find('.fermer a').bind('click', function(event){
@@ -272,37 +280,9 @@ function ContenuPrincipal() {
         fermerDetail(element);
       });
       
-      self.detailSelector.find('.envoyer a').bind('click', function(event){
-        event.preventDefault();
-        if($(this).hasClass('share'))
-        {
-          ouvreChoixPartage(element,idElement);
-        }else if($(this).hasClass('share-sms'))
-        {
-          ouvreChoixPartage(element,idElement);
-        }else if($(this).hasClass('share-mail'))
-        {
-          envoiChoixParMail(element,idElement);
-        }else if($(this).hasClass('share-fb'))
-        {
-          ouvreChoixPartage(element,idElement);
-        }else if($(this).hasClass('share-tw'))
-        {
-          ouvreChoixPartage(element,idElement);
-        }
-        
-        $.ajax({
-                  type: 'POST',
-                  url: webservice_stats,
-                  data: {id:idShare},
-                  async:true
-                })
-        
-      });
-      
       self.detailSelector.addClass('affiche');
       self.detailSelector.height(window.innerHeight);
-      self.detailSelector.animate({'opacity':1},500);
+      self.detailSelector.animate({'opacity':1, 'left':'0%'},500);
     });
   }
   
@@ -313,7 +293,7 @@ function ContenuPrincipal() {
     var vignette = $(element);
     vignette.removeClass('selected');
     
-    self.detailSelector.animate({'opacity':0},500, function(){
+    self.detailSelector.animate({'opacity':0, 'left':'100%'},500, function(){
       self.detailSelector.removeClass('affiche');
       
       self.detailSelector.find('.fermer a').unbind('click');

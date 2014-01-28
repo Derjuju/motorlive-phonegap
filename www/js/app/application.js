@@ -21,7 +21,7 @@
 // DEPENDANCES
 //---------------------------------
 var APP_PROD = true;
-APP_PROD = false;
+//APP_PROD = false;
 
 
 //---------------------------------

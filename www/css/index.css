@@ -110,7 +110,7 @@ html.csstransforms3d .navigation {
 }
 
 .meny {
-  background-color: #FFF;
+  background-color: #000;
 	display: block; 
 	/*overflow: auto;*/
 	/*left:-10px;*/
@@ -272,7 +272,7 @@ html.csstransforms3d .meny ul li.cache {
         
 /* zone de contenu */
 .contents {
-  background: #F6F8F1;
+  background: #000000;
   padding: 0px 0px;
   width: 100%;
   height: 100%;
@@ -315,10 +315,11 @@ html.csstransforms3d #retourMenuAccueil{
 
 
 #retourMenuAccueil, #retourMenu {
-  background-color: #cccccc;
+  position: absolute;
+  z-index: 10;
+  width: 100%; 
 }
 #retourMenuAccueil a img, #retourMenu a img {
-  height: 50px;
   padding-left: 10px;
   padding-top: 10px;
 }
@@ -391,6 +392,7 @@ html.csstransforms3d #retourMenuAccueil{
 .mainContent .infoRubrique{
   width:90%;
   margin:0 auto;
+  display: none;
 }
 .mainContent .infoRubrique h1{
   font-weight: normal;
@@ -398,7 +400,7 @@ html.csstransforms3d #retourMenuAccueil{
   font-size: 33px;
   margin-top: 5px;
   margin-bottom: 20px;
-  display:hidden;
+  display:none;
 }
 
 .mainContent .infoRubrique h1 span{
@@ -430,7 +432,7 @@ html.csstransforms3d #retourMenuAccueil{
   opacity:0;
   display:none;
   position: absolute;
-  
+  left:100%;
   z-index: 100;
 }
 #detailManager.affiche{
@@ -443,7 +445,7 @@ html.csstransforms3d #retourMenuAccueil{
 #detailManager .fondDetail{
   /*background-color: #000000;
   opacity: 0.5;*/
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.9);/*7);*/
   
   display:block;
   width:100%;
@@ -481,7 +483,7 @@ html.csstransforms3d #retourMenuAccueil{
 }
 
 #detailManager .titre{
-  display:none;/*block;*/
+  display:block;
   /*width:300px;
   height:400px;*/
   width:80%;
@@ -498,10 +500,10 @@ html.csstransforms3d #retourMenuAccueil{
   
   font-weight: normal;
   text-transform: none;
-  font-size: 28px;
-  line-height: 35px;
+  font-size: 18px;
+  line-height: 21px;
   margin: 0 0 10px 0;
-  padding: 15px 0 15px 25px;
+  padding: 45px 0 5px 25px;
   
   color:#ffffff;
 }
@@ -512,6 +514,7 @@ html.csstransforms3d #retourMenuAccueil{
   float:left;
   z-index: 2;
   margin-top:10px;
+  text-align: center;
 }
 
 #detailManager .visuel img{
@@ -582,20 +585,20 @@ html.csstransforms3d #retourMenuAccueil{
  *
  */
 #pullDown, #pullUp {
-	background:#fff;
+	background:#000;
 	height:44px;
 	line-height:34px;
 	padding:5px 0px;
-	border-bottom:1px solid #ccc;
+	border-bottom:1px solid #000;
 	/*font-weight:bold;*/
 	font-size:14px;
-	color:#888;
+	color:#fff;
 }
 #pullDown .pullDownIcon, #pullUp .pullUpIcon  {
 	display:block; float:left;
 	width:40px;
         height:40px;
-        background: #fff url("../img/ui/pull-icon@2x.png") 0 0 no-repeat;
+        background: #000 url("../img/ui/pull-icon@2x.png") 0 0 no-repeat;
        
 	-webkit-background-size:40px 80px; background-size:40px 80px;
 	-webkit-transition-property:-webkit-transform;
