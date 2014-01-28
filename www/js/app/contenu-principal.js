@@ -268,9 +268,12 @@ function ContenuPrincipal() {
       
       var codeVideo = elementVignette["idvideo"];
       var playerVideo = '';
+      var urlSrcVideo = '';
       if(elementVignette["videosrc"] == "youtube")
       {
-        playerVideo = '<iframe width="'+largeurImposee+'" height="'+hauteurImposee+'" src="//www.youtube.com/embed/'+codeVideo+'" frameborder="0" allowfullscreen></iframe> ';
+        //playerVideo = '<iframe width="'+largeurImposee+'" height="'+hauteurImposee+'" src="//www.youtube.com/embed/'+codeVideo+'" frameborder="0" allowfullscreen></iframe> ';
+        urlSrcVideo = 'http://www.youtube.com/v/'+codeVideo;
+        playerVideo = '<object width="'+largeurImposee+'" height="'+hauteurImposee+'"><param name="movie" value="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR"><param name="allowFullScreen" value="true"><param name="allowscriptaccess" value="always"><embed src="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="'+largeurImposee+'" height="'+hauteurImposee+'"/></object>';
       }
       self.detailSelector.find('.visuel').html(playerVideo);
       
