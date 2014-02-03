@@ -285,8 +285,9 @@ function ContenuPrincipal() {
   
   function ouvreRecherche(){
     rechercheOuverte = true;
-    $("#formRecherche").animate({'right':'-5%'},500, function(){
-      $("#motcle").focus();
+    $("#formRecherche").animate({'right':'0%'},500, function(){  
+        $("#motcle").focus();
+        $("#motcle").setSelectionRange && $("#motcle").setSelectionRange(0, 0);    
     });
   }
   
@@ -310,6 +311,7 @@ function ContenuPrincipal() {
       if($("#motcle").val().length > 1)
       {
         $("#motcle").focusout();
+        $("#motcle").blur();
         $.ajax({
           type: 'POST',
           url: webservice_recherche,
