@@ -33,7 +33,7 @@ function FicheDetail() {
   
   
   // constructeur
-  this.initialise = function(_parent, element) {
+  this.initialise = function(_parent, element, _objetFiche) {
     self.parent = _parent;
     var vignette = $(element);
     self.indiceElement = vignette.attr('data-id');
@@ -42,7 +42,7 @@ function FicheDetail() {
     self.detailSelector.load('js/tpl/detail.html', function(){
       // récuperation de la fiche de l'élément
       var idElement = self.indiceElement;
-      self.objetFiche = donneesJson[idElement];
+      self.objetFiche = _objetFiche;//donneesJson[idElement];
       
       var idShare = self.objetFiche["id"];
       

@@ -30,6 +30,7 @@ var APP_PROD = true;
 var myApp;
 var entries, entriesLink, entriesLabel, entriesTitle, entriesTpl;
 var donneesJson;
+var donneesJsonRecherche;
 
 var permanentStorage = window.localStorage;
 
@@ -46,6 +47,7 @@ var IS_ANDROID = navigator.userAgent.match( /android/gi ),
 var website_app = "http://motorlive.derjuju.com";
 var webservice_version = "http://motorlive.derjuju.com/services/checkVersion/";
 var webservice_update = "http://motorlive.derjuju.com/services/update/";
+var webservice_recherche = "http://motorlive.derjuju.com/services/recherche/";
 var webservice_stats = "http://motorlive.derjuju.com/services/stats/";
 
 var cdn_visuel_menu = "http://motorlive.derjuju.com/";

@@ -36,6 +36,10 @@ function ContenuPrincipal() {
   var largeurVignette;
   var hauteurVignette;
   
+  var rechercheOuverte;
+  
+  var donneesJsonListing;
+  
   // constructeur
   this.initialise = function(_parent) {
     self.parent = _parent;
@@ -45,6 +49,8 @@ function ContenuPrincipal() {
     
     self.premierChargement = true;
     
+    self.rechercheOuverte = false;
+    
     self.largeurEcran = Math.floor(window.innerWidth * 0.9);
     self.largeurVignette = self.largeurEcran;//Math.floor(self.largeurEcran * 0.5);
     self.hauteurVignette = Math.floor(170 * self.largeurVignette / 300);
@@ -53,6 +59,32 @@ function ContenuPrincipal() {
     
     //charge affichage de la rubrique Actuelle;
     //this.chargeRubriqueActuelle();
+    
+    
+    var zoneRetourMenu;
+    zoneRetourMenu = $('#retourMenu a');
+    zoneRetourMenu.bind('click', function(event){ 
+      event.preventDefault();
+      self.parent.menuNav.ouvreMenu();
+    });
+    
+    var zoneRechercheMenu;
+    zoneRechercheMenu = $('#rechercheMenu a');
+    zoneRechercheMenu.bind('click', function(event){ 
+      event.preventDefault();
+      if(rechercheOuverte){
+        lanceRecherche();
+      }else{
+        ouvreRecherche();
+      }
+    });
+    
+    // attache l'action de soumission de la recherche
+    $("form.recherche").submit(function() {
+        //alert($("[name=input]").val());
+        lanceRecherche();
+        return false;
+    });
   };
   
   this.chargeRubriqueActuelle = function(){
@@ -77,6 +109,10 @@ function ContenuPrincipal() {
       templateAAfficher = entriesTpl[itemIndice]+'.html';
       typeContenu = entriesTpl[itemIndice];
       
+      // on referme la zone de recherche
+      if(rechercheOuverte){
+        fermeRecherche();
+      }
 
       self.zoneContenuSelector.load('js/tpl/'+templateAAfficher, function(){
         //navigator.notification.loadingStop();
@@ -120,38 +156,44 @@ function ContenuPrincipal() {
     }*/
     
     
+    
     var zoneCible = self.zoneContenuSelector.find('.visuels');
-    //zoneCible.addClass('small');
-    var html = "";
-    var position = 0;
+    
+    //self.donneesJsonListing = donneesJson;
+    
+    var donneesTemp = new Array();
     for(var i = 0; i<donneesJson.length; i++)
     {
       var cat = donneesJson[i]['cat'];
       if($.inArray(rubriqueCherchee, cat) > -1)
       {
-        html += insereVignette(donneesJson[i],i,position);
-        position++;
+        donneesTemp.push(donneesJson[i]);
       }
+    }
+    
+    construitContenuListing(donneesTemp);
+  }
+  
+  function construitContenuListing(_donneesJson){
+    self.donneesJsonListing = _donneesJson;
+    
+    var zoneCible = self.zoneContenuSelector.find('.visuels');
+    //zoneCible.addClass('small');
+    var html = "";
+    var position = 0;
+    for(var i = 0; i<self.donneesJsonListing.length; i++)
+    {
+      html += insereVignette(self.donneesJsonListing[i],i,position);
+      position++;
     }
     
     zoneCible.html(html);
     
     zoneCible.find('img').bind('click', function(){ clickSurVignette(this); });
     
-    var zoneRetourMenu;
-    /*if(typeContenu == "accueil") {
-      zoneRetourMenu = self.zoneContenuSelector.find('#retourMenuAccueil a');
-    }else{
-      zoneRetourMenu = self.zoneContenuSelector.find('#retourMenu a');
-    }*/
-    zoneRetourMenu = $('#retourMenu a');
-    zoneRetourMenu.bind('click', function(event){ 
-      event.preventDefault();
-      self.parent.menuNav.ouvreMenu();
-    });
-    
     
     contenuPret();
+    
   }
   
   function insereVignette(elementVignette,indice,position){
@@ -165,7 +207,7 @@ function ContenuPrincipal() {
     
     var zoneCible = self.zoneContenuSelector.find('.visuels');
     zoneCible.find('img').each(function(){      
-      $(this).attr('src', cdn_visuel+donneesJson[$(this).attr('data-id')]["id"]+'/'+donneesJson[$(this).attr('data-id')]["preview"]) ;     
+      $(this).attr('src', cdn_visuel+self.donneesJsonListing[$(this).attr('data-id')]["id"]+'/'+self.donneesJsonListing[$(this).attr('data-id')]["preview"]) ;     
     });
     
   }
@@ -237,73 +279,61 @@ function ContenuPrincipal() {
     vignette.addClass('selected');
     
     ficheDetail = new FicheDetail();
-    ficheDetail.initialise(self, vignette);
+    ficheDetail.initialise(self, vignette, self.donneesJsonListing[vignette.attr('data-id')]);
   }
-  /*
-  function modePersonnalisation(element){
-    // désactive navigation
-    self.parent.menuNav.desactiveMenu();
-    
-    var vignette = $(element);
-    vignette.addClass('selected');
-    self.detailSelector.load('js/tpl/detail.html', function(){
-      // récuperation de la fiche de l'élément
-      var idElement = vignette.attr('data-id');
-      var elementVignette = donneesJson[idElement];
-      
-      var idShare = elementVignette["id"];
-            
-      var titre = elementVignette["titre"].split('<br>')[0];
-      var reg=new RegExp("(<br>)", "g")
-      self.messagePerso = "";//elementVignette["texte"].replace(reg, ' ');
-      
-      //var imagePreview = cdn_visuel+'images/preview/'+elementVignette["preview"];
-      //var imageVierge = cdn_visuel+'images/image/'+elementVignette["preview"];
-      
-      // customisation de la fiche detail
-      self.detailSelector.find('.titre').html('<h1>'+titre+'...</h1>');
-      //self.detailSelector.find('.titre').html('<h1>&nbsp;</h1>');
-      
-      // modification dimension en fonction du téléphone
-      var hauteurElementsUI = 131;
-      var hauteurPossible = window.innerHeight - hauteurElementsUI;
-      var largeurPossible = window.innerWidth;
-      
-      var largeurImposee = 300;
-      var hauteurImposee = 170;
-      
-      if(largeurPossible > 560){
-        if(hauteurPossible > 315){
-          largeurImposee = 560;
-          hauteurImposee = 315;
-        }
-      }
-      
-      
-      var codeVideo = elementVignette["idvideo"];
-      var playerVideo = '';
-      var urlSrcVideo = '';
-      if(elementVignette["videosrc"] == "youtube")
-      {
-        //playerVideo = '<iframe width="'+largeurImposee+'" height="'+hauteurImposee+'" src="http://www.youtube.com/embed/'+codeVideo+'" frameborder="0" allowfullscreen></iframe> ';
-        urlSrcVideo = 'http://www.youtube.com/v/'+codeVideo;
-        playerVideo = '<object width="'+largeurImposee+'" height="'+hauteurImposee+'"><param name="movie" value="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR"><param name="allowFullScreen" value="true"><param name="allowscriptaccess" value="always"><embed src="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="'+largeurImposee+'" height="'+hauteurImposee+'"/></object>';
-      }
-      self.detailSelector.find('.visuel').html(playerVideo);
-      
-      // liaison des boutons
-      self.detailSelector.find('.fermer a').bind('click', function(event){
-        event.preventDefault();
-        fermerDetail(element);
-      });
-      
-      self.detailSelector.addClass('affiche');
-      self.detailSelector.height(window.innerHeight);
-      self.detailSelector.animate({'opacity':1, 'left':'0%'},500);
+  
+  
+  function ouvreRecherche(){
+    rechercheOuverte = true;
+    $("#formRecherche").animate({'right':'0%'},500, function(){
+      $("#motcle").focus();
     });
   }
-  */
   
+  function fermeRecherche(){
+    rechercheOuverte = false;
+    $("#formRecherche").animate({'right':'-70%'},500);
+  }
+  
+  function lanceRecherche(){
+    console.log("motcle : "+$("#motcle").val());
+    
+    /*
+     self.zoneContenuSelector.load('js/tpl/'+templateAAfficher, function(){
+        //navigator.notification.loadingStop();
+        contenuRempli(typeContenu);
+      });
+     */
+    
+    if($("#motcle").val() != "")
+    {
+      if($("#motcle").val().length > 1)
+      {
+        $.ajax({
+          type: 'POST',
+          url: webservice_recherche,
+          data: {motcle:$("#motcle").val()},
+          dataType: "json",
+          async:true
+        }).done(function(objJSon){       
+          
+            if(objJSon["contenu"].length > 0)
+            {
+              self.zoneContenuSelector.load('js/tpl/resultat.html', function(){
+                construitContenuListing(objJSon["contenu"]);
+                objJSon = null;
+              });
+            }
+          
+          
+              
+              
+            }
+        );
+      }
+    }
+    
+  }
   
   
   // à déplacer dans la partie gestion de contenu
