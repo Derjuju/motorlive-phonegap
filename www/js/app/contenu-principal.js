@@ -26,6 +26,8 @@ function ContenuPrincipal() {
   var detailSelector = null;
   var parent = null;
   
+  var ficheDetail = null;
+  
   var premierChargement;
   
   var messagePerso;
@@ -226,6 +228,18 @@ function ContenuPrincipal() {
     
   }
   
+  
+  function modePersonnalisation(element){
+    // désactive navigation
+    self.parent.menuNav.desactiveMenu();
+    
+    var vignette = $(element);
+    vignette.addClass('selected');
+    
+    ficheDetail = new FicheDetail();
+    ficheDetail.initialise(self, vignette);
+  }
+  /*
   function modePersonnalisation(element){
     // désactive navigation
     self.parent.menuNav.desactiveMenu();
@@ -288,80 +302,9 @@ function ContenuPrincipal() {
       self.detailSelector.animate({'opacity':1, 'left':'0%'},500);
     });
   }
-  
-  function fermerDetail(element){
-    // désactive navigation
-    self.parent.menuNav.activeMenu();
-    
-    var vignette = $(element);
-    vignette.removeClass('selected');
-    
-    self.detailSelector.animate({'opacity':0, 'left':'100%'},500, function(){
-      self.detailSelector.removeClass('affiche');
-      
-      self.detailSelector.find('.fermer a').unbind('click');
-      
-      //vide detail
-      self.detailSelector.html('');
-    });
-  }
-  
-  function ouvreChoixPartage(element,idElement){
-    var vignette = $(element);
-    var elementVignette = donneesJson[idElement];
-    
-    var imageToShare = cdn_visuel+elementVignette["id"]+'/'+elementVignette["preview"];
-        
-        //window.plugins.socialsharing.share(null, null, imageToShare);
-        var socialShare = window.plugins.socialsharing;
-        socialShare.available(function(isAvailable) {
-          if (isAvailable) {
-            
-            var imageToShare = cdn_visuel+elementVignette["id"]+'/'+elementVignette["preview"];
-            
-            //self.messagePerso = '<br><img src="'+imageToShare+'"><br>Offrez, vous aussi, une bonne (ou mauvaise) r&eacute;solution : <a href="http://wishit.freetouch.fr">wishit.freetouch.fr</a>';
-            self.messagePerso = "Offrez, vous aussi, une bonne (ou mauvaise) résolution";
-            
-            //share('message', 'sujet', 'image', 'site web');
-            window.plugins.socialsharing.share(self.messagePerso, 'Bonne année et...', imageToShare, website_app);
-          }
-        });
-    
-  }
-  
-  function envoiChoixParSMS(){ //element,idElement){
-    //var vignette = $(element);
-    //var elementVignette = donneesJson[idElement];
-    
-    //var imageToShare = cdn_visuel+'images/preview/'+elementVignette["preview"];
-    //var imageToShare = cdn_visuel+'images/preview/requin.jpg';
-    //self.messagePerso, 'Meilleurs voeux 2014', imageToShare, website_app);
-    //window.location.href = "sms:contactno?body=Meilleurs voeux 2014";
-  }
+  */
   
   
-  function envoiChoixParMail(element,idElement){
-    var vignette = $(element);
-    var elementVignette = donneesJson[idElement];
-    
-    var imageToShare = cdn_visuel+elementVignette["id"]+'/'+elementVignette["preview"];
-    
-    var mailShare = plugin.email;
-    mailShare.isServiceAvailable(function(isAvailable) {
-      if (isAvailable) {
-        mailShare.open({
-            to:      [],
-            cc:      [],
-            bcc:     [],
-            subject: 'Bonne année et...',
-            body:    '<br><img src="'+imageToShare+'"><br>Offrez, vous aussi, une bonne (ou mauvaise) r&eacute;solution : <a href="http://wishit.freetouch.fr">wishit.freetouch.fr</a>',
-            isHtml:  true
-        });
-      }
-    });
-    
-    
-  }
   
   // à déplacer dans la partie gestion de contenu
   function updateHeightInner() {
