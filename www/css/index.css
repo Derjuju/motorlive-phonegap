@@ -338,7 +338,7 @@ html.csstransforms3d #retourMenuAccueil{
 #formRecherche{
   position: absolute;
   z-index: 8;
-  right:-70%;
+  right:-90%;
   height:40px;
   background-color: #000000;
   border:1px solid #000000;
@@ -445,7 +445,7 @@ html.csstransforms3d #retourMenuAccueil{
 
 .mainContent .infoRubrique.rechercheResultat{
   display:block;
-  height:50px;
+  height:54px;
 }
 
 

@@ -285,14 +285,14 @@ function ContenuPrincipal() {
   
   function ouvreRecherche(){
     rechercheOuverte = true;
-    $("#formRecherche").animate({'right':'0%'},500, function(){
+    $("#formRecherche").animate({'right':'-5%'},500, function(){
       $("#motcle").focus();
     });
   }
   
   function fermeRecherche(){
     rechercheOuverte = false;
-    $("#formRecherche").animate({'right':'-70%'},500);
+    $("#formRecherche").animate({'right':'-90%'},500);
   }
   
   function lanceRecherche(){
@@ -309,6 +309,7 @@ function ContenuPrincipal() {
     {
       if($("#motcle").val().length > 1)
       {
+        $("#motcle").focusout();
         $.ajax({
           type: 'POST',
           url: webservice_recherche,
