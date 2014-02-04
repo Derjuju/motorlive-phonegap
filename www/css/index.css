@@ -287,7 +287,13 @@ body.menuOuvert .contents {
   /*width:85%;*/ /* trop lent sur iPhone 4 */
 }
 
-.mainContent{
+#wrapperAllContent{
+  position:relative;
+  z-index:1;
+  left:0px;
+}
+
+.mainContent, .mainContentRecherche, #detailManager{
   position:relative;
   z-index:1;
   /*width:97%;
@@ -300,9 +306,25 @@ body.menuOuvert .contents {
 body.menuOuvert .mainContent {
   margin-left:0%;*/
   width: 100%;
+  
+  float: left;
 }
 
-.mainContent .zoneContenu{  
+.mainContentRecherche{
+  background-color:#e1e1e1;
+}
+
+#wrapper{
+  width: 100%;
+  float:left;
+}
+
+#wrapperRecherche{
+  width: 100%;
+  float:left;
+}
+
+.mainContent .zoneContenu, .mainContentRecherche .zoneContenu{  
   /*overflow-x: hidden;
   overflow-y: scroll;*/
   position:relative;
@@ -313,15 +335,30 @@ html.csstransforms3d #retourMenuAccueil{
   /*display:none;*/
 }
 
+.fondHeader{
+  background: transparent url(../img/fond/degrad_2.png) 0 0 repeat-x;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 50px;
+}
 
-#retourMenuAccueil, #retourMenu {
+
+#retourMenuAccueil, #retourMenu, #retourArriere {
   position: absolute;
   z-index: 10;
   left:0px; 
 }
-#retourMenuAccueil a img, #retourMenu a img {
+#retourMenuAccueil a img, #retourMenu a img, #retourArriere a img {
   padding-left: 10px;
   padding-top: 10px;
+}
+
+#retourArriere {
+  visibility:hidden;
 }
 
 #rechercheMenu{
@@ -362,30 +399,6 @@ html.csstransforms3d #retourMenuAccueil{
   color: #FFF;
   font-size: 20px;
   line-height: 23px;
-}
-
-.mainContent .messageWelcome{
-  width:90%;
-  margin:0 auto;
-}
-.mainContent .messageWelcome h1{
-  font-weight: normal;
-  text-transform: none;
-  font-size: 33px;
-  margin-top: 0px;
-  padding-top: 20px;
-}
-.mainContent .messageWelcome p{
-  font-size: 18px;
-  text-transform: none;
-}
-.mainContent .messageWelcome h2{
-  font-weight: normal;
-  font-size: 20px;
-}
-
-.mainContent .messageWelcome span.rayerTexte{
-  text-decoration: line-through;
 }
 
 
@@ -448,34 +461,33 @@ html.csstransforms3d #retourMenuAccueil{
   display: block;
 }
 
-.mainContent .infoRubrique.rechercheResultat{
+.mainContentRecherche .infoRubrique.rechercheResultat{
   display:block;
   height:54px;
 }
 
 
-.mainContent .visuels{
+.mainContent .visuels, .mainContentRecherche .visuels{
   position:relative;
   /*clear:both;  */
 }
 
-.mainContent .visuels img{
+.mainContent .visuels img, .mainContentRecherche .visuels img{
   width:100%;
   /*float:left;*/
   margin-top: -3px;
 }
-.mainContent .visuels.small img{
+.mainContent .visuels.small img, .mainContentRecherche .visuels.small img{
   width:50%; height:50%;
 }
 
-.mainContent .visuels img.selected{
+.mainContent .visuels img.selected, .mainContentRecherche .visuels img.selected{
   
 }
 
 
-#detailManager{
+/*#detailManager{
   opacity:0;
-  /*display:none;*/
   display:block;
   position: absolute;
   left:100%;
@@ -486,12 +498,14 @@ html.csstransforms3d #retourMenuAccueil{
   width:100%;
   height:100%;
   overflow:hidden;
-}
+}*/
 
 #detailManager .fondDetail{
   /*background-color: #000000;
   opacity: 0.5;*/
-  background-color: rgba(0, 0, 0, 0.9);/*7);*/
+  /*background-color: rgba(0, 0, 0, 0.9);/*7);*/
+  
+  background-color:#e1e1e1;
   
   display:block;
   width:100%;

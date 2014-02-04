@@ -28,8 +28,7 @@
     </head>
     <body data-role="page"  class="app container">
       <!--<div id="app">-->
-      <div id="eventManager"></div>
-      <div id="detailManager"></div>
+      <div id="eventManager"></div>      
         <!-- application : start -->
       
           
@@ -52,27 +51,48 @@
           
           <!-- contenu : start -->
           <div data-role="content" class="contents">
-            <!-- // mainContent : start -->
-            <div class="mainContent">
-              <div class="rubriqueContent">
-                
-                <div class="zoneLogin"></div>
-                
-                <div id="retourMenu"><a href="#retourMenu"><img src="img/ui/bt-menu.png" height="37" ></a></div>
-                <div id="rechercheMenu"><a href="#rechercheMenu"><img src="img/ui/bt-recherche.png" height="37" ></a></div>
-                <div id="formRecherche">
-                  <form class="recherche">
-                    <input type="text" id="motcle" name="motcle" value="">
-                    <input type="submit" style="opacity:0;" />
-                  </form>
+            
+            <div class="zoneLogin"></div>
+                <div class="fondHeader">
+                  <div id="retourMenu"><a href="#retourMenu"><img src="img/ui/bt-menu.png" height="37" ></a></div>
+                  <div id="retourArriere"><a href="#retourArriere"><img src="img/ui/fleche-gauche.png" height="37" ></a></div>
+                  <div id="rechercheMenu"><a href="#rechercheMenu"><img src="img/ui/bt-recherche.png" height="37" ></a></div>
+                  <div id="formRecherche">
+                    <form class="recherche">
+                      <input type="text" id="motcle" name="motcle" value="">
+                      <input type="submit" style="opacity:0;" />
+                    </form>
+                  </div>
                 </div>
-                
-                <div id="wrapper">
-                  <div class="zoneContenu"></div>
+            
+            
+            <div id="wrapperAllContent">
+            
+                <!-- // mainContent : start -->
+                <div class="mainContent">
+                  <div class="rubriqueContent">                
+                    <div id="wrapper">
+                      <div class="zoneContenu"></div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+                <!-- // mainContent : end -->
+
+                <!-- // detailManager : start -->
+                <div id="detailManager"></div>
+                <!-- // detailManager : end -->
+
+                <!-- // mainContentRecherche : start -->
+                <div class="mainContentRecherche">
+                    <div id="wrapperRecherche">
+                      <div class="zoneContenu"></div>
+                    </div>
+                </div>
+                <!-- // mainContentRecherche : end -->
+                
             </div>
-            <!-- // mainContent : end -->
+            
+            
           </div>
           <!-- contenu : start -->
             

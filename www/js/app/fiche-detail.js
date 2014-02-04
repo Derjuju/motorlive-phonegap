@@ -92,14 +92,27 @@ function FicheDetail() {
       
       
       // liaison des boutons
-      self.detailSelector.find('.fermer a').bind('click', function(event){
+      /*self.detailSelector.find('.fermer a').bind('click', function(event){
         event.preventDefault();
         fermerDetail(element);
-      });
+      });*/
       
       self.detailSelector.addClass('affiche');
       self.detailSelector.height(window.innerHeight);
-      self.detailSelector.animate({'opacity':1, 'left':'0%'},500);
+      self.detailSelector.width(window.innerWidth);
+      self.parent.ficheDetailOuverte = true;
+      
+      
+      //self.detailSelector.animate({'opacity':1, 'left':'0%'},500);
+      
+      
+      //TweenMax.to(self.detailSelector,1, {left:"0%", opacity:1, ease:Quart.easeInOut});
+      
+      TweenMax.to($("#wrapperAllContent"),1, {left:-window.innerWidth, ease:Quart.easeInOut});
+      
+      $('#retourMenu').css('visibility','hidden');
+      $('#retourArriere').css('visibility','visible');
+      
     });
     
   };
@@ -107,23 +120,26 @@ function FicheDetail() {
   
   
   
-  function fermerDetail(element){
+  /*function fermerDetail(element){
     // désactive navigation
     self.parent.parent.menuNav.activeMenu();
     
     var vignette = $(element);
     vignette.removeClass('selected');
     
-    self.detailSelector.animate({'opacity':0, 'left':'100%'},500, function(){
-      self.detailSelector.removeClass('affiche');
-      
-      self.detailSelector.find('.fermer a').unbind('click');
-      
-      //vide detail
-      self.detailSelector.html('');
-    });
-  }
+    TweenMax.to(self.detailSelector,1, {left:"100%", opacity:0, ease:Quart.easeInOut, onComplete:libereFicheDetail});
+    //self.detailSelector.animate({'opacity':0, 'left':'100%'},500, function(){
+    //  libereFicheDetail();
+    //});
+  }*/
   
+  this.libereFicheDetail = function(){
+    self.detailSelector.removeClass('affiche');
+    //self.detailSelector.find('.fermer a').unbind('click');
+    //vide detail
+    self.detailSelector.html('');
+    self.parent.ficheDetailOuverte = false;
+  };
   
   
   

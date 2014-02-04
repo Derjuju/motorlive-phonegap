@@ -36,7 +36,7 @@ var permanentStorage = window.localStorage;
 
 var rubriqueActuelle = 0;
 
-var myScroll, myScrollMenu;
+var myScroll, myScrollMenu, myScrollRecherche;
 var useTransition3D = true;
 
 var IS_ANDROID = navigator.userAgent.match( /android/gi ),
