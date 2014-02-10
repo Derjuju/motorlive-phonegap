@@ -45,7 +45,7 @@ var IS_ANDROID = navigator.userAgent.match( /android/gi ),
     IS_IOS = navigator.userAgent.match( /(iPad|iPhone|iPod)/i );
     
 // url des services
-var website_app = "http://motorlive.derjuju.com";
+var website_app = "http://www.motorlive.tv/";
 var webservice_version = "http://motorlive.derjuju.com/services/checkVersion/";
 var webservice_update = "http://motorlive.derjuju.com/services/update/";
 var webservice_detail = "http://motorlive.derjuju.com/services/detail/";
@@ -244,7 +244,7 @@ function MyApplication(){
     {
       self.demarrageApplication = false;
       navigator.splashscreen.hide();
-    
+      $("#fondHeaderRecherche").css("display","block");
     
       // masque la barre de status sous iOS7
       if(IS_IOS){

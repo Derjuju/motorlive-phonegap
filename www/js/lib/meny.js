@@ -292,7 +292,13 @@ var Meny = {
 			 * Expands the menu.
 			 */
 			function open() {
-				if( !isOpen ) {
+                                if(parseInt($("#wrapperAllContent").css('left')) < 0) {
+                                  // contenu décalé on ne réouvre pas tout de suite le menu
+                                  // on fait appel à la fonction reculeContenu()
+                                  Meny.dispatchEvent( dom.menu, 'reculeContenu' );
+                                  
+                                  
+                                }else if( !isOpen ) {
 					isOpen = true;
 
 					Meny.addClass( dom.wrapper, 'meny-active' );

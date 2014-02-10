@@ -28,6 +28,7 @@ function ContenuPrincipal() {
   
   var ficheDetail = null;
   var ficheDetailOuverte = false;
+  var etatPanneaux = 0;
   
   var premierChargement;
   
@@ -56,6 +57,8 @@ function ContenuPrincipal() {
     self.largeurVignette = self.largeurEcran;//Math.floor(self.largeurEcran * 0.5);
     self.hauteurVignette = Math.floor(170 * self.largeurVignette / 300);
     
+    self.etatPanneaux = 0;
+    
     //updateHeightInner();
     
     //charge affichage de la rubrique Actuelle;
@@ -71,6 +74,11 @@ function ContenuPrincipal() {
     
     var zoneRetourArriere;
     zoneRetourArriere = $('#retourArriere a');
+    zoneRetourArriere.bind('click', function(event){ 
+      event.preventDefault();
+      reculeContenu();
+    });
+    zoneRetourArriere = $('#retourArriereRecherche a');
     zoneRetourArriere.bind('click', function(event){ 
       event.preventDefault();
       reculeContenu();
@@ -127,11 +135,11 @@ function ContenuPrincipal() {
       self.zoneContenuSelector.load('js/tpl/'+templateAAfficher, function(){
         //navigator.notification.loadingStop();
         TweenMax.to($("#wrapperAllContent"),1, {left:0, ease:Quart.easeInOut});
-        $('#retourMenu').css('visibility','visible');
+        /*$('#retourMenu').css('visibility','visible');
         $('#retourArriere').css('visibility','hidden');
         $('#suivante').css('visibility','hidden');
         $('#precedente').css('visibility','hidden');
-        $('#partage').css('visibility','hidden');
+        $('#partage').css('visibility','hidden');*/
         if(self.ficheDetailOuverte){
           ficheDetail.libereFicheDetail();
         }
@@ -308,11 +316,15 @@ function ContenuPrincipal() {
     // désactive navigation
     //self.parent.menuNav.desactiveMenu();
     
+    self.etatPanneaux = 1;
+    
     var vignette = $(element);
     vignette.addClass('selected');
     
+    fermeRecherche();
+    
     ficheDetail = new FicheDetail();
-    ficheDetail.initialise(self, vignette, self.donneesJsonListing[vignette.attr('data-id')], self.donneesJsonListing[vignette.attr('data-id')]["id"]);
+    ficheDetail.initialise(self, vignette, vignette.attr('data-id'), self.donneesJsonListing[vignette.attr('data-id')]["id"]);
   }
   
   
@@ -324,21 +336,26 @@ function ContenuPrincipal() {
         $("#motcle").setSelectionRange && $("#motcle").setSelectionRange(0, 0);    
     });*/
     
-    TweenMax.to($("#formRecherche"),1, {right:"0%", ease:Quart.easeInOut, onComplete:activeFocusRecherche});    
+    //TweenMax.to($("#formRecherche"),1, {right:"0%", ease:Quart.easeInOut, onComplete:activeFocusRecherche});    
+    TweenMax.to($("#fondHeaderRecherche"),0.5, {width:"240px", delay:0.5, ease:Quart.easeInOut, onComplete:activeFocusRecherche});    
     TweenMax.to($("#motcle"), 0.5, {opacity:'1'});
     
     var decaleVers = window.innerWidth;
     if(self.ficheDetailOuverte){
-      decaleVers = decaleVers*2;
+      self.etatPanneaux = 2;
+      //decaleVers = decaleVers*2;
+    }else{
+      self.etatPanneaux = 1;
     }
+    decaleVers = decaleVers*self.etatPanneaux;
     
     TweenMax.to($("#wrapperAllContent"),1, {left:-decaleVers, ease:Quart.easeInOut});
     
-      $('#retourMenu').css('visibility','hidden');
+      /*$('#retourMenu').css('visibility','hidden');
       $('#retourArriere').css('visibility','visible');
       $('#suivante').css('visibility','visible');
       $('#precedente').css('visibility','visible');
-      $('#partage').css('visibility','visible');
+      $('#partage').css('visibility','visible');*/
     
     // déplace tout l'ensemble des 3 zones
     //TweenMax.to($("#formRecherche"),1, {right:"0%", ease:Quart.easeInOut, onComplete:activeFocusRecherche});
@@ -347,12 +364,13 @@ function ContenuPrincipal() {
   
   function activeFocusRecherche(){
     $("#motcle").focus();
-    $("#motcle").setSelectionRange && $("#motcle").setSelectionRange(0, 0);  
+    //$("#motcle").setSelectionRange && $("#motcle").setSelectionRange(0, 0);  
   }
   
   function fermeRecherche(){
     rechercheOuverte = false;
-    TweenMax.to($("#formRecherche"), 0.5, {right:'-60%'});
+    //TweenMax.to($("#formRecherche"), 0.5, {right:'-60%'});
+    TweenMax.to($("#fondHeaderRecherche"), 0.5, {width:'60px'});
     TweenMax.to($("#motcle"), 0.5, {opacity:'0'});
   }
   
@@ -398,28 +416,43 @@ function ContenuPrincipal() {
   }
   
   function reculeContenu(){
-    var posActuelle = parseInt($("#wrapperAllContent").css('left'));
     fermeRecherche();
     
-    TweenMax.to($("#wrapperAllContent"),1, {left:(posActuelle+window.innerWidth), ease:Quart.easeInOut});
+    var decaleVers = window.innerWidth;
+    self.etatPanneaux = self.etatPanneaux-1;
+    if(self.etatPanneaux < 0) self.etatPanneaux = 0;
     
-    if((posActuelle+window.innerWidth) == 0)
+    decaleVers = decaleVers*self.etatPanneaux;
+    
+    TweenMax.to($("#wrapperAllContent"),1, {left:-decaleVers, ease:Quart.easeInOut});
+    
+    
+    //var posActuelle = parseInt($("#wrapperAllContent").css('left'));
+    
+    //TweenMax.to($("#wrapperAllContent"),1, {left:(posActuelle+window.innerWidth), ease:Quart.easeInOut});
+    
+    /*if((posActuelle+window.innerWidth) == 0)
     {
       $('#retourMenu').css('visibility','visible');
       $('#retourArriere').css('visibility','hidden');
       $('#suivante').css('visibility','hidden');
       $('#precedente').css('visibility','hidden');
       $('#partage').css('visibility','hidden');
-    }
-    
+    } */   
+  }
+  
+  this.reculeContenuGlobal = function(){
+    reculeContenu();
   }
   
   
   // à déplacer dans la partie gestion de contenu
   function updateHeightInner() {
     
-    $('.contents').width((window.innerWidth*3)+30);
-    $('.fondHeader').width(window.innerWidth);
+    //$('.contents').width((window.innerWidth*3)+30);
+    $('.contents').width(window.innerWidth);
+    $('#wrapperAllContent').width((window.innerWidth*3)+30);
+    //$('.fondHeader').width(window.innerWidth);
     
     self.contenuSelector.height(window.innerHeight);
     if(useTransition3D)

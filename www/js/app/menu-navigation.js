@@ -88,7 +88,13 @@ function MenuNavigation() {
     });
     self.menuSelector.on('close', function(event) {
       synchroniseFermeture();
-    });   
+    }); 
+    
+    // gestion non retour menu
+    self.menuSelector.on('reculeContenu', function(event) {
+      self.parent.contenuPrincipal.reculeContenuGlobal();
+    });
+    
   }; 
   
   // construction automatique

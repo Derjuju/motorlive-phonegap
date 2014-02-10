@@ -52,13 +52,9 @@
           <!-- contenu : start -->
           <div data-role="content" class="contents">
             
-            <div class="zoneLogin"></div>
-                <div class="fondHeader">
-                  <div id="retourMenu"><a href="#retourMenu"><img src="img/ui/bt-menu.png" height="37" ></a></div>
-                  <div id="retourArriere"><a href="#retourArriere"><img src="img/ui/fleche-gauche.png" height="37" ></a></div>
-                  <div id="suivante"><a href="#suivante"><img src="img/ui/fleche-basse.png" height="37" ></a></div>
-                  <div id="precedente"><a href="#precedente"><img src="img/ui/fleche-haute.png" height="37" ></a></div>
-                  <div id="partage"><a href="#partage"><img src="img/ui/bt-partage.png" height="37" ></a></div>
+                <div class="zoneLogin"></div>
+                
+                <div id="fondHeaderRecherche" class="fondHeader">                      
                   <div id="rechercheMenu"><a href="#rechercheMenu"><img src="img/ui/bt-recherche.png" height="37" ></a></div>
                   <div id="formRecherche">
                     <form class="recherche">
@@ -73,6 +69,11 @@
             
                 <!-- // mainContent : start -->
                 <div class="mainContent">
+                  <div class="fondHeader">
+                    <div class="headerListe">
+                      <div id="retourMenu"><a href="#retourMenu"><img src="img/ui/bt-menu.png" height="37" ></a></div>                  
+                    </div>
+                  </div>
                   <div class="rubriqueContent">                
                     <div id="wrapper">
                       <div class="zoneContenu"></div>
@@ -82,11 +83,22 @@
                 <!-- // mainContent : end -->
 
                 <!-- // detailManager : start -->
-                <div id="detailManager"></div>
+                <div id="detailManager">
+                  <div class="fondHeader">
+                      <div id="retourArriere"><a href="#retourArriere"><img src="img/ui/fleche-gauche.png" height="37" ></a></div>
+                      <div id="suivante"><a href="#suivante"><img src="img/ui/fleche-basse.png" height="37" ></a></div>
+                      <div id="precedente"><a href="#precedente"><img src="img/ui/fleche-haute.png" height="37" ></a></div>
+                      <div id="partage"><a href="#partage"><img src="img/ui/bt-partage.png" height="37" ></a></div>                  
+                  </div>   
+                  <div class="detailContent"></div>
+                </div>
                 <!-- // detailManager : end -->
 
                 <!-- // mainContentRecherche : start -->
                 <div class="mainContentRecherche">
+                    <div class="fondHeader">
+                        <div id="retourArriereRecherche"><a href="#retourArriereRecherche"><img src="img/ui/fleche-gauche.png" height="37" ></a></div>                        
+                    </div> 
                     <div id="wrapperRecherche">
                       <div class="zoneContenu"></div>
                     </div>

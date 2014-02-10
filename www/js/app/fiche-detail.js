@@ -36,9 +36,32 @@ function FicheDetail() {
   this.initialise = function(_parent, element, _indice, _id) {
     self.parent = _parent;
     //var vignette = $(element);
-    self.indiceElement = _indice;//vignette.attr('data-id');
+    self.indiceElement = parseInt(_indice);//vignette.attr('data-id');
     self.idFiche = _id;
-    self.detailSelector = $('#detailManager');
+    self.detailSelector = $('#detailManager .detailContent');
+    
+    $('#precedente').css('display','none');
+    $('#suivante').css('display','none');
+    if(self.indiceElement > 0){
+      $('#precedente').css('display','block');
+    }
+    if(self.indiceElement < self.parent.donneesJsonListing.length-1){
+      $('#suivante').css('display','block');
+    }
+    
+    
+    $('#partage a').bind('click', function(event){
+      event.preventDefault();
+      partageVideo();
+    });
+    $('#suivante a').bind('click', function(event){
+      event.preventDefault();
+      chargeVideo(1);
+    });
+    $('#precedente a').bind('click', function(event){
+      event.preventDefault();
+      chargeVideo(-1);
+    });
     
     self.detailSelector.load('js/tpl/detail.html', function(){
       // récuperation de la fiche de l'élément
@@ -68,7 +91,7 @@ function FicheDetail() {
       var reg=new RegExp("(<br>)", "g");
       
       // customisation de la fiche detail
-      self.detailSelector.find('.titre').html('<h1>'+titre+'...</h1>');
+      //self.detailSelector.find('.titre').html('<h1>'+titre+'...</h1>');
       
       // modification dimension en fonction du téléphone
       var hauteurElementsUI = 131;
@@ -111,10 +134,13 @@ function FicheDetail() {
         event.preventDefault();
         fermerDetail(element);
       });*/
+    
+      
       
       self.detailSelector.addClass('affiche');
       self.detailSelector.height(window.innerHeight);
       self.detailSelector.width(window.innerWidth);
+      self.detailSelector.parent().width(window.innerWidth);
       self.parent.ficheDetailOuverte = true;
       
       
@@ -123,13 +149,26 @@ function FicheDetail() {
       
       //TweenMax.to(self.detailSelector,1, {left:"0%", opacity:1, ease:Quart.easeInOut});
       
+      
       TweenMax.to($("#wrapperAllContent"),1, {left:-window.innerWidth, ease:Quart.easeInOut});
       
-      $('#retourMenu').css('visibility','hidden');
+      if(parseInt(self.detailSelector.css('margin-top')) > 10)
+      {
+        self.detailSelector.css('margin-top',-window.innerHeight);
+        TweenMax.to(self.detailSelector, 0.5, {opacity:'1', marginTop:0, ease:Quart.easeInOut}); 
+      }else{
+        if(parseInt(self.detailSelector.css('margin-top')) < -10)
+        {
+          self.detailSelector.css('margin-top',window.innerHeight);
+          TweenMax.to(self.detailSelector, 0.5, {opacity:'1', marginTop:0, ease:Quart.easeInOut}); 
+        }
+      }
+      
+      /*$('#retourMenu').css('visibility','hidden');
       $('#retourArriere').css('visibility','visible');
       $('#suivante').css('visibility','visible');
       $('#precedente').css('visibility','visible');
-      $('#partage').css('visibility','visible');
+      $('#partage').css('visibility','visible');*/
   }
   
   
@@ -156,5 +195,54 @@ function FicheDetail() {
   };
   
   
+  function partageVideo() {    
+        var socialShare = window.plugins.socialsharing;
+        socialShare.available(function(isAvailable) {
+          if (isAvailable) {
+            
+            var imageToShare = cdn_visuel+self.objetFiche["id"]+'/'+self.objetFiche["preview"];
+            var permalien = website_app+"tv/"+self.objetFiche["id"];
+            var messagePerso = "Découvrez la vidéo sur motorlive.tv";
+            
+            //share('message', 'sujet', 'image', 'site web');
+            window.plugins.socialsharing.share(messagePerso, self.objetFiche["titre"], imageToShare, permalien);
+          }
+        });
+    
+  }
+  
+  
+  function chargeVideo(direction){
+    
+    self.indiceElement = parseInt(self.indiceElement)+parseInt(direction);
+    if(self.indiceElement < 0) self.indiceElement = 0;
+    if(self.indiceElement > self.parent.donneesJsonListing.length-1) self.indiceElement = self.parent.donneesJsonListing.length-1;
+    
+    $('#precedente').css('display','none');
+    $('#suivante').css('display','none');
+    if(self.indiceElement > 0){
+      $('#precedente').css('display','block');
+    }
+    if(self.indiceElement < self.parent.donneesJsonListing.length-1){
+      $('#suivante').css('display','block');
+    }
+    
+    var nouvelleDirection
+    if(direction > 0)
+    {
+      nouvelleDirection = -window.innerHeight;
+    }else{
+      nouvelleDirection = window.innerHeight;
+    }
+    TweenMax.to(self.detailSelector, 0.5, {opacity:'0', marginTop:nouvelleDirection, ease:Quart.easeInOut, onComplete:initialiseNouvelleFiche}); 
+  }
+  
+  function initialiseNouvelleFiche(){
+    self.idFiche = self.parent.donneesJsonListing[self.indiceElement]["id"];
+    self.detailSelector.load('js/tpl/detail.html', function(){
+      // récuperation de la fiche de l'élément
+      chargeFiche();
+    });
+  }
   
 }

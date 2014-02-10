@@ -277,6 +277,7 @@ html.csstransforms3d .meny ul li.cache {
   width: 100%;
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
 
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
@@ -310,6 +311,14 @@ body.menuOuvert .mainContent {
   float: left;
 }
 
+#detailManager {
+  background-color: #e1e1e1;
+}
+
+.detailContent{
+  z-index: 1;
+}
+
 .mainContentRecherche{
   background-color:#e1e1e1;
 }
@@ -322,6 +331,7 @@ body.menuOuvert .mainContent {
 #wrapperRecherche{
   width: 100%;
   float:left;
+  background-color:#e1e1e1;
 }
 
 .mainContent .zoneContenu, .mainContentRecherche .zoneContenu{  
@@ -330,12 +340,25 @@ body.menuOuvert .mainContent {
   position:relative;
   z-index: 1;
 }
-
+.mainContentRecherche .zoneContenu{  
+  background-color: #e1e1e1;
+  height: 100%;
+}
 html.csstransforms3d #retourMenuAccueil{
   /*display:none;*/
 }
 
 .fondHeader{
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 2;
+  display: block;
+  width: 60px;
+  height: 75px;
+}
+#fondHeaderRecherche{display:none;}
+.mainContent .fondHeader, #detailManager .fondHeader, .mainContentRecherche .fondHeader{
   background: transparent url(../img/fond/degrad_2.png) 0 0 repeat-x;
   position: absolute;
   left: 0px;
@@ -347,7 +370,7 @@ html.csstransforms3d #retourMenuAccueil{
 }
 
 
-#retourMenuAccueil, #retourMenu, #retourArriere {
+#retourMenuAccueil, #retourMenu, #retourArriere, #retourArriereRecherche {
   position: absolute;
   z-index: 11;
   left:10px; 
@@ -367,7 +390,7 @@ html.csstransforms3d #retourMenuAccueil{
   z-index: 10;
   right: 61px;
 }
-#retourMenuAccueil a img, #retourMenu a img, #retourArriere a img, #suivante a img, #precedente a img {
+#retourMenuAccueil a img, #retourMenu a img, #retourArriere a img, #suivante a img, #precedente a img, #retourArriereRecherche a img {
   padding-left: 10px;
   padding-top: 14px;
 }
@@ -378,7 +401,7 @@ html.csstransforms3d #retourMenuAccueil{
 }
 
 #retourArriere, #suivante, #precedente, #partage {
-  visibility:hidden;
+  /*visibility:hidden;*/
 }
 
 #rechercheMenu{
@@ -395,7 +418,7 @@ html.csstransforms3d #retourMenuAccueil{
 #formRecherche{
   position: absolute;
   z-index: 14;
-  right:-60%;
+  right:0;
   height:40px;
   background-color: #000000;
   border-bottom: 1px solid #000000;
@@ -407,8 +430,7 @@ html.csstransforms3d #retourMenuAccueil{
   
   
   padding-top:9px;
-  padding-left:5px;
-  width:75%;
+  width:100%;
   top:7px;
 }
 
@@ -420,6 +442,7 @@ html.csstransforms3d #retourMenuAccueil{
   color: #FFF;
   font-size: 20px;
   line-height: 23px;
+  margin-left: 5px;
 }
 
 
@@ -564,7 +587,7 @@ html.csstransforms3d #retourMenuAccueil{
 }
 
 #detailManager .titre{
-  display:block;
+  display:none;
   /*width:300px;
   height:400px;*/
   width:100%;
@@ -623,7 +646,7 @@ html.csstransforms3d #retourMenuAccueil{
 }
 
 #detailManager .panneauCommentaires{
-  display: block;
+  display: none;
   width: 100%;
   float: left;
   text-align: left;
