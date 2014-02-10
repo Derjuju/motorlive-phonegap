@@ -101,7 +101,7 @@ function MenuNavigation() {
     
     var html = '';
     
-    for( var i = 0, len = entries.length; i < len; i++ ) {
+    /*for( var i = 0, len = entries.length; i < len; i++ ) {    
       var attributes = IS_ANDROID ? 'cache' : '';	
       attributes += ' vignette';
       
@@ -111,6 +111,14 @@ function MenuNavigation() {
       else { html +='<a href="'+entriesLink[i]+'">'+entriesLabel[i]+'</a>'; } 
       html +='</li>';
       
+    }*/
+    for(var i= 0, len = menuJson.length; i < len; i++) {
+      var attributes = IS_ANDROID ? 'cache' : '';	
+      attributes += ' vignette';
+      html += '<li class="' + attributes + '">';
+      if(menuJson[i]["icon"] != "") { html +='<a href="'+menuJson[i]["id"]+'" data-indice="'+i+'">'+insereBigVignette(menuJson[i]["icon"], menuJson[i]["label"])+'</a>'; }
+      else { html +='<a href="'+menuJson[i]["id"]+'">'+menuJson[i]["label"]+'</a>'; } 
+      html +='</li>';
     }
     
     self.menuElements.html(html);
@@ -132,8 +140,16 @@ function MenuNavigation() {
     // ajoute un click sur les éléments
     self.menuElements.find(".vignette a").each(function(){
       $(this).click(function(event){
-        event.preventDefault();        
-          requeteAjaxMenuNav(this);
+        event.preventDefault();  
+        // retire ancienne rubrique active
+        desactiveElementMenu();
+        // si nouveau possède un état actif on l'active
+        if(menuJson[$(this).attr('data-indice')]["iconOn"] != undefined)
+        {
+          activeElementMenu($(this))
+        }
+        // appel le chargement du contenu
+        requeteAjaxMenuNav(this);          
       });
     });
     
@@ -141,6 +157,26 @@ function MenuNavigation() {
     $("#eventManager").trigger('menuNavigationReady');
   }
   
+  function desactiveElementMenu(){    
+    // retire ancienne rubrique active
+    var ancienneRubriqueActive = self.menuElements.find(".vignette a.actif");
+    // si existante
+    if(ancienneRubriqueActive.length > 0)
+    {
+      if(menuJson[ancienneRubriqueActive.attr('data-indice')]["icon"] != undefined)
+      {
+        ancienneRubriqueActive.find('img').attr('src',cdn_visuel_menu+'images/icon/'+ menuJson[ancienneRubriqueActive.attr('data-indice')]["icon"]);
+      }
+      ancienneRubriqueActive.removeClass('actif');
+    }
+  }
+  
+  function activeElementMenu(target){
+    var indice = $(target).attr('data-indice');
+    $(target).addClass('actif');
+    $(target).find('img').attr('src',cdn_visuel_menu+'images/icon/'+ menuJson[indice]["iconOn"]);
+  }
+   
   this.ouvreMenu = function(){
     if(useTransition3D)
     {

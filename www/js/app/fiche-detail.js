@@ -33,31 +33,42 @@ function FicheDetail() {
   
   
   // constructeur
-  this.initialise = function(_parent, element, _objetFiche) {
+  this.initialise = function(_parent, element, _indice, _id) {
     self.parent = _parent;
-    var vignette = $(element);
-    self.indiceElement = vignette.attr('data-id');
+    //var vignette = $(element);
+    self.indiceElement = _indice;//vignette.attr('data-id');
+    self.idFiche = _id;
     self.detailSelector = $('#detailManager');
     
     self.detailSelector.load('js/tpl/detail.html', function(){
       // récuperation de la fiche de l'élément
-      var idElement = self.indiceElement;
-      self.objetFiche = _objetFiche;//donneesJson[idElement];
-      
-      var idShare = self.objetFiche["id"];
-      
+      chargeFiche();
+    });
+  };
+  
+  function chargeFiche(){
+    $.ajax({
+        type: 'GET',
+        url: webservice_detail,
+        data: {id:self.idFiche},
+        dataType: "json",
+        async:true
+      }).done(function(data){        
+            // data already JSON
+            self.objetFiche = data['fiche'][0];
+            creationFiche();
+      });
+  }
+  
+  function creationFiche(){
+      var idShare = self.objetFiche["id"];      
       self.idFiche = self.objetFiche["id"];
             
       var titre = self.objetFiche["titre"].split('<br>')[0];
-      var reg=new RegExp("(<br>)", "g")
-      self.messagePerso = "";
-      
-      //var imagePreview = cdn_visuel+'images/preview/'+self.objetFiche["preview"];
-      //var imageVierge = cdn_visuel+'images/image/'+self.objetFiche["preview"];
+      var reg=new RegExp("(<br>)", "g");
       
       // customisation de la fiche detail
       self.detailSelector.find('.titre').html('<h1>'+titre+'...</h1>');
-      //self.detailSelector.find('.titre').html('<h1>&nbsp;</h1>');
       
       // modification dimension en fonction du téléphone
       var hauteurElementsUI = 131;
@@ -91,6 +102,10 @@ function FicheDetail() {
       self.detailSelector.find('.visuel').html(playerVideo);
       
       
+      var descriptif = self.objetFiche["descriptif"];
+      self.detailSelector.find('.descriptif').html("<p>"+descriptif+"</p>");
+      
+      
       // liaison des boutons
       /*self.detailSelector.find('.fermer a').bind('click', function(event){
         event.preventDefault();
@@ -112,11 +127,10 @@ function FicheDetail() {
       
       $('#retourMenu').css('visibility','hidden');
       $('#retourArriere').css('visibility','visible');
-      
-    });
-    
-  };
-  
+      $('#suivante').css('visibility','visible');
+      $('#precedente').css('visibility','visible');
+      $('#partage').css('visibility','visible');
+  }
   
   
   

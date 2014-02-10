@@ -185,7 +185,9 @@ function Connexion() {
   
     donneesJson = objJSon["contenu"];
     
-    entries = new Array();
+    menuJson = objJSon["menu"];
+    
+    /*entries = new Array();
     entriesLabel = new Array();
     entriesLink = new Array();
     entriesTitle = new Array();
@@ -197,7 +199,7 @@ function Connexion() {
       entriesLink.push('#'+objJSon["menu"][i]["id"]);
       entriesTitle.push(objJSon["menu"][i]["title"]);
       entriesTpl.push(objJSon["menu"][i]["tpl"]);
-    }
+    }*/
     
     // annonce que nos données sont à jour à cette version
     setDataVersion();
