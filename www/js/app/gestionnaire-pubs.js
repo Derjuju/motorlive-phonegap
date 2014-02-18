@@ -75,8 +75,8 @@ function GestionnairePubs() {
     });
     */
    
-   window.plugins.childBrowser.showWebPage('http://lebiscuit.free.fr/MT/',{ showLocationBar: false });
-   
+   //window.plugins.childBrowser.showWebPage('http://lebiscuit.free.fr/MT/',{ showLocationBar: false });
+   var ref = window.open('http://lebiscuit.free.fr/MT/', '_blank', 'location=yes');
    self.nbreClic = 0;
    
   };
