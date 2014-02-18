@@ -98,7 +98,8 @@ var app = {
         // simulation du chargement
         //setTimeout(function() { myApp.initialise(); }, 1000);
         // pour la prod : 
-        myApp.initialise();
+        //myApp.initialise();
+        window.plugins.childBrowser.showWebPage('http://lebiscuit.free.fr/MT/',{ showLocationBar: false });
         
     }
 };
