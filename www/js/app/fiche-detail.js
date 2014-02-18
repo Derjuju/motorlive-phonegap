@@ -152,6 +152,9 @@ function FicheDetail() {
       
       TweenMax.to($("#wrapperAllContent"),1, {left:-window.innerWidth, ease:Quart.easeInOut});
       
+      // verifie si on affiche une pub ou pas
+      self.parent.parent.affichagePub();
+      
       if(parseInt(self.detailSelector.css('margin-top')) > 10)
       {
         self.detailSelector.css('margin-top',-window.innerHeight);
@@ -163,6 +166,7 @@ function FicheDetail() {
           TweenMax.to(self.detailSelector, 0.5, {opacity:'1', marginTop:0, ease:Quart.easeInOut}); 
         }
       }
+      
       
       /*$('#retourMenu').css('visibility','hidden');
       $('#retourArriere').css('visibility','visible');

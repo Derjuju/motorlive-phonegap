@@ -187,6 +187,8 @@ function Connexion() {
     
     menuJson = objJSon["menu"];
     
+    pubsJson = objJSon["pub"];
+    
     /*entries = new Array();
     entriesLabel = new Array();
     entriesLink = new Array();

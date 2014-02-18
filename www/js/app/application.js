@@ -29,9 +29,11 @@ var APP_PROD = true;
 //---------------------------------
 var myApp;
 var entries, entriesLink, entriesLabel, entriesTitle, entriesTpl;
+// les listes
 var menuJson;
 var donneesJson;
 var donneesJsonRecherche;
+var pubsJson;
 
 var permanentStorage = window.localStorage;
 
@@ -109,13 +111,16 @@ function MyApplication(){
   var menuNav;
   var contenuPrincipal;
   var connexion;
+  var gestionnairePub;
   
   var demarrageApplication = false;
   
   // constructeur
   this.initialise = function() {
     //navigator.splashscreen.show();
-    connexion = new Connexion();    
+    connexion = new Connexion();   
+    self.gestionnairePub = new GestionnairePubs();
+    self.gestionnairePub.initialise(self);
     
     document.body.addEventListener('touchmove', function(event) {event.preventDefault();}, false);
     //$("#app").css('width',window.innerWidth+"px");
@@ -224,6 +229,7 @@ function MyApplication(){
   
   function onInitialiseDonneesReady(){
     $("#eventManager").off('initialiseDonneesReady');
+    self.gestionnairePub.parametrage();
     // données chargées en local, lance UI
     initialiseUI(); 
   }
@@ -271,6 +277,15 @@ function MyApplication(){
   this.miseAjourContenu = function(){   
     self.contenuPrincipal.chargeRubriqueActuelle();   
   };
+  
+  
+  this.affichagePub = function(){
+    console.log("test si on doit afficher les pubs");
+    if(self.gestionnairePub.testAffichage()){
+      self.gestionnairePub.affichePub();
+    }
+  }
+  
   
   
   
