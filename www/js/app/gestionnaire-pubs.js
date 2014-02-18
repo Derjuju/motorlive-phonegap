@@ -74,10 +74,10 @@ function GestionnairePubs() {
         $("#ZonePub").css('top','0%');
     });
     */
-   window.plugins.childBrowser.showWebPage('http://lebiscuit.free.fr/MT/',
-                                        { showLocationBar: true });
    
+   window.plugins.childBrowser.showWebPage('http://lebiscuit.free.fr/MT/',{ showLocationBar: false });
    
+   self.nbreClic = 0;
    
   };
   
