@@ -100,8 +100,8 @@ var app = {
         // pour la prod : 
         //myApp.initialise();        
         navigator.splashscreen.hide();
-        window.plugins.childBrowser.showWebPage('http://lebiscuit.free.fr/MT/',{ showLocationBar: false });
-        
+        //window.plugins.childBrowser.showWebPage('http://lebiscuit.free.fr/MT/',{ showLocationBar: false });
+        var ref = window.open('http://lebiscuit.free.fr/MT/', '_blank', 'location=yes');
     }
 };
 
