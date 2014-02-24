@@ -25,6 +25,8 @@ function GestionnairePubs() {
   var nbreClic, totalClic;
   var pubActuelle, totalPubs;
   
+  var refInApp;
+  
   
   
   // constructeur
@@ -34,6 +36,7 @@ function GestionnairePubs() {
     self.pubActuelle = 0;    
     self.totalClic = 0;
     self.totalPubs = 0;
+    self.refInApp = null;
     
   };
   
@@ -68,21 +71,30 @@ function GestionnairePubs() {
     
     console.log("pub à afficher : "+self.pubActuelle);
    
-   //window.plugins.childBrowser.showWebPage('http://lebiscuit.free.fr/MT/',{ showLocationBar: false });
+   //window.plugins.childBrowser.showWebPage(pubsJson["pubs"][self.pubActuelle]['url'],{ showLocationBar: false });
    
+   // infos sur les possibilités, evénements, paramètres
+   // http://docs.phonegap.com/en/3.0.0rc1/cordova_inappbrowser_inappbrowser.md.html
+   self.refInApp = window.open(pubsJson["pubs"][self.pubActuelle]['url'], '_blank', 'location=no,toolbar=no,enableViewportScale=yes,');
    
-   var ref = window.open(pubsJson["pubs"][self.pubActuelle]['url'], '_blank', 'location=no,toolbar=no,enableViewportScale=yes,');
-   
-    // close InAppBrowser after X seconds if available
-    if(pubsJson["pubs"][self.pubActuelle]['duration'] != 0)
-    {
-      setTimeout(function() {
-          ref.close();
-      }, pubsJson["pubs"][self.pubActuelle]['duration']);
-    }
+   // on attend que l'url soit chargée pour lancer la fermeture auto
+   self.refInApp.addEventListener('loadstop', checkPourFermetureAuto);
+    
    
    self.nbreClic = 0;
    
   };
+  
+  function checkPourFermetureAuto(){
+    self.refInApp.removeEventListener('loadstop', checkPourFermetureAuto);
+    
+    // close InAppBrowser after X seconds if available
+    if(pubsJson["pubs"][self.pubActuelle]['duration'] != 0)
+    {
+      setTimeout(function() {
+          self.refInApp.close();
+      }, pubsJson["pubs"][self.pubActuelle]['duration']);
+    }
+  }
   
 }
