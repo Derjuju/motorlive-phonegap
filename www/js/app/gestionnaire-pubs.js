@@ -67,16 +67,20 @@ function GestionnairePubs() {
     }
     
     console.log("pub à afficher : "+self.pubActuelle);
-    /*$("#ZonePub").html('<iframe id="pub"></iframe>');
-    $("#ZonePub #pub").load('http://lebiscuit.free.fr/MT/', function(){
-        console.log("pub chargée");
-        $("#ZonePub").css('left','0%');
-        $("#ZonePub").css('top','0%');
-    });
-    */
    
    //window.plugins.childBrowser.showWebPage('http://lebiscuit.free.fr/MT/',{ showLocationBar: false });
-   var ref = window.open('http://lebiscuit.free.fr/MT/', '_blank', 'location=yes');
+   
+   
+   var ref = window.open(pubsJson["pubs"][self.pubActuelle]['url'], '_blank', 'location=yes');
+   
+    // close InAppBrowser after X seconds if available
+    if(pubsJson["pubs"][self.pubActuelle]['duration'] != 0)
+    {
+      setTimeout(function() {
+          ref.close();
+      }, pubsJson["pubs"][self.pubActuelle]['duration']);
+    }
+   
    self.nbreClic = 0;
    
   };
