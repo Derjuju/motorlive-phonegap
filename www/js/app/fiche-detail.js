@@ -158,12 +158,14 @@ function FicheDetail() {
       if(parseInt(self.detailSelector.css('margin-top')) > 10)
       {
         self.detailSelector.css('margin-top',-window.innerHeight);
-        TweenMax.to(self.detailSelector, 0.5, {opacity:'1', marginTop:0, ease:Quart.easeInOut}); 
+        //TweenMax.to(self.detailSelector, 0.5, {opacity:'1', marginTop:0, ease:Quart.easeInOut}); 
+        TweenMax.to(self.detailSelector, 0.5, {marginTop:0, ease:Quart.easeInOut}); 
       }else{
         if(parseInt(self.detailSelector.css('margin-top')) < -10)
         {
           self.detailSelector.css('margin-top',window.innerHeight);
-          TweenMax.to(self.detailSelector, 0.5, {opacity:'1', marginTop:0, ease:Quart.easeInOut}); 
+          //TweenMax.to(self.detailSelector, 0.5, {opacity:'1', marginTop:0, ease:Quart.easeInOut}); 
+          TweenMax.to(self.detailSelector, 0.5, {marginTop:0, ease:Quart.easeInOut}); 
         }
       }
       
@@ -238,7 +240,8 @@ function FicheDetail() {
     }else{
       nouvelleDirection = window.innerHeight;
     }
-    TweenMax.to(self.detailSelector, 0.5, {opacity:'0', marginTop:nouvelleDirection, ease:Quart.easeInOut, onComplete:initialiseNouvelleFiche}); 
+    //TweenMax.to(self.detailSelector, 0.5, {opacity:'0', marginTop:nouvelleDirection, ease:Quart.easeInOut, onComplete:initialiseNouvelleFiche}); 
+    TweenMax.to(self.detailSelector, 0.5, {marginTop:nouvelleDirection, ease:Quart.easeInOut, onComplete:initialiseNouvelleFiche}); 
   }
   
   function initialiseNouvelleFiche(){
