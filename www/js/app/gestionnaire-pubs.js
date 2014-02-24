@@ -71,7 +71,7 @@ function GestionnairePubs() {
    //window.plugins.childBrowser.showWebPage('http://lebiscuit.free.fr/MT/',{ showLocationBar: false });
    
    
-   var ref = window.open(pubsJson["pubs"][self.pubActuelle]['url'], '_blank', 'location=yes');
+   var ref = window.open(pubsJson["pubs"][self.pubActuelle]['url'], '_blank', 'location=no,toolbar=no,enableViewportScale=yes,');
    
     // close InAppBrowser after X seconds if available
     if(pubsJson["pubs"][self.pubActuelle]['duration'] != 0)
