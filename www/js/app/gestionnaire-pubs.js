@@ -104,9 +104,8 @@ function GestionnairePubs() {
       //alert(event.url);
       var url = event.url;
       var filename = url.substring(url.lastIndexOf('/')+1);
-      alert(filename);
       if(filename == "iabClose.html"){
-        iabClose();
+        self.refInApp.close();
       }else{
         // pas sur une page de fermeture alors on regarde s'il faut fermer automatiquement
         checkPourFermetureAuto();
