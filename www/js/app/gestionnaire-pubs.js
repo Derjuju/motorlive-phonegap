@@ -75,7 +75,9 @@ function GestionnairePubs() {
    
    // infos sur les possibilités, evénements, paramètres
    // http://docs.phonegap.com/en/3.0.0rc1/cordova_inappbrowser_inappbrowser.md.html
-   self.refInApp = window.open(pubsJson["pubs"][self.pubActuelle]['url'], '_blank', 'location=no,toolbar=no,enableViewportScale=yes,');
+   //self.refInApp = window.open(pubsJson["pubs"][self.pubActuelle]['url'], '_blank', 'location=no,toolbar=no,enableViewportScale=yes,');
+   
+   self.refInApp = window.open('http://motorlive.derjuju.com/pub/test.html', '_blank', 'location=no,toolbar=no,enableViewportScale=yes,');
    
    // on attend que l'url soit chargée pour lancer la fermeture auto
    self.refInApp.addEventListener('loadstop', checkPourFermetureAuto);
