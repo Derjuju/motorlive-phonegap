@@ -75,21 +75,19 @@ function GestionnairePubs() {
    
    // infos sur les possibilités, evénements, paramètres
    // http://docs.phonegap.com/en/3.0.0rc1/cordova_inappbrowser_inappbrowser.md.html
-   self.refInApp = window.open(pubsJson["pubs"][self.pubActuelle]['url'], '_blank', 'location=no,toolbar=no,enableViewportScale=yes,');
+   //self.refInApp = window.open(pubsJson["pubs"][self.pubActuelle]['url'], '_blank', 'location=no,toolbar=no,enableViewportScale=yes,');
    
-   //self.refInApp = window.open('http://motorlive.derjuju.com/pub/test.html', '_blank', 'location=no,toolbar=no,enableViewportScale=yes,');
+   self.refInApp = window.open('http://motorlive.derjuju.com/pub/test.html', '_blank', 'location=no,toolbar=no,enableViewportScale=yes,');
    
    // on attend que l'url soit chargée pour lancer la fermeture auto
-   self.refInApp.addEventListener('loadstop', checkPourFermetureAuto);
-    
+   self.refInApp.addEventListener('loadstop', iabLoadStop);
+   self.refInApp.addEventListener('exit', iabClose);
    
    self.nbreClic = 0;
    
   };
   
   function checkPourFermetureAuto(){
-    self.refInApp.removeEventListener('loadstop', checkPourFermetureAuto);
-    
     // close InAppBrowser after X seconds if available
     if(pubsJson["pubs"][self.pubActuelle]['duration'] != 0)
     {
@@ -97,6 +95,20 @@ function GestionnairePubs() {
           self.refInApp.close();
       }, pubsJson["pubs"][self.pubActuelle]['duration']);
     }
+  }
+  
+  function iabLoadStop(event) {
+      if(event.url == "http://www.motorlive.tv/iabClose"){
+          self.refInApp.close();
+      }else{
+        // pas sur une page de fermeture alors on regarde s'il faut fermer automatiquement
+        checkPourFermetureAuto();
+      }
+  }
+  
+  function iabClose(event) {
+    self.refInApp.removeEventListener('loadstop', iabLoadStop);
+    self.refInApp.removeEventListener('exit', iabClose);
   }
   
 }
