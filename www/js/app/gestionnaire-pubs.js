@@ -91,7 +91,7 @@ function GestionnairePubs() {
     // close InAppBrowser after X seconds if available
     if(pubsJson["pubs"][self.pubActuelle]['duration'])
     {
-      if(pubsJson["pubs"][self.pubActuelle]['duration'] != 0)
+      if(pubsJson["pubs"][self.pubActuelle]['duration'] > 0)
       {
         setTimeout(function() {
             self.refInApp.close();
@@ -104,8 +104,9 @@ function GestionnairePubs() {
       //alert(event.url);
       var url = event.url;
       var filename = url.substring(url.lastIndexOf('/')+1);
+      alert(filename);
       if(filename == "iabClose.html"){
-        iabClose
+        iabClose();
       }else{
         // pas sur une page de fermeture alors on regarde s'il faut fermer automatiquement
         checkPourFermetureAuto();
