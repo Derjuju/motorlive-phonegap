@@ -45,14 +45,14 @@ function GestionnairePubs() {
     self.totalClic = parseInt(pubsJson["config"]["frequence"]);
     self.totalPubs = parseInt(pubsJson["pubs"].length);
     
-    console.log("self.totalClic : "+self.totalClic+" et self.totalPubs : "+self.totalPubs);
+    //console.log("self.totalClic : "+self.totalClic+" et self.totalPubs : "+self.totalPubs);
     
   };
   
   this.testAffichage = function(){
     self.nbreClic++;
     
-    console.log("self.nbreClic : "+self.nbreClic);
+    //console.log("self.nbreClic : "+self.nbreClic);
     
     if(self.nbreClic >= self.totalClic){
       self.nbreClic = 0;
@@ -69,7 +69,7 @@ function GestionnairePubs() {
       self.pubActuelle = 0;
     }
     
-    console.log("pub à afficher : "+self.pubActuelle);
+    //console.log("pub à afficher : "+self.pubActuelle);
    
    //window.plugins.childBrowser.showWebPage(pubsJson["pubs"][self.pubActuelle]['url'],{ showLocationBar: false });
    

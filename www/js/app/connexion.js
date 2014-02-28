@@ -182,12 +182,16 @@ function Connexion() {
   };
   
   function analyseDonnees(objJSon) {
+    
+    configJson = objJSon["config"];
   
     donneesJson = objJSon["contenu"];
     
     menuJson = objJSon["menu"];
     
     pubsJson = objJSon["pub"];
+    
+    updateConfig();
     
     /*entries = new Array();
     entriesLabel = new Array();
@@ -212,6 +216,12 @@ function Connexion() {
     // annonce que la données sont chargées
     $("#eventManager").trigger('initialiseDonneesReady');
   };
+  
+  function updateConfig(){
+    cdn_visuel_menu = configJson['cdn_visuel_menu'];
+    cdn_visuel = configJson['cdn_visuel'];
+    cdn_visuel_small = configJson['cdn_visuel_small'];
+  }
   
   
   this.getAppVersion = function(){

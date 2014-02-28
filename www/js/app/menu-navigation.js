@@ -308,7 +308,8 @@ function MenuNavigation() {
   */
   function insereBigVignette( srcImage, lblImage ) {
     //return '<img src="img/menu/'+ srcImage +'"><div class="labelImage">'+lblImage+'</div>';
-    return '<img src="'+cdn_visuel_menu+'images/icon/'+ srcImage +'"><div class="labelImage">'+lblImage+'</div>';
+    //return '<img src="'+cdn_visuel_menu+'images/icon/'+ srcImage +'"><div class="labelImage">'+lblImage+'</div>';
+    return '<img src="'+cdn_visuel_menu+ srcImage +'"><div class="labelImage">'+lblImage+'</div>';
   }
   
   function synchroniseOuverture(){

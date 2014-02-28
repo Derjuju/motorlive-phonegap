@@ -42,6 +42,8 @@ function ContenuPrincipal() {
   
   var donneesJsonListing;
   
+  LAST_NEWS = 10;
+  
   // constructeur
   this.initialise = function(_parent) {
     self.parent = _parent;
@@ -58,6 +60,8 @@ function ContenuPrincipal() {
     self.hauteurVignette = Math.floor(170 * self.largeurVignette / 300);
     
     self.etatPanneaux = 0;
+    
+    self.lastNews = LAST_NEWS;
     
     //updateHeightInner();
     
@@ -191,10 +195,22 @@ function ContenuPrincipal() {
     var donneesTemp = new Array();
     for(var i = 0; i<donneesJson.length; i++)
     {
-      var cat = donneesJson[i]['cat'];
-      if($.inArray(rubriqueCherchee, cat) > -1)
+      // rubrique de la home ? alors on prend les X plus récentes
+      if(rubriqueCherchee == 0)
       {
-        donneesTemp.push(donneesJson[i]);
+        // tant qu'on a pas notre quota de lastNews, on prend
+        if(donneesTemp.length < self.lastNews)
+        {
+          donneesTemp.push(donneesJson[i]);
+        }else{
+          break;
+        }
+      }else{
+        var cat = donneesJson[i]['cat'];      
+        if($.inArray(rubriqueCherchee, cat) > -1)
+        {
+          donneesTemp.push(donneesJson[i]);
+        }
       }
     }
     
@@ -364,7 +380,7 @@ function ContenuPrincipal() {
   
   function activeFocusRecherche(){
     $("#motcle").focus();
-    //$("#motcle").setSelectionRange && $("#motcle").setSelectionRange(0, 0);  
+    $("#motcle").setSelectionRange && $("#motcle").setSelectionRange(0, 0);  
   }
   
   function fermeRecherche(){
@@ -375,7 +391,7 @@ function ContenuPrincipal() {
   }
   
   function lanceRecherche(){
-    console.log("motcle : "+$("#motcle").val());
+    //console.log("motcle : "+$("#motcle").val());
     
     /*
      self.zoneContenuSelector.load('js/tpl/'+templateAAfficher, function(){

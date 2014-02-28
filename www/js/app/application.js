@@ -30,6 +30,7 @@ var APP_PROD = true;
 var myApp;
 var entries, entriesLink, entriesLabel, entriesTitle, entriesTpl;
 // les listes
+var configJson;
 var menuJson;
 var donneesJson;
 var donneesJsonRecherche;
@@ -47,7 +48,19 @@ var IS_ANDROID = navigator.userAgent.match( /android/gi ),
     IS_IOS = navigator.userAgent.match( /(iPad|iPhone|iPod)/i );
     
 // url des services
-var website_app = "http://www.motorlive.tv/";
+
+var website_app = "http://www.motorlive.tv";
+var webservice_version = website_app+"/services/checkVersion";
+var webservice_update = website_app+"/services/update";
+var webservice_detail = website_app+"/services/detail";
+var webservice_recherche = website_app+"/services/recherche";
+var webservice_stats = website_app+"/services/stats";
+
+var cdn_visuel_menu = website_app+"/bundles/motoservicesmotorlive/motorlive_menu_icons/";
+var cdn_visuel = "http://medddddddddia.motoservices.com/media/cache/motorlive_big_thumbnail/media/video/";
+var cdn_visuel_small = "http://media.motoservices.com/media/cache/motorlive_playlist_thumbnail/media/video/";
+
+/* 
 var webservice_version = "http://motorlive.derjuju.com/services/checkVersion/";
 var webservice_update = "http://motorlive.derjuju.com/services/update/";
 var webservice_detail = "http://motorlive.derjuju.com/services/detail/";
@@ -57,7 +70,7 @@ var webservice_stats = "http://motorlive.derjuju.com/services/stats/";
 var cdn_visuel_menu = "http://motorlive.derjuju.com/";
 var cdn_visuel = "http://media.motoservices.com/media/cache/motorlive_big_thumbnail/media/video/";
 var cdn_visuel_small = "http://media.motoservices.com/media/cache/motorlive_playlist_thumbnail/media/video/";
-
+*/
 
 //---------------------------------
 // APPLICATION RACINE
@@ -279,7 +292,7 @@ function MyApplication(){
   
   
   this.affichagePub = function(){
-    console.log("test si on doit afficher les pubs");
+    //console.log("test si on doit afficher les pubs");
     if(self.gestionnairePub.testAffichage()){
       self.gestionnairePub.affichePub();
     }

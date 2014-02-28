@@ -72,8 +72,8 @@ function FicheDetail() {
   function chargeFiche(){
     $.ajax({
         type: 'GET',
-        url: webservice_detail,
-        data: {id:self.idFiche},
+        url: webservice_detail+"/"+self.idFiche,
+        data: {},
         dataType: "json",
         async:true
       }).done(function(data){        
