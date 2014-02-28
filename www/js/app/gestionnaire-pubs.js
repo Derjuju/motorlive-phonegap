@@ -89,11 +89,14 @@ function GestionnairePubs() {
   
   function checkPourFermetureAuto(){
     // close InAppBrowser after X seconds if available
-    if(pubsJson["pubs"][self.pubActuelle]['duration'] != 0)
+    if(pubsJson["pubs"][self.pubActuelle]['duration'])
     {
-      setTimeout(function() {
-          self.refInApp.close();
-      }, pubsJson["pubs"][self.pubActuelle]['duration']);
+      if(pubsJson["pubs"][self.pubActuelle]['duration'] != 0)
+      {
+        setTimeout(function() {
+            self.refInApp.close();
+        }, pubsJson["pubs"][self.pubActuelle]['duration']);
+      }
     }
   }
   
