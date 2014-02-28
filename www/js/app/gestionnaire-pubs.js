@@ -101,9 +101,11 @@ function GestionnairePubs() {
   }
   
   function iabLoadStop(event) {
-      alert(event.url);
-      if(event.url == "http://motorlive.derjuju.com/pub/iabClose.html"){
-          self.refInApp.close();
+      //alert(event.url);
+      var url = event.url;
+      var filename = url.substring(url.lastIndexOf('/')+1);
+      if(filename == "iabClose.html"){
+        iabClose
       }else{
         // pas sur une page de fermeture alors on regarde s'il faut fermer automatiquement
         checkPourFermetureAuto();
