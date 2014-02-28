@@ -98,7 +98,8 @@ function GestionnairePubs() {
   }
   
   function iabLoadStop(event) {
-      if(event.url == "http://www.motorlive.tv/iabClose"){
+      alert(event.url);
+      if(event.url == "http://motorlive.derjuju.com/pub/iabClose.html"){
           self.refInApp.close();
       }else{
         // pas sur une page de fermeture alors on regarde s'il faut fermer automatiquement
