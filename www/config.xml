@@ -19,6 +19,7 @@
     <preference name="ios-statusbarstyle" value="black-opaque" />
     <preference name="detect-data-types" value="true" />
     <preference name="exit-on-suspend" value="false" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" />
     <!-- Android preference -->
     <preference name="android-minSdkVersion" value="10" />
     <!--<preference name="android-maxSdkVersion" value="15" /> -->
