@@ -171,7 +171,7 @@ function MenuNavigation() {
     {
       if(menuJson[ancienneRubriqueActive.attr('data-indice')]["icon"] != undefined)
       {
-        ancienneRubriqueActive.find('img').attr('src',cdn_visuel_menu+'images/icon/'+ menuJson[ancienneRubriqueActive.attr('data-indice')]["icon"]);
+        ancienneRubriqueActive.find('img').attr('src',cdn_visuel_menu+menuJson[ancienneRubriqueActive.attr('data-indice')]["icon"]);
       }
       ancienneRubriqueActive.removeClass('actif');
     }
@@ -180,7 +180,7 @@ function MenuNavigation() {
   function activeElementMenu(target){
     var indice = $(target).attr('data-indice');
     $(target).addClass('actif');
-    $(target).find('img').attr('src',cdn_visuel_menu+'images/icon/'+ menuJson[indice]["iconOn"]);
+    $(target).find('img').attr('src',cdn_visuel_menu+menuJson[indice]["iconOn"]);
   }
    
   this.ouvreMenu = function(){

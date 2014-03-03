@@ -365,7 +365,7 @@ function ContenuPrincipal() {
     }
     decaleVers = decaleVers*self.etatPanneaux;
     
-    TweenMax.to($("#wrapperAllContent"),1, {left:-decaleVers, ease:Quart.easeInOut});
+    TweenMax.to($("#wrapperAllContent"),0.5, {left:-decaleVers, ease:Quart.easeInOut});
     
       /*$('#retourMenu').css('visibility','hidden');
       $('#retourArriere').css('visibility','visible');
@@ -440,7 +440,7 @@ function ContenuPrincipal() {
     
     decaleVers = decaleVers*self.etatPanneaux;
     
-    TweenMax.to($("#wrapperAllContent"),1, {left:-decaleVers, ease:Quart.easeInOut});
+    TweenMax.to($("#wrapperAllContent"),0.5, {left:-decaleVers, ease:Quart.easeInOut});
     
     
     //var posActuelle = parseInt($("#wrapperAllContent").css('left'));
