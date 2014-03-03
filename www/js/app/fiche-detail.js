@@ -70,6 +70,9 @@ function FicheDetail() {
   };
   
   function chargeFiche(){
+    // animation navigation principale
+    TweenMax.to($("#wrapperAllContent"),0.5, {left:-window.innerWidth, ease:Quart.easeInOut});
+    
     $.ajax({
         type: 'GET',
         url: webservice_detail+"/"+self.idFiche,
@@ -150,7 +153,7 @@ function FicheDetail() {
       //TweenMax.to(self.detailSelector,1, {left:"0%", opacity:1, ease:Quart.easeInOut});
       
       
-      TweenMax.to($("#wrapperAllContent"),0.5, {left:-window.innerWidth, ease:Quart.easeInOut});
+      //TweenMax.to($("#wrapperAllContent"),0.5, {left:-window.innerWidth, ease:Quart.easeInOut});
       
       // verifie si on affiche une pub ou pas
       self.parent.parent.affichagePub();

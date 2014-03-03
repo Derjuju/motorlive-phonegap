@@ -662,6 +662,9 @@ html.csstransforms3d #retourMenuAccueil{
   text-align:left;
   margin-bottom: 10px;
   
+  font-size: 14px;
+  line-height: 18px;
+  
   z-index: 2;
 }
 
