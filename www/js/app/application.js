@@ -57,7 +57,7 @@ var webservice_recherche = website_app+"/services/recherche";
 var webservice_stats = website_app+"/services/stats";
 
 var cdn_visuel_menu = website_app+"/bundles/motoservicesmotorlive/motorlive_menu_icons/";
-var cdn_visuel = "http://medddddddddia.motoservices.com/media/cache/motorlive_big_thumbnail/media/video/";
+var cdn_visuel = "http://media.motoservices.com/media/cache/motorlive_big_thumbnail/media/video/";
 var cdn_visuel_small = "http://media.motoservices.com/media/cache/motorlive_playlist_thumbnail/media/video/";
 
 /* 
