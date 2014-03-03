@@ -106,7 +106,7 @@ function GestionnairePubs() {
       var filename = url.substring(url.lastIndexOf('/')+1);
       if(filename == "iabClose.html"){
         self.refInApp.close();
-      }else if((filename+".html" == "iabClose.html"){ // pour Symfony : iabClose
+      }else if((filename+".html") == "iabClose.html"){ // pour Symfony : iabClose
         self.refInApp.close();
       }else{
         // pas sur une page de fermeture alors on regarde s'il faut fermer automatiquement
