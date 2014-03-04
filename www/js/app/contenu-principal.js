@@ -126,10 +126,19 @@ function ContenuPrincipal() {
         typeContenu = "liste";
       }*/
     
-      //templateAAfficher = entriesTpl[itemIndice]+'.html';
-      //typeContenu = entriesTpl[itemIndice];
-      templateAAfficher = menuJson[itemIndice]["tpl"]+'.html';
-      typeContenu = menuJson[itemIndice]["tpl"];
+      if(itemIndice == -1){
+        templateAAfficher = 'new.html';
+        typeContenu = 'new';
+      }else if(itemIndice == -2){
+        templateAAfficher = 'a-propos.html';
+        typeContenu = 'a-propos';
+      }else{
+        templateAAfficher = 'liste.html';
+        typeContenu = 'liste';
+      }
+    
+      //templateAAfficher = menuJson[itemIndice]["tpl"]+'.html';
+      //typeContenu = menuJson[itemIndice]["tpl"];
       
       // on referme la zone de recherche
       if(rechercheOuverte){
@@ -156,13 +165,11 @@ function ContenuPrincipal() {
     var rubriqueCherchee = ""+rubriqueActuelle;
     var itemMenu = self.parent.menuNav.getItemMenu(rubriqueActuelle);
     var itemIndice = itemMenu.attr('data-indice');
-    
-    
+        
     var zoneTitre = "";
     if((typeContenu == "new")||(typeContenu == "liste"))
     {
       zoneTitre = self.zoneContenuSelector.find('.infoRubrique');
-      //zoneTitre.find('h1').html(entriesTitle[itemIndice]);
     }
     else if(typeContenu == "a-propos")
     {
@@ -173,24 +180,15 @@ function ContenuPrincipal() {
       self.zoneContenuSelector.find('.transformVersion').html(etatUI);
     }
     
-    /*if(typeContenu == "mes-infos")
-    {
-      self.zoneContenuSelector.find('.envoyer a').bind('click', function(event){
-        event.preventDefault();
-        if($(this).hasClass('sms'))
-        {
-          envoiChoixParSMS();
-        }else{
-          ouvreChoixPartage(element,idElement);
-        }
-      });
-    }*/
-    
-    
-    
     var zoneCible = self.zoneContenuSelector.find('.visuels');
     
     //self.donneesJsonListing = donneesJson;
+    // on prend un indice de recherche uniquement si on est sur un element de donneesJson
+    var catIndice = 0;
+    if(itemIndice >= 0)
+    {
+      catIndice = menuJson[itemIndice]["id"];
+    }
     
     var donneesTemp = new Array();
     for(var i = 0; i<donneesJson.length; i++)
@@ -206,8 +204,11 @@ function ContenuPrincipal() {
           break;
         }
       }else{
-        var cat = donneesJson[i]['cat'];      
-        if($.inArray(rubriqueCherchee, cat) > -1)
+        // conversion en tableau de nombre et non de string
+        // sinon on a le bug : 1 est dans 1 et dans 10 aussi
+        var cat = donneesJson[i]['cat'].split(',').map(Number);         
+        //if($.inArray(rubriqueCherchee, cat) > -1)
+        if($.inArray(catIndice, cat) > -1)
         {
           donneesTemp.push(donneesJson[i]);
         }

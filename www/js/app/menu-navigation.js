@@ -106,24 +106,21 @@ function MenuNavigation() {
     self.menuElements = $('.menu-list');
     
     var html = '';
+    var attributes = IS_ANDROID ? 'cache' : '';	
+      attributes += ' vignette';
+      
+    // ajout de l'icone par défaut : accueil
+    html += '<li class="' + attributes + '">';
+    html +='<a href="0" data-indice="-1" data-a-index="0"><img src="img/menu/icon-accueil.jpg"><div class="labelImage">Accueil</div></a>';    
+    html +='</li>';
     
-    /*for( var i = 0, len = entries.length; i < len; i++ ) {    
-      var attributes = IS_ANDROID ? 'cache' : '';	
-      attributes += ' vignette';
-      
-      html += '<li class="' + attributes + '">';
-      //if(entries[i] != "") { html +='<a href="'+entriesLink[i]+'" data-tpl="'+entriesTpl[i]+'" data-title="'+entriesTitle[i]+'" data-id="'+entriesLink[i]+'" data-indice="'+i+'">'+insereBigVignette(entries[i], entriesLabel[i])+'</a>'; }
-      if(entries[i] != "") { html +='<a href="'+entriesLink[i]+'" data-indice="'+i+'">'+insereBigVignette(entries[i], entriesLabel[i])+'</a>'; }
-      else { html +='<a href="'+entriesLink[i]+'">'+entriesLabel[i]+'</a>'; } 
-      html +='</li>';
-      
-    }*/
+    // parcours des éléments du menu pour les ajouter
     for(var i= 0, len = menuJson.length; i < len; i++) {
-      var attributes = IS_ANDROID ? 'cache' : '';	
+      attributes = IS_ANDROID ? 'cache' : '';	
       attributes += ' vignette';
       html += '<li class="' + attributes + '">';
-      if(menuJson[i]["icon"] != "") { html +='<a href="'+menuJson[i]["id"]+'" data-indice="'+i+'">'+insereBigVignette(menuJson[i]["icon"], menuJson[i]["label"])+'</a>'; }
-      else { html +='<a href="'+menuJson[i]["id"]+'">'+menuJson[i]["label"]+'</a>'; } 
+      if(menuJson[i]["icon"] != "") { html +='<a href="'+menuJson[i]["id"]+'" data-indice="'+i+'" data-a-index="'+(i+1)+'">'+insereBigVignette(menuJson[i]["icon"], menuJson[i]["title"])+'</a>'; }
+      else { html +='<a href="'+menuJson[i]["id"]+'">'+menuJson[i]["title"]+'</a>'; } 
       html +='</li>';
     }
     
@@ -149,10 +146,14 @@ function MenuNavigation() {
         event.preventDefault();  
         // retire ancienne rubrique active
         desactiveElementMenu();
-        // si nouveau possède un état actif on l'active
-        if(menuJson[$(this).attr('data-indice')]["iconOn"] != undefined)
+        // uniquement sur les items du menu autre que Accueil
+        if($(this).attr('data-indice') >= 0)
         {
-          activeElementMenu($(this))
+          // si nouveau possède un état actif on l'active
+          if(menuJson[$(this).attr('data-indice')]["iconOn"] != undefined)
+          {
+            activeElementMenu($(this))
+          }
         }
         // appel le chargement du contenu
         requeteAjaxMenuNav(this);          
@@ -169,9 +170,13 @@ function MenuNavigation() {
     // si existante
     if(ancienneRubriqueActive.length > 0)
     {
-      if(menuJson[ancienneRubriqueActive.attr('data-indice')]["icon"] != undefined)
+      // uniquement sur les items du menu autre que Accueil
+      if(ancienneRubriqueActive.attr('data-indice') >= 0)
       {
-        ancienneRubriqueActive.find('img').attr('src',cdn_visuel_menu+menuJson[ancienneRubriqueActive.attr('data-indice')]["icon"]);
+        if(menuJson[ancienneRubriqueActive.attr('data-indice')]["icon"] != undefined)
+        {
+          ancienneRubriqueActive.find('img').attr('src',cdn_visuel_menu+menuJson[ancienneRubriqueActive.attr('data-indice')]["icon"]);
+        }
       }
       ancienneRubriqueActive.removeClass('actif');
     }
@@ -296,7 +301,8 @@ function MenuNavigation() {
   }
   
   function requeteAjaxMenuNav(itemMenu){
-    rubriqueActuelle = $(itemMenu).attr("data-indice");
+    //rubriqueActuelle = $(itemMenu).attr("data-indice");
+    rubriqueActuelle = $(itemMenu).attr("data-a-index");
     self.parent.miseAjourContenu();
   }
   
@@ -307,8 +313,6 @@ function MenuNavigation() {
   * @param {String} type source de l'image
   */
   function insereBigVignette( srcImage, lblImage ) {
-    //return '<img src="img/menu/'+ srcImage +'"><div class="labelImage">'+lblImage+'</div>';
-    //return '<img src="'+cdn_visuel_menu+'images/icon/'+ srcImage +'"><div class="labelImage">'+lblImage+'</div>';
     return '<img src="'+cdn_visuel_menu+ srcImage +'"><div class="labelImage">'+lblImage+'</div>';
   }
   

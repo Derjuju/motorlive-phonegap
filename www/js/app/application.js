@@ -28,7 +28,6 @@ var APP_PROD = true;
 // GLOBAL
 //---------------------------------
 var myApp;
-var entries, entriesLink, entriesLabel, entriesTitle, entriesTpl;
 // les listes
 var configJson;
 var menuJson;

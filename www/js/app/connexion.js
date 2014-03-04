@@ -192,21 +192,7 @@ function Connexion() {
     pubsJson = objJSon["pub"];
     
     updateConfig();
-    
-    /*entries = new Array();
-    entriesLabel = new Array();
-    entriesLink = new Array();
-    entriesTitle = new Array();
-    entriesTpl = new Array();
-    for(var i = 0; i<objJSon["menu"].length; i++)
-    {
-      entries.push(objJSon["menu"][i]["icon"]);
-      entriesLabel.push(objJSon["menu"][i]["label"]);
-      entriesLink.push('#'+objJSon["menu"][i]["id"]);
-      entriesTitle.push(objJSon["menu"][i]["title"]);
-      entriesTpl.push(objJSon["menu"][i]["tpl"]);
-    }*/
-    
+        
     // annonce que nos données sont à jour à cette version
     setDataVersion();
     
