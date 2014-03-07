@@ -256,15 +256,18 @@ function ContenuPrincipal() {
   function lanceSubstitution(_containerListe){
     
     var zoneCible;
+    var cdn_visuel_substitution = cdn_visuel;
+    
     if(_containerListe == "rubrique")
     {
       zoneCible = self.zoneContenuSelector.find('.visuels');
     }else{
       zoneCible = $("#wrapperRecherche .zoneContenu").find('.visuels');
+      cdn_visuel_substitution = cdn_visuel_small;
     }
     
     zoneCible.find('img').each(function(){      
-      $(this).attr('src', cdn_visuel+self.donneesJsonListing[$(this).attr('data-id')]["id"]+'/'+self.donneesJsonListing[$(this).attr('data-id')]["preview"]) ;     
+      $(this).attr('src', cdn_visuel_substitution+self.donneesJsonListing[$(this).attr('data-id')]["id"]+'/'+self.donneesJsonListing[$(this).attr('data-id')]["preview"]) ;     
     });
     
   }
