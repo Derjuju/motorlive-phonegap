@@ -471,11 +471,14 @@ function ContenuPrincipal() {
     $('#wrapperAllContent').width((window.innerWidth*3)+30);
     //$('.fondHeader').width(window.innerWidth);
     
+    
     self.contenuSelector.height(window.innerHeight);
     if(useTransition3D)
     {
       self.contenuSelector.width((window.innerWidth - 10));
       self.contenuSelector.css('margin-left','10px');
+    }else{
+	    self.contenuSelector.width(window.innerWidth);
     }
     
     if(self.ficheDetailOuverte){
