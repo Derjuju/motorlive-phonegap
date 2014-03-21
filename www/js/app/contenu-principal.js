@@ -220,7 +220,6 @@ function ContenuPrincipal() {
   
   function construitContenuListing(_donneesJson, _containerListe){
     self.donneesJsonListing = _donneesJson;
-    
     var zoneCible;
     if(_containerListe == "rubrique")
     {
@@ -273,19 +272,28 @@ function ContenuPrincipal() {
   }
   
   function contenuPret(_containerListe){ 
-    //console.log("contenuPret");
     //self.zoneContenuSelector.scrollTop(0);  
     
     if(self.premierChargement){
       self.premierChargement = false;
       
+      
+      /*
       // ajout de l'element iScroll pour gérer le contenu
       setTimeout(function () { 
         myScroll = new iScroll('wrapper',{ zoom:true, bounce:false, hScrollbar:false, hScroll:false}); 
         myScrollRecherche = new iScroll('wrapperRecherche',{ zoom:true, bounce:false, hScrollbar:false, hScroll:false}); 
         updateHeightInner();
       }, 100);
-      
+      */
+     
+     myScrollers = new Array();
+     setTimeout(function () { 
+        myScrollers[0] = new iScroll('wrapper',{ zoom:true, bounce:false, hScrollbar:false, hScroll:false}); 
+        myScrollers[1] = new iScroll('wrapperRecherche',{ zoom:true, bounce:false, hScrollbar:false, hScroll:false}); 
+        updateHeightInner();
+      },100);  
+     
       setTimeout(function () { 
         // lance fermeture menu
         self.parent.menuNav.fermeMenu();
@@ -293,7 +301,9 @@ function ContenuPrincipal() {
       
     }else{
       // mise à jour des dimensions + appel au iscroll refresh  
-      updateHeightInner();
+      setTimeout(function () { 
+        updateHeightInner();
+      },100);  
       // lance fermeture menu
       self.parent.menuNav.fermeMenu();  
     }  
@@ -468,7 +478,6 @@ function ContenuPrincipal() {
   
   // à déplacer dans la partie gestion de contenu
   function updateHeightInner() {
-    
     //$('.contents').width((window.innerWidth*3)+30);
     $('.contents').width(window.innerWidth);
     $('#wrapperAllContent').width((window.innerWidth*3)+30);
@@ -481,7 +490,7 @@ function ContenuPrincipal() {
       self.contenuSelector.width((window.innerWidth - 10));
       self.contenuSelector.css('margin-left','10px');
     }else{
-	    self.contenuSelector.width(window.innerWidth);
+      self.contenuSelector.width(window.innerWidth);
     }
     
     if(self.ficheDetailOuverte){
@@ -493,18 +502,22 @@ function ContenuPrincipal() {
     
     $('.mainContentRecherche').width(window.innerWidth);
     $('.mainContentRecherche').height(window.innerHeight);
-    
     //self.zoneContenuSelector.height(window.innerHeight);
     
     $("#wrapper").height(window.innerHeight);
     $("#wrapperRecherche").height(window.innerHeight);
 	
+    /*
     myScroll.refresh();
     myScrollRecherche.refresh();
     // remonte le scroll en 0, 0 en 0 ms
     myScroll.scrollTo(0, 0, 0);
     myScrollRecherche.scrollTo(0, 0, 0);
-    
+    */
+    myScrollers[0].refresh();
+    myScrollers[1].refresh();
+    myScrollers[0].scrollTo(0, 0, 0);
+    myScrollers[1].scrollTo(0, 0, 0);
     
   }
 }
