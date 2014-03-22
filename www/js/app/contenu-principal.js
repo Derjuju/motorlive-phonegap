@@ -42,6 +42,21 @@ function ContenuPrincipal() {
   
   var donneesJsonListing;
   
+  // gestion effet origami
+  var $wrapper, $newwrapper;
+  var isAnimating,
+      // https://github.com/twitter/bootstrap/issues/2870
+      transEndEventNames = {
+              'WebkitTransition'	: 'webkitTransitionEnd',
+              'MozTransition'		: 'transitionend',
+              'OTransition'		: 'oTransitionEnd',
+              'msTransition'		: 'MSTransitionEnd',
+              'transition'		: 'transitionend'
+      },
+      transEndEventName	= transEndEventNames[ Modernizr.prefixed( 'transition' ) ],
+      endCount = 0,
+      notsupported = !Modernizr.csstransforms || !Modernizr.csstransforms3d || !Modernizr.csstransitions;
+  
   LAST_NEWS = 10;
   
   // constructeur
@@ -238,7 +253,8 @@ function ContenuPrincipal() {
     
     zoneCible.html(html);
     
-    zoneCible.find('img').bind('click', function(){ clickSurVignette(this); });
+    //zoneCible.find('img').bind('click', function(){ clickSurVignette(this); });
+    zoneCible.find('img.th-face').bind('click', function(){ toggleView(this); });
     
     
     contenuPret(_containerListe);
@@ -248,7 +264,8 @@ function ContenuPrincipal() {
   function insereVignette(elementVignette,indice,position){
     var html = "";    
     //html+='<img data-id="'+indice+'" data-position="'+position+'" src="'+cdn_visuel+'images/preview/'+elementVignette["preview"]+'">';    
-    html+='<img data-id="'+indice+'" data-position="'+position+'" src="img/vignette-vide.png" height="'+self.hauteurVignette+'" width="'+self.largeurVignette+'">';    
+    //html+='<img data-id="'+indice+'" data-position="'+position+'" src="img/vignette-vide.png" height="'+self.hauteurVignette+'" width="'+self.largeurVignette+'">';    
+    html+='<div class="th-wrap" data-id="'+indice+'" data-view="face" style="height:'+self.hauteurVignette+'px;width:100%;"><img class="th-face" data-id="'+indice+'" data-position="'+position+'" src="img/vignette-vide.png" height="'+self.hauteurVignette+'" width="'+self.largeurVignette+'"><div class="th-inner" style="display: none;"><br>On va retrouver ici le player vidéo et le descriptif</div></div>';    
     return html;
   }
   
@@ -262,7 +279,7 @@ function ContenuPrincipal() {
       zoneCible = self.zoneContenuSelector.find('.visuels');
     }else{
       zoneCible = $("#wrapperRecherche .zoneContenu").find('.visuels');
-      cdn_visuel_substitution = cdn_visuel_small;
+      //cdn_visuel_substitution = cdn_visuel_small;
     }
     
     zoneCible.find('img').each(function(){      
@@ -520,6 +537,100 @@ function ContenuPrincipal() {
     myScrollers[1].scrollTo(0, 0, 0);
     
   }
+  
+  
+  function toggleView(cible){ 
+    if( !isAnimating ) {
+      $newwrapper = $(cible).parent();   
+      if(($wrapper != null)&&($wrapper.attr("data-id") != $newwrapper.attr("data-id"))){        
+        var cibleOld = $wrapper.find('img.th-face');
+        lanceToggleView(cibleOld);
+      }else{
+        $newwrapper = $(cible).parent();
+        lanceToggleView(cible);
+      }
+    }
+  }
+  
+  function lanceToggleView(cible) {
+    console.log("clic : "+isAnimating);
+      //var $btn = $( this );
+      $wrapper = $(cible).parent();
+      
+      var cibleImage = cible;
+      
+      if( !isAnimating ) {
+
+              isAnimating = true;
+              
+              var view = $wrapper.data( 'view' );
+              
+              if( view === 'detail' ) {
+                $wrapper.data( 'view', 'face' );
+                if( notsupported ) {
+                  $wrapper.removeClass( 'th-active' ).children( 'div.th-inner' ).hide();
+                  isAnimating = false;
+                  return false;
+                }
+              }else{                
+                $wrapper.data( 'view', 'detail' );
+                if( notsupported ) {
+                  $wrapper.addClass( 'th-active' ).children( 'div.th-inner' ).show();
+                  isAnimating = false;
+                  return false;
+                }
+              }
+
+              $wrapper.children( 'img' )
+                              .remove()
+                              .end()
+                              .children( 'div.th-inner' )
+                              .show()
+                              .wrap( $( '<div class="th-part"></div>' ) )
+                              .append( '<div class="th-overlay"></div>' )
+                              .parent()
+                              .clone()
+                              .appendTo( $wrapper );
+              $wrapper.append( '<div class="th-part th-part-image th-part-image-basse"></div>' )
+                              .prepend( $( '<div class="th-part th-part-image th-part-image-haute"></div>' ) )
+                              .find('.th-part.th-part-image').css('background-image','url('+$(cibleImage).attr("src")+')');
+                      
+              $wrapper.find( 'div.th-part' )
+                              .on( transEndEventName, function( event ) {
+                                      ++endCount;
+                                      // 4 transitions
+                                      if( endCount === 4 ) {
+
+                                              $wrapper.off( transEndEventName );
+                                              endCount = 0;
+                                              clear( view , cibleImage);
+
+                                      }
+
+                              } ) ;
+        setTimeout( function() { ( view === 'detail' ) ? $wrapper.removeClass( 'th-active' ) : $wrapper.addClass( 'th-active' ); }, 0 );
+      }
+      return false;
+    }
+  
+    function clear( view, cibleImage ) {
+            $wrapper.find( 'div.th-inner:first' ).unwrap().end().find( 'div.th-overlay' ).remove();
+            var $img =  $(cibleImage);//$wrapper.children( 'img' );
+            var $inner = $wrapper.find( 'div.th-inner' );
+            ( view !== 'face' ) ? $inner.hide() : $inner.show();
+            $wrapper.find( 'div.th-part' ).remove();
+            $img.prependTo( $wrapper );
+            isAnimating = false;
+            
+            $(cibleImage).bind('click', function(){ toggleView(this); });
+            
+            // animation sur ancienne cible ?
+            if($wrapper.attr("data-id") != $newwrapper.attr("data-id")){           
+              var cible = $newwrapper.find('img.th-face');
+              lanceToggleView(cible);
+            }
+    }
+  
 }
 
 /*
