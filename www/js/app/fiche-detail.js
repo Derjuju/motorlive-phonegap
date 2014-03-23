@@ -31,44 +31,6 @@ function FicheDetail() {
   var largeurImposee = 240;
   var hauteurImposee = 320;
   
-  
-  // constructeur
-  /*this.initialise = function(_parent, element, _indice, _id) {
-    self.parent = _parent;
-    //var vignette = $(element);
-    self.indiceElement = parseInt(_indice);//vignette.attr('data-id');
-    self.idFiche = _id;
-    self.detailSelector = $('#detailManager .detailContent');
-    
-    $('#precedente').css('display','none');
-    $('#suivante').css('display','none');
-    if(self.indiceElement > 0){
-      $('#precedente').css('display','block');
-    }
-    if(self.indiceElement < self.parent.donneesJsonListing.length-1){
-      $('#suivante').css('display','block');
-    }
-    
-    
-    $('#partage a').bind('click', function(event){
-      event.preventDefault();
-      partageVideo();
-    });
-    $('#suivante a').bind('click', function(event){
-      event.preventDefault();
-      chargeVideo(1);
-    });
-    $('#precedente a').bind('click', function(event){
-      event.preventDefault();
-      chargeVideo(-1);
-    });
-    
-    self.detailSelector.load('js/tpl/detail.html', function(){
-      // récuperation de la fiche de l'élément
-      chargeFiche();
-    });
-  };*/
-  
   this.initialise = function(_parent, _indice, _id) {
     self.parent = _parent;
     self.indiceElement = parseInt(_indice);
@@ -148,53 +110,10 @@ function FicheDetail() {
       self.detailSelector.find('.descriptif').html("<p>"+descriptif+"</p>");
       
       
-      // liaison des boutons
-      /*self.detailSelector.find('.fermer a').bind('click', function(event){
-        event.preventDefault();
-        fermerDetail(element);
-      });*/
-    
-      
-      
       self.detailSelector.addClass('affiche');
-      //self.detailSelector.height(window.innerHeight);
-      //self.detailSelector.width(window.innerWidth);
-      //self.detailSelector.parent().width(window.innerWidth);
-      //self.parent.ficheDetailOuverte = true;
       
-      
-      //self.detailSelector.animate({'opacity':1, 'left':'0%'},500);
-      
-      
-      //TweenMax.to(self.detailSelector,1, {left:"0%", opacity:1, ease:Quart.easeInOut});
-      
-      
-      //TweenMax.to($("#wrapperAllContent"),0.5, {left:-window.innerWidth, ease:Quart.easeInOut});
-      
-      // verifie si on affiche une pub ou pas
-      //self.parent.parent.affichagePub();
+      // verifie si on affiche une pub ou pas      
       myApp.affichagePub();
-      
-      /*if(parseInt(self.detailSelector.css('margin-top')) > 10)
-      {
-        self.detailSelector.css('margin-top',-window.innerHeight);
-        //TweenMax.to(self.detailSelector, 0.5, {opacity:'1', marginTop:0, ease:Quart.easeInOut}); 
-        TweenMax.to(self.detailSelector, 0.5, {marginTop:0, ease:Quart.easeInOut}); 
-      }else{
-        if(parseInt(self.detailSelector.css('margin-top')) < -10)
-        {
-          self.detailSelector.css('margin-top',window.innerHeight);
-          //TweenMax.to(self.detailSelector, 0.5, {opacity:'1', marginTop:0, ease:Quart.easeInOut}); 
-          TweenMax.to(self.detailSelector, 0.5, {marginTop:0, ease:Quart.easeInOut}); 
-        }
-      }*/
-      
-      
-      /*$('#retourMenu').css('visibility','hidden');
-      $('#retourArriere').css('visibility','visible');
-      $('#suivante').css('visibility','visible');
-      $('#precedente').css('visibility','visible');
-      $('#partage').css('visibility','visible');*/
   }
   
   
