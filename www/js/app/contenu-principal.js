@@ -671,6 +671,8 @@ function ContenuPrincipal() {
             if($temp_wrapper.attr("data-id") != $newwrapper.attr("data-id")){           
               var cible = $newwrapper.find('img.th-face');
               lanceToggleView(cible);
+            }else{
+              $temp_wrapper.find( 'div.th-inner' ).find( 'visuel' ).css('display','block');              
             }
     }
   
