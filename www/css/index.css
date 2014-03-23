@@ -360,6 +360,9 @@ body.menuOuvert .mainContent {
   background-color: #e1e1e1;
   /*height: 100%;*/
 }
+.mainContentRecherche .zoneContenu {
+  margin-top: -12px;
+}
 html.csstransforms3d #retourMenuAccueil{
   /*display:none;*/
 }
@@ -460,6 +463,8 @@ html.csstransforms3d #retourMenuAccueil{
   padding-top:9px;
   width:100%;
   top:7px;
+  
+  opacity: 0;
 }
 
 #motcle {
@@ -571,7 +576,7 @@ html.csstransforms3d #retourMenuAccueil{
 	height: 82px;/*150px;*/
 	position: relative;
 	overflow: hidden;
-	background: #f0f0f0;
+	background: #333333;/*#f0f0f0;*/
 }
 
 .th-wrap .th-part:nth-child(1),
@@ -583,7 +588,6 @@ html.csstransforms3d #retourMenuAccueil{
 	z-index: 100;
         background-size: cover;
 }
-
 .th-wrap .th-part:nth-child(2){
 	/*-webkit-transform-origin: center bottom;	
 	-webkit-transform: translateY(-150px) translateZ(-150px) rotateX(-90deg);
@@ -653,7 +657,7 @@ html.csstransforms3d #retourMenuAccueil{
 	overflow: hidden;
 	z-index: 1000;
 	display: none;
-	background: #f0f0f0;
+	background: #333333;/*#f0f0f0;*/
 }
 
 .th-wrap .th-part:nth-child(3) .th-inner{
@@ -787,6 +791,88 @@ html.csstransforms3d #retourMenuAccueil{
   height:100%;
   overflow:hidden;
 }*/
+
+.fondDetail{
+  background-color:#e1e1e1;
+  
+  display:block;
+  width:100%;
+  height:100%;
+  position: absolute;
+  
+  z-index: 1;
+}
+
+.fondDetail .detailHaut{
+  background-color:#000000;
+  height: 82px;
+  position: relative;
+}
+
+.fondDetail .detailHaut .visuel{
+  float: left;
+  width: 50%;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.fondDetail .detailHaut .partage{
+  float: right;
+  width: 45%;
+  text-align: center;
+}
+.fondDetail .detailHaut .partage img{
+  width: auto;
+  padding-top: 10px;
+}
+
+.fondDetail .detailBas{
+  background-color:#333333;
+  height: 82px;
+  position: relative;
+}
+
+.fondDetail .detailBas .categories{
+  color:#999999;
+  float: left;
+  width: 70%;
+  padding-left: 5px;
+  display: none;
+}
+
+.fondDetail .detailBas .duree{
+  color:#ffffff;
+  float: right;
+  width: 20%;
+  text-align: right;
+  padding-right: 5px;
+  display: none;
+}
+
+.fondDetail .detailBas .titre{
+  color:#ffffff;
+  display:none;
+}
+
+.fondDetail .detailBas .descriptif{
+  color:#ffffff;
+  overflow: hidden;
+  width: 100%;
+  height: 60px;
+  padding-top:5px;
+}
+.fondDetail .detailBas .descriptif p{
+  margin: 0 0 0 0;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.fondDetail .detailBas .panneauCommentaires{
+  color:#ffffff;
+  display:none;
+}
+
+
 
 #detailManager .fondDetail{
   /*background-color: #000000;

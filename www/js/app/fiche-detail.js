@@ -33,7 +33,7 @@ function FicheDetail() {
   
   
   // constructeur
-  this.initialise = function(_parent, element, _indice, _id) {
+  /*this.initialise = function(_parent, element, _indice, _id) {
     self.parent = _parent;
     //var vignette = $(element);
     self.indiceElement = parseInt(_indice);//vignette.attr('data-id');
@@ -67,11 +67,27 @@ function FicheDetail() {
       // récuperation de la fiche de l'élément
       chargeFiche();
     });
+  };*/
+  
+  this.initialise = function(_parent, _indice, _id) {
+    self.parent = _parent;
+    self.indiceElement = parseInt(_indice);
+    self.idFiche = parseInt(_id);
+    
+    self.detailSelector = $(self.parent).children( 'div.th-inner' );
+    self.detailSelector.load('js/tpl/detail_v2.html', function(){
+      // récuperation de la fiche de l'élément
+      chargeFiche();
+      $(this).find('.partage a').bind('click', function(event){
+        event.preventDefault();
+        partageVideo();
+      });
+    });
   };
   
   function chargeFiche(){
     // animation navigation principale
-    TweenMax.to($("#wrapperAllContent"),0.5, {left:-window.innerWidth, ease:Quart.easeInOut});
+    //TweenMax.to($("#wrapperAllContent"),0.5, {left:-window.innerWidth, ease:Quart.easeInOut});
     
     $.ajax({
         type: 'GET',
@@ -101,13 +117,13 @@ function FicheDetail() {
       var hauteurPossible = window.innerHeight - hauteurElementsUI;
       var largeurPossible = window.innerWidth;
       
-      self.largeurImposee = 300;
-      self.hauteurImposee = 170;
+      self.largeurImposee = 140; //300;
+      self.hauteurImposee = 70; //170;
       
       if(largeurPossible > 560){
         if(hauteurPossible > 315){
-          self.largeurImposee = 560;
-          self.hauteurImposee = 315;
+          self.largeurImposee = 260;
+          self.hauteurImposee = 130;
         }
       }
       
@@ -141,10 +157,10 @@ function FicheDetail() {
       
       
       self.detailSelector.addClass('affiche');
-      self.detailSelector.height(window.innerHeight);
-      self.detailSelector.width(window.innerWidth);
-      self.detailSelector.parent().width(window.innerWidth);
-      self.parent.ficheDetailOuverte = true;
+      //self.detailSelector.height(window.innerHeight);
+      //self.detailSelector.width(window.innerWidth);
+      //self.detailSelector.parent().width(window.innerWidth);
+      //self.parent.ficheDetailOuverte = true;
       
       
       //self.detailSelector.animate({'opacity':1, 'left':'0%'},500);
@@ -156,9 +172,10 @@ function FicheDetail() {
       //TweenMax.to($("#wrapperAllContent"),0.5, {left:-window.innerWidth, ease:Quart.easeInOut});
       
       // verifie si on affiche une pub ou pas
-      self.parent.parent.affichagePub();
+      //self.parent.parent.affichagePub();
+      myApp.affichagePub();
       
-      if(parseInt(self.detailSelector.css('margin-top')) > 10)
+      /*if(parseInt(self.detailSelector.css('margin-top')) > 10)
       {
         self.detailSelector.css('margin-top',-window.innerHeight);
         //TweenMax.to(self.detailSelector, 0.5, {opacity:'1', marginTop:0, ease:Quart.easeInOut}); 
@@ -170,7 +187,7 @@ function FicheDetail() {
           //TweenMax.to(self.detailSelector, 0.5, {opacity:'1', marginTop:0, ease:Quart.easeInOut}); 
           TweenMax.to(self.detailSelector, 0.5, {marginTop:0, ease:Quart.easeInOut}); 
         }
-      }
+      }*/
       
       
       /*$('#retourMenu').css('visibility','hidden');
@@ -200,7 +217,7 @@ function FicheDetail() {
     //self.detailSelector.find('.fermer a').unbind('click');
     //vide detail
     self.detailSelector.html('');
-    self.parent.ficheDetailOuverte = false;
+    //self.parent.ficheDetailOuverte = false;
   };
   
   

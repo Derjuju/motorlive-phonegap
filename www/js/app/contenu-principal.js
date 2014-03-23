@@ -44,6 +44,9 @@ function ContenuPrincipal() {
   
   // gestion effet origami
   var $wrapper, $newwrapper;
+  var $wrapperRecherche;
+  var $temp_wrapper;
+  
   var isAnimating,
       // https://github.com/twitter/bootstrap/issues/2870
       transEndEventNames = {
@@ -107,7 +110,7 @@ function ContenuPrincipal() {
     zoneRechercheMenu = $('#rechercheMenu a');
     zoneRechercheMenu.bind('click', function(event){ 
       event.preventDefault();
-      if(rechercheOuverte){
+      if(self.rechercheOuverte){
         lanceRecherche();
       }else{
         ouvreRecherche();
@@ -125,6 +128,14 @@ function ContenuPrincipal() {
   this.chargeRubriqueActuelle = function(){
     //self.parent.menuNav.fermeMenu();
     //navigator.notification.loadingStart();
+    
+      // libére l'ancienne animation si pas attendu la fin de l'ancienne animation 
+      isAnimating = false;
+
+      $wrapper = null;
+      
+      self.zoneContenuSelector.find('img.th-face').unbind('click');
+    
       //href data-tpl data-id
       var itemMenu = self.parent.menuNav.getItemMenu(rubriqueActuelle);
       
@@ -156,7 +167,7 @@ function ContenuPrincipal() {
       //typeContenu = menuJson[itemIndice]["tpl"];
       
       // on referme la zone de recherche
-      if(rechercheOuverte){
+      if(self.rechercheOuverte){
         fermeRecherche();
       }
 
@@ -168,9 +179,10 @@ function ContenuPrincipal() {
         $('#suivante').css('visibility','hidden');
         $('#precedente').css('visibility','hidden');
         $('#partage').css('visibility','hidden');*/
-        if(self.ficheDetailOuverte){
+        
+        /*if(self.ficheDetailOuverte){
           ficheDetail.libereFicheDetail();
-        }
+        }*/
         contenuRempli(typeContenu);
       });
     
@@ -265,7 +277,7 @@ function ContenuPrincipal() {
     var html = "";    
     //html+='<img data-id="'+indice+'" data-position="'+position+'" src="'+cdn_visuel+'images/preview/'+elementVignette["preview"]+'">';    
     //html+='<img data-id="'+indice+'" data-position="'+position+'" src="img/vignette-vide.png" height="'+self.hauteurVignette+'" width="'+self.largeurVignette+'">';    
-    html+='<div class="th-wrap" data-id="'+indice+'" data-view="face" style="height:'+self.hauteurVignette+'px;width:100%;"><img class="th-face" data-id="'+indice+'" data-position="'+position+'" src="img/vignette-vide.png" height="'+self.hauteurVignette+'" width="'+self.largeurVignette+'"><div class="th-inner" style="display: none;"><br>On va retrouver ici le player vidéo et le descriptif</div></div>';    
+    html+='<div class="th-wrap" data-id="'+indice+'" data-view="face" style="height:'+self.hauteurVignette+'px;width:100%;"><img class="th-face" data-id="'+indice+'" data-position="'+position+'" src="img/vignette-vide.png" height="'+self.hauteurVignette+'" width="'+self.largeurVignette+'"><div class="th-inner" style="display: none;"></div></div>';    
     return html;
   }
   
@@ -290,7 +302,7 @@ function ContenuPrincipal() {
   
   function contenuPret(_containerListe){ 
     //self.zoneContenuSelector.scrollTop(0);  
-    
+    isAnimating = false;
     if(self.premierChargement){
       self.premierChargement = false;
       
@@ -331,17 +343,7 @@ function ContenuPrincipal() {
   
   function clickSurVignette(element){
     // à tester pour prévenir d'un click pendant le scroll
-    //if (myScroll.moved) return;
-    
-    var vignette = $(element);
-    /*if(!vignette.parent().hasClass('small'))
-    {
-      modePersonnalisation(element);
-    }else{
-      // click sur petite on agrandit
-      vignette.parent().removeClass('small');
-      deplaceScrollbar(element);
-    } */   
+    //if (myScroll.moved) return;  
     modePersonnalisation(element);
   }
   
@@ -356,6 +358,16 @@ function ContenuPrincipal() {
     var distance = (vignette.attr('data-position')*vignette.height()) + decalage;
     self.zoneContenuSelector.animate({'scrollTop':distance},500);
     
+  }
+  
+  function creationFiche(element){   
+    var vignette = $(element);
+    vignette.addClass('selected');
+    
+    ficheDetail = new FicheDetail();
+    ficheDetail.initialise(vignette, vignette.attr('data-id'), self.donneesJsonListing[vignette.attr('data-id')]["id"]);
+    
+    //return ficheDetail.getView();
   }
   
   
@@ -376,7 +388,7 @@ function ContenuPrincipal() {
   
   
   function ouvreRecherche(){
-    rechercheOuverte = true;
+    self.rechercheOuverte = true;
     /*
     $("#formRecherche").animate({'right':'0%'},500, function(){  
         $("#motcle").focus();
@@ -386,6 +398,7 @@ function ContenuPrincipal() {
     //TweenMax.to($("#formRecherche"),1, {right:"0%", ease:Quart.easeInOut, onComplete:activeFocusRecherche});    
     TweenMax.to($("#fondHeaderRecherche"),0.5, {width:"240px", delay:0.5, ease:Quart.easeInOut, onComplete:activeFocusRecherche});    
     TweenMax.to($("#motcle"), 0.5, {opacity:'1'});
+    TweenMax.to($("#formRecherche"), 0.5, {opacity:'1'});
     
     var decaleVers = window.innerWidth;
     if(self.ficheDetailOuverte){
@@ -415,22 +428,14 @@ function ContenuPrincipal() {
   }
   
   function fermeRecherche(){
-    rechercheOuverte = false;
+    self.rechercheOuverte = false;
     //TweenMax.to($("#formRecherche"), 0.5, {right:'-60%'});
     TweenMax.to($("#fondHeaderRecherche"), 0.5, {width:'60px'});
     TweenMax.to($("#motcle"), 0.5, {opacity:'0'});
+    TweenMax.to($("#formRecherche"), 0.5, {opacity:'0'});
   }
   
-  function lanceRecherche(){
-    //console.log("motcle : "+$("#motcle").val());
-    
-    /*
-     self.zoneContenuSelector.load('js/tpl/'+templateAAfficher, function(){
-        //navigator.notification.loadingStop();
-        contenuRempli(typeContenu);
-      });
-     */
-    
+  function lanceRecherche(){    
     if($("#motcle").val() != "")
     {
       if($("#motcle").val().length > 1)
@@ -531,31 +536,45 @@ function ContenuPrincipal() {
     myScroll.scrollTo(0, 0, 0);
     myScrollRecherche.scrollTo(0, 0, 0);
     */
-    myScrollers[0].refresh();
-    myScrollers[1].refresh();
-    myScrollers[0].scrollTo(0, 0, 0);
-    myScrollers[1].scrollTo(0, 0, 0);
-    
+    if(self.rechercheOuverte)
+    {
+      myScrollers[1].refresh();
+      myScrollers[1].scrollTo(0, 0, 0);
+    }else{
+      myScrollers[0].refresh();
+      myScrollers[0].scrollTo(0, 0, 0);
+    }
   }
   
   
   function toggleView(cible){ 
     if( !isAnimating ) {
       $newwrapper = $(cible).parent();   
-      if(($wrapper != null)&&($wrapper.attr("data-id") != $newwrapper.attr("data-id"))){        
+      if(self.rechercheOuverte)
+      {
+        if(($wrapperRecherche != null)&&($wrapperRecherche.attr("data-id") != $newwrapper.attr("data-id"))){        
+          var cibleOld = $wrapperRecherche.find('img.th-face');
+          lanceToggleView(cibleOld);
+        }else{
+          $newwrapper = $(cible).parent();
+          lanceToggleView(cible);
+        }        
+      }else {
+        if(($wrapper != null)&&($wrapper.attr("data-id") != $newwrapper.attr("data-id"))){        
         var cibleOld = $wrapper.find('img.th-face');
         lanceToggleView(cibleOld);
-      }else{
-        $newwrapper = $(cible).parent();
-        lanceToggleView(cible);
+        }else{
+          $newwrapper = $(cible).parent();
+          lanceToggleView(cible);
+        }
       }
     }
   }
   
   function lanceToggleView(cible) {
-    console.log("clic : "+isAnimating);
       //var $btn = $( this );
-      $wrapper = $(cible).parent();
+      
+      $temp_wrapper = $(cible).parent();
       
       var cibleImage = cible;
       
@@ -563,25 +582,43 @@ function ContenuPrincipal() {
 
               isAnimating = true;
               
-              var view = $wrapper.data( 'view' );
+              var view = $temp_wrapper.data( 'view' );
               
               if( view === 'detail' ) {
-                $wrapper.data( 'view', 'face' );
+                $temp_wrapper.data( 'view', 'face' );
                 if( notsupported ) {
-                  $wrapper.removeClass( 'th-active' ).children( 'div.th-inner' ).hide();
+                  $temp_wrapper.removeClass( 'th-active' ).children( 'div.th-inner' ).hide();
                   isAnimating = false;
+                  if(self.rechercheOuverte)
+                  {
+                    $wrapperRecherche = $temp_wrapper;
+                  }else{
+                    $wrapper = $temp_wrapper;
+                  }
                   return false;
                 }
               }else{                
-                $wrapper.data( 'view', 'detail' );
+                $temp_wrapper.data( 'view', 'detail' );
+                
+                //on récupère la fiche si elle n'existait pas encore
+                if($temp_wrapper.children( 'div.th-inner' ).html() == '')
+                  creationFiche($temp_wrapper);
+                
+                
                 if( notsupported ) {
-                  $wrapper.addClass( 'th-active' ).children( 'div.th-inner' ).show();
+                  $temp_wrapper.addClass( 'th-active' ).children( 'div.th-inner' ).show();
                   isAnimating = false;
+                  if(self.rechercheOuverte)
+                  {
+                    $wrapperRecherche = $temp_wrapper;
+                  }else{
+                    $wrapper = $temp_wrapper;
+                  }
                   return false;
                 }
               }
 
-              $wrapper.children( 'img' )
+              $temp_wrapper.children( 'img' )
                               .remove()
                               .end()
                               .children( 'div.th-inner' )
@@ -590,52 +627,51 @@ function ContenuPrincipal() {
                               .append( '<div class="th-overlay"></div>' )
                               .parent()
                               .clone()
-                              .appendTo( $wrapper );
-              $wrapper.append( '<div class="th-part th-part-image th-part-image-basse"></div>' )
+                              .appendTo( $temp_wrapper );
+              $temp_wrapper.append( '<div class="th-part th-part-image th-part-image-basse"></div>' )
                               .prepend( $( '<div class="th-part th-part-image th-part-image-haute"></div>' ) )
                               .find('.th-part.th-part-image').css('background-image','url('+$(cibleImage).attr("src")+')');
                       
-              $wrapper.find( 'div.th-part' )
+              $temp_wrapper.find( 'div.th-part' )
                               .on( transEndEventName, function( event ) {
                                       ++endCount;
                                       // 4 transitions
                                       if( endCount === 4 ) {
 
-                                              $wrapper.off( transEndEventName );
+                                              $temp_wrapper.off( transEndEventName );
                                               endCount = 0;
                                               clear( view , cibleImage);
 
                                       }
 
                               } ) ;
-        setTimeout( function() { ( view === 'detail' ) ? $wrapper.removeClass( 'th-active' ) : $wrapper.addClass( 'th-active' ); }, 0 );
+        setTimeout( function() { ( view === 'detail' ) ? $temp_wrapper.removeClass( 'th-active' ) : $temp_wrapper.addClass( 'th-active' ); }, 0 );
       }
       return false;
     }
   
     function clear( view, cibleImage ) {
-            $wrapper.find( 'div.th-inner:first' ).unwrap().end().find( 'div.th-overlay' ).remove();
+            $temp_wrapper.find( 'div.th-inner:first' ).unwrap().end().find( 'div.th-overlay' ).remove();
             var $img =  $(cibleImage);//$wrapper.children( 'img' );
-            var $inner = $wrapper.find( 'div.th-inner' );
+            var $inner = $temp_wrapper.find( 'div.th-inner' );
             ( view !== 'face' ) ? $inner.hide() : $inner.show();
-            $wrapper.find( 'div.th-part' ).remove();
-            $img.prependTo( $wrapper );
+            $temp_wrapper.find( 'div.th-part' ).remove();
+            $img.prependTo( $temp_wrapper );
             isAnimating = false;
             
             $(cibleImage).bind('click', function(){ toggleView(this); });
             
-            // animation sur ancienne cible ?
-            if($wrapper.attr("data-id") != $newwrapper.attr("data-id")){           
+            // animation sur ancienne cible ?            
+            if(self.rechercheOuverte)
+            {
+              $wrapperRecherche = $temp_wrapper;
+            }else{
+              $wrapper = $temp_wrapper;
+            }
+            if($temp_wrapper.attr("data-id") != $newwrapper.attr("data-id")){           
               var cible = $newwrapper.find('img.th-face');
               lanceToggleView(cible);
             }
     }
   
 }
-
-/*
-  
- <iframe width="560" height="315" src="//www.youtube.com/embed/wcOMV0nywds" frameborder="0" allowfullscreen></iframe> 
-  
- 
- */
