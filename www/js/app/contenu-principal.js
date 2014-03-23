@@ -302,7 +302,7 @@ function ContenuPrincipal() {
   
   function contenuPret(_containerListe){ 
     //self.zoneContenuSelector.scrollTop(0);  
-    isAnimating = false;
+    isAnimating = false;    
     if(self.premierChargement){
       self.premierChargement = false;
       
@@ -529,6 +529,7 @@ function ContenuPrincipal() {
     $("#wrapper").height(window.innerHeight);
     $("#wrapperRecherche").height(window.innerHeight);
 	
+        
     /*
     myScroll.refresh();
     myScrollRecherche.refresh();

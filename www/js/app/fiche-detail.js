@@ -103,7 +103,7 @@ function FicheDetail() {
         //playerVideo += '<iframe title="'+titre+'" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'" src="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR" frameborder="0" allowfullscreen></iframe>"';
         
       }
-      self.detailSelector.find('.visuel').html(playerVideo);
+      setTimeout(function(){ self.detailSelector.find('.visuel').html(playerVideo);}, 200);
       
       
       var descriptif = self.objetFiche["descriptif"];
