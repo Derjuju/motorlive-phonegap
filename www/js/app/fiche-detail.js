@@ -146,14 +146,18 @@ function FicheDetail() {
       {
         //playerVideo = '<iframe width="'+largeurImposee+'" height="'+hauteurImposee+'" src="http://www.youtube.com/embed/'+codeVideo+'" frameborder="0" allowfullscreen></iframe> ';
         urlSrcVideo = 'http://www.youtube.com/v/'+codeVideo;
-        playerVideo = '<object width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'"><param name="movie" value="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR"><param name="allowFullScreen" value="true"><param name="allowscriptaccess" value="always"><embed src="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'"/></object>';
+        playerVideo = '<object width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'"><param name="movie" value="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR"><param name="allowFullScreen" value="true"><param name="allowscriptaccess" value="always"><param name="bgcolor" value="#000000"><embed src="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" bgcolor="#000000" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'"/></object>';
         
         // cette ligne en dessous ne marche pas
         //playerVideo += '<iframe title="'+titre+'" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'" src="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR" frameborder="0" allowfullscreen></iframe>"';
         
       }
       
-      setTimeout(function(){ self.detailSelector.find('.visuel').html(playerVideo);}, 500);
+      setTimeout(function(){ 
+        self.detailSelector.find('.visuel').css('display','none');
+        self.detailSelector.find('.visuel').html(playerVideo);
+        self.detailSelector.find('.visuel').css('display','block');
+      }, 500);
   };
   
   /*function fermerDetail(element){
