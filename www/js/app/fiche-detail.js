@@ -107,8 +107,8 @@ function FicheDetail() {
       setTimeout(function(){ self.detailSelector.find('.visuel').html(playerVideo);}, 200);
       */
      
-     if(self.detailSelector.find('.visuel').html() != '<img src="img/ui/loader2.gif" height="40" width="40"/>')
-        self.detailSelector.find('.visuel').html('<img src="img/ui/loader2.gif" height="40" width="40"/>');
+     if(self.detailSelector.find('.visuel').html() != '<img src="img/ui/loader2.gif" height="40" width="40">')
+        self.detailSelector.find('.visuel').html('<img src="img/ui/loader2.gif" height="40" width="40">');
      
      setTimeout(function(){ajouteVideo();}, 100);
       
