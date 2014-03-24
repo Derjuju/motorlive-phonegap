@@ -74,6 +74,7 @@ function FicheDetail() {
       // customisation de la fiche detail
       //self.detailSelector.find('.titre').html('<h1>'+titre+'...</h1>');
       
+      /*
       // modification dimension en fonction du téléphone
       var hauteurElementsUI = 131;
       var hauteurPossible = window.innerHeight - hauteurElementsUI;
@@ -104,7 +105,12 @@ function FicheDetail() {
         
       }
       setTimeout(function(){ self.detailSelector.find('.visuel').html(playerVideo);}, 200);
-      
+      */
+     
+     if(self.detailSelector.find('.visuel').html() != '<img src="img/ui/loader2.gif" height="40" width="40"/>')
+        self.detailSelector.find('.visuel').html('<img src="img/ui/loader2.gif" height="40" width="40"/>');
+     
+     setTimeout(function(){ajouteVideo();}, 100);
       
       var descriptif = self.objetFiche["descriptif"];
       self.detailSelector.find('.descriptif').html("<p>"+descriptif+"</p>");
@@ -116,7 +122,39 @@ function FicheDetail() {
       myApp.affichagePub();
   }
   
-  
+  function ajouteVideo(){
+      // modification dimension en fonction du téléphone
+      var hauteurElementsUI = 131;
+      var hauteurPossible = window.innerHeight - hauteurElementsUI;
+      var largeurPossible = window.innerWidth;
+      
+      self.largeurImposee = 140; //300;
+      self.hauteurImposee = 70; //170;
+      
+      if(largeurPossible > 560){
+        if(hauteurPossible > 315){
+          self.largeurImposee = 260;
+          self.hauteurImposee = 130;
+        }
+      }
+      
+      
+      var codeVideo = self.objetFiche["idvideo"];
+      var playerVideo = '';
+      var urlSrcVideo = '';
+      if(self.objetFiche["videosrc"] == "youtube")
+      {
+        //playerVideo = '<iframe width="'+largeurImposee+'" height="'+hauteurImposee+'" src="http://www.youtube.com/embed/'+codeVideo+'" frameborder="0" allowfullscreen></iframe> ';
+        urlSrcVideo = 'http://www.youtube.com/v/'+codeVideo;
+        playerVideo = '<object width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'"><param name="movie" value="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR"><param name="allowFullScreen" value="true"><param name="allowscriptaccess" value="always"><embed src="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'"/></object>';
+        
+        // cette ligne en dessous ne marche pas
+        //playerVideo += '<iframe title="'+titre+'" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'" src="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR" frameborder="0" allowfullscreen></iframe>"';
+        
+      }
+      
+      setTimeout(function(){ self.detailSelector.find('.visuel').html(playerVideo);}, 500);
+  };
   
   /*function fermerDetail(element){
     // désactive navigation

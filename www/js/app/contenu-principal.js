@@ -605,7 +605,6 @@ function ContenuPrincipal() {
                 if($temp_wrapper.children( 'div.th-inner' ).html() == '')
                   creationFiche($temp_wrapper);
                 
-                
                 if( notsupported ) {
                   $temp_wrapper.addClass( 'th-active' ).children( 'div.th-inner' ).show();
                   isAnimating = false;
