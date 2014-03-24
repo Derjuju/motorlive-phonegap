@@ -154,7 +154,7 @@ function FicheDetail() {
         // cette ligne en dessous ne marche pas
         //playerVideo += '<iframe title="'+titre+'" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'" src="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR" frameborder="0" allowfullscreen></iframe>"';
         
-        urlSrcVideo = 'http://www.youtube.com/embed/'+codeVideo;
+        urlSrcVideo = 'http://www.youtube.com/embed/'+codeVideo+"?autoplay=1&controls=0&showinfo=0&rel=0";
         playerVideo = '<iframe title="'+titre+'" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'" src="'+urlSrcVideo+'" frameborder="0" allowfullscreen></iframe>';
         
       }
