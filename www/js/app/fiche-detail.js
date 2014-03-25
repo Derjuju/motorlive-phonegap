@@ -194,7 +194,7 @@ function FicheDetail() {
           if (isAvailable) {
             
             var imageToShare = cdn_visuel+self.objetFiche["id"]+'/'+self.objetFiche["preview"];
-            var permalien = website_app+"tv/"+self.objetFiche["id"];
+            var permalien = website_app+"/tv/"+self.objetFiche["id"];
             var messagePerso = "Découvrez la vidéo sur motorlive.tv";
             
             //share('message', 'sujet', 'image', 'site web');
