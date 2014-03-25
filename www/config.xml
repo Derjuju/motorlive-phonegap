@@ -64,7 +64,7 @@
     <gap:plugin name="com.phonegap.plugin.statusbar" /><!-- iOS7 plugin -->
     <gap:plugin name="de.appplant.cordova.plugin.email-composer" />
     <!--<gap:plugin name="com.phonegap.plugins.childbrowser" /> -->
-    <gap:plugin name="org.apache.cordova.inappbrowser" version="0.2.4" />
+    <gap:plugin name="org.apache.cordova.inappbrowser" version="0.3.3" />
     
     <icon src="icon.png" />
     
