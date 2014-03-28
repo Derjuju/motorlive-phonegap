@@ -173,9 +173,9 @@ function MyApplication(){
   }
   
   function debugAndroidKeyboardOnStart(){
-    $.bind('showkeyboard', function(){alert("ouvert");
+    /*$.bind('showkeyboard', function(){alert("ouvert");
        $.unbind('showkeyboard');
-    });
+    });*/
   }
   
   this.verifieDonneesServeur = function(){
