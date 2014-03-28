@@ -574,7 +574,7 @@ html.csstransforms3d #retourMenuAccueil{
 
 .th-wrap .th-part {
 	width: 100%;
-	height: 82px;/*150px;*/
+	height: 85px;/*150px;*/
 	position: relative;
 	overflow: hidden;
 	background: #333333;/*#f0f0f0;*/
@@ -601,15 +601,15 @@ html.csstransforms3d #retourMenuAccueil{
 	transform-origin: center bottom;	
 	transform: translateY(-150px) translateZ(-150px) rotateX(-90deg);*/
         -webkit-transform-origin: center bottom;	
-	-webkit-transform: translateY(-82px) translateZ(-82px) rotateX(-90deg);
+	-webkit-transform: translateY(-85px) translateZ(-85px) rotateX(-90deg);
 	-moz-transform-origin: center bottom;	
-	-moz-transform: translateY(-82px) translateZ(-82px) rotateX(-90deg);
+	-moz-transform: translateY(-85px) translateZ(-85px) rotateX(-90deg);
 	-o-transform-origin: center bottom;	
-	-o-transform: translateY(-82px) translateZ(-82px) rotateX(-90deg);
+	-o-transform: translateY(-85px) translateZ(-85px) rotateX(-90deg);
 	-ms-transform-origin: center bottom;	
-	-ms-transform: translateY(-82px) translateZ(-82px) rotateX(-90deg);
+	-ms-transform: translateY(-85px) translateZ(-85px) rotateX(-90deg);
 	transform-origin: center bottom;	
-	transform: translateY(-82px) translateZ(-82px) rotateX(-90deg);
+	transform: translateY(-85px) translateZ(-85px) rotateX(-90deg);
 }
 
 .th-wrap .th-part:nth-child(3) {
@@ -624,15 +624,15 @@ html.csstransforms3d #retourMenuAccueil{
 	transform-origin: center top;	
 	transform: translateY(-150px) translateZ(-150px) rotateX(90deg);*/
         -webkit-transform-origin: center top;	
-	-webkit-transform: translateY(-82px) translateZ(-82px) rotateX(90deg);
+	-webkit-transform: translateY(-85px) translateZ(-85px) rotateX(90deg);
 	-moz-transform-origin: center top;	
-	-moz-transform: translateY(-82px) translateZ(-82px) rotateX(90deg);
+	-moz-transform: translateY(-85px) translateZ(-85px) rotateX(90deg);
 	-o-transform-origin: center top;	
-	-o-transform: translateY(-82px) translateZ(-82px) rotateX(90deg);
+	-o-transform: translateY(-85px) translateZ(-85px) rotateX(90deg);
 	-ms-transform-origin: center top;	
-	-ms-transform: translateY(-82px) translateZ(-82px) rotateX(90deg);
+	-ms-transform: translateY(-85px) translateZ(-85px) rotateX(90deg);
 	transform-origin: center top;	
-	transform: translateY(-82px) translateZ(-82px) rotateX(90deg);
+	transform: translateY(-85px) translateZ(-85px) rotateX(90deg);
 }
 
 .th-wrap .th-part:nth-child(4) {
@@ -641,11 +641,11 @@ html.csstransforms3d #retourMenuAccueil{
 	-o-transform: translateY(-300px);
 	-ms-transform: translateY(-300px);
 	transform: translateY(-300px);*/
-        -webkit-transform: translateY(-163px);
-	-moz-transform: translateY(-163px);
-	-o-transform: translateY(-163px);
-	-ms-transform: translateY(-163px);
-	transform: translateY(-163px);
+        -webkit-transform: translateY(-170px);
+	-moz-transform: translateY(-170px);
+	-o-transform: translateY(-170px);
+	-ms-transform: translateY(-170px);
+	transform: translateY(-170px);
 	background-position: bottom left;
 }
 
@@ -663,7 +663,7 @@ html.csstransforms3d #retourMenuAccueil{
 
 .th-wrap .th-part:nth-child(3) .th-inner{
 	/*margin-top: -150px;*/
-        margin-top: -82px;
+        margin-top: -85px;
 }
 
 .th-overlay {
@@ -673,7 +673,7 @@ html.csstransforms3d #retourMenuAccueil{
 	left: 0px;
 	width: 100%;
 	/*height: 150px;*/
-	height: 82px;
+	height: 85px;
 	opacity: 1;
 }
 
@@ -701,11 +701,11 @@ html.csstransforms3d #retourMenuAccueil{
 	-o-transform: translateY(-150px) translateZ(0px) rotateX(0deg);
 	-ms-transform: translateY(-150px) translateZ(0px) rotateX(0deg);
 	transform: translateY(-150px) translateZ(0px) rotateX(0deg);*/
-        -webkit-transform: translateY(-82px) translateZ(0px) rotateX(0deg);
-	-moz-transform: translateY(-82px) translateZ(0px) rotateX(0deg);
-	-o-transform: translateY(-82px) translateZ(0px) rotateX(0deg);
-	-ms-transform: translateY(-82px) translateZ(0px) rotateX(0deg);
-	transform: translateY(-82px) translateZ(0px) rotateX(0deg);
+        -webkit-transform: translateY(-85px) translateZ(0px) rotateX(0deg);
+	-moz-transform: translateY(-85px) translateZ(0px) rotateX(0deg);
+	-o-transform: translateY(-85px) translateZ(0px) rotateX(0deg);
+	-ms-transform: translateY(-85px) translateZ(0px) rotateX(0deg);
+	transform: translateY(-85px) translateZ(0px) rotateX(0deg);
 }
 
 .th-wrap.th-active .th-overlay {
@@ -719,11 +719,11 @@ html.csstransforms3d #retourMenuAccueil{
 	-o-transform: translateY(-150px);
 	-ms-transform: translateY(-150px);
 	transform: translateY(-150px);*/
-        -webkit-transform: translateY(-82px);
-	-moz-transform: translateY(-82px);
-	-o-transform: translateY(-82px);
-	-ms-transform: translateY(-82px);
-	transform: translateY(-82px);
+        -webkit-transform: translateY(-85px);
+	-moz-transform: translateY(-85px);
+	-o-transform: translateY(-85px);
+	-ms-transform: translateY(-85px);
+	transform: translateY(-85px);
 }
 
 /* Transitions */
@@ -806,7 +806,7 @@ html.csstransforms3d #retourMenuAccueil{
 
 .fondDetail .detailHaut{
   background-color:#000000;
-  height: 82px;
+  height: 85px;
   position: relative;
 }
 
@@ -822,6 +822,10 @@ html.csstransforms3d #retourMenuAccueil{
   width: auto;
   padding-top:15px;
 }
+.fondDetail .detailHaut .visuel img.loaderVideo{
+  width:40px;
+  height: 40px;
+}
 
 .fondDetail .detailHaut .partage{
   float: right;
@@ -836,7 +840,7 @@ html.csstransforms3d #retourMenuAccueil{
 
 .fondDetail .detailBas{
   background-color:#333333;
-  height: 82px;
+  height: 85px;
   position: relative;
 }
 
@@ -867,12 +871,12 @@ html.csstransforms3d #retourMenuAccueil{
   overflow: hidden;
   width: 100%;
   height: 60px;
-  padding-top:5px;
+  padding-top:10px;
 }
 .fondDetail .detailBas .descriptif p{
   margin: 0 0 0 0;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .fondDetail .detailBas .panneauCommentaires{
@@ -1112,4 +1116,372 @@ html.csstransforms3d #retourMenuAccueil{
 @-webkit-keyframes loading {
 	from { -webkit-transform:rotate(0deg) translateZ(0); }
 	to { -webkit-transform:rotate(360deg) translateZ(0); }
+}
+
+
+
+/* specific iPad */
+html.isiPad .fondDetail .detailHaut{
+  height: 212px;
+}
+html.isiPad .fondDetail .detailHaut .visuel img.loaderVideo{
+  width:80px;
+  height: 80px;  
+  padding-top:55px;
+}
+html.isiPad .fondDetail .detailHaut .partage img {
+  padding-top: 72px;
+  height: 56px! important;
+}
+
+html.isiPad .fondDetail .detailBas{
+  height: 212px;
+}
+html.isiPad .fondDetail .detailBas .descriptif {
+  height: 190px;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+html.isiPad .th-wrap .th-part {
+	height: 212px;
+}
+
+html.isiPad .th-wrap .th-part:nth-child(2){
+        -webkit-transform-origin: center bottom;	
+	-webkit-transform: translateY(-212px) translateZ(-212px) rotateX(-90deg);
+	-moz-transform-origin: center bottom;	
+	-moz-transform: translateY(-212px) translateZ(-212px) rotateX(-90deg);
+	-o-transform-origin: center bottom;	
+	-o-transform: translateY(-212px) translateZ(-212px) rotateX(-90deg);
+	-ms-transform-origin: center bottom;	
+	-ms-transform: translateY(-212px) translateZ(-212px) rotateX(-90deg);
+	transform-origin: center bottom;	
+	transform: translateY(-212px) translateZ(-212px) rotateX(-90deg);
+}
+
+html.isiPad .th-wrap .th-part:nth-child(3) {
+	-webkit-transform-origin: center top;	
+	-webkit-transform: translateY(-212px) translateZ(-212px) rotateX(90deg);
+	-moz-transform-origin: center top;	
+	-moz-transform: translateY(-212px) translateZ(-212px) rotateX(90deg);
+	-o-transform-origin: center top;	
+	-o-transform: translateY(-212px) translateZ(-212px) rotateX(90deg);
+	-ms-transform-origin: center top;	
+	-ms-transform: translateY(-212px) translateZ(-212px) rotateX(90deg);
+	transform-origin: center top;	
+	transform: translateY(-212px) translateZ(-212px) rotateX(90deg);
+}
+
+html.isiPad .th-wrap .th-part:nth-child(4) {
+	-webkit-transform: translateY(-423px);
+	-moz-transform: translateY(-423px);
+	-o-transform: translateY(-423px);
+	-ms-transform: translateY(-423px);
+	transform: translateY(-423px);
+	background-position: bottom left;
+}
+
+html.isiPad .th-wrap .th-part:nth-child(3) .th-inner{	
+        margin-top: -212px;
+}
+
+html.isiPad .th-overlay {
+	height: 212px;	
+}
+
+
+html.isiPad .th-wrap.th-active .th-part:nth-child(2),
+html.isiPad .th-wrap.th-active .th-part:nth-child(3){
+	-webkit-transform: translateY(-212px) translateZ(0px) rotateX(0deg);
+	-moz-transform: translateY(-212px) translateZ(0px) rotateX(0deg);
+	-o-transform: translateY(-212px) translateZ(0px) rotateX(0deg);
+	-ms-transform: translateY(-212px) translateZ(0px) rotateX(0deg);
+	transform: translateY(-212px) translateZ(0px) rotateX(0deg);
+}
+
+html.isiPad .th-wrap.th-active .th-part:nth-child(1),
+html.isiPad .th-wrap.th-active .th-part:nth-child(4){
+	-webkit-transform: translateY(-212px);
+	-moz-transform: translateY(-212px);
+	-o-transform: translateY(-212px);
+	-ms-transform: translateY(-212px);
+	transform: translateY(-212px);
+}
+
+
+/* Differents Android : 340x192 */
+@media screen and (min-width: 320px) and (max-width: 360px) {
+  html.isAndroid .fondDetail .detailHaut{
+    height: 96px;
+  }
+  html.isAndroid .fondDetail .detailHaut .visuel img.loaderVideo{
+    width:46px;
+    height: 46px;  
+    padding-top:24px;
+  }
+  html.isAndroid .fondDetail .detailHaut .partage img {
+    padding-top: 26px;
+    height: 46px! important;
+  }
+
+  html.isAndroid .fondDetail .detailBas{
+    height: 96px;
+  }
+  html.isAndroid .fondDetail .detailBas .descriptif {
+    height: 80px;
+    font-size: 12px;
+    line-height: 16px;
+    padding-top:7px;
+  }
+
+  html.isAndroid .th-wrap .th-part {
+          height: 96px;
+  }
+
+  html.isAndroid .th-wrap .th-part:nth-child(2){
+          -webkit-transform-origin: center bottom;	
+          -webkit-transform: translateY(-96px) translateZ(-96px) rotateX(-90deg);
+          -moz-transform-origin: center bottom;	
+          -moz-transform: translateY(-96px) translateZ(-96px) rotateX(-90deg);
+          -o-transform-origin: center bottom;	
+          -o-transform: translateY(-96px) translateZ(-96px) rotateX(-90deg);
+          -ms-transform-origin: center bottom;	
+          -ms-transform: translateY(-96px) translateZ(-96px) rotateX(-90deg);
+          transform-origin: center bottom;	
+          transform: translateY(-96px) translateZ(-96px) rotateX(-90deg);
+  }
+
+  html.isAndroid .th-wrap .th-part:nth-child(3) {
+          -webkit-transform-origin: center top;	
+          -webkit-transform: translateY(-96px) translateZ(-96px) rotateX(90deg);
+          -moz-transform-origin: center top;	
+          -moz-transform: translateY(-96px) translateZ(-96px) rotateX(90deg);
+          -o-transform-origin: center top;	
+          -o-transform: translateY(-96px) translateZ(-96px) rotateX(90deg);
+          -ms-transform-origin: center top;	
+          -ms-transform: translateY(-96px) translateZ(-96px) rotateX(90deg);
+          transform-origin: center top;	
+          transform: translateY(-96px) translateZ(-96px) rotateX(90deg);
+  }
+
+  html.isAndroid .th-wrap .th-part:nth-child(4) {
+          -webkit-transform: translateY(-192px);
+          -moz-transform: translateY(-192px);
+          -o-transform: translateY(-192px);
+          -ms-transform: translateY(-192px);
+          transform: translateY(-192px);
+          background-position: bottom left;
+  }
+
+  html.isAndroid .th-wrap .th-part:nth-child(3) .th-inner{	
+          margin-top: -96px;
+  }
+
+  html.isAndroid .th-overlay {
+          height: -96px;	
+  }
+
+
+  html.isAndroid .th-wrap.th-active .th-part:nth-child(2),
+  html.isAndroid .th-wrap.th-active .th-part:nth-child(3){
+          -webkit-transform: translateY(-96px) translateZ(0px) rotateX(0deg);
+          -moz-transform: translateY(-96px) translateZ(0px) rotateX(0deg);
+          -o-transform: translateY(-96px) translateZ(0px) rotateX(0deg);
+          -ms-transform: translateY(-96px) translateZ(0px) rotateX(0deg);
+          transform: translateY(-96px) translateZ(0px) rotateX(0deg);
+  }
+
+  html.isAndroid .th-wrap.th-active .th-part:nth-child(1),
+  html.isAndroid .th-wrap.th-active .th-part:nth-child(4){
+          -webkit-transform: translateY(-96px);
+          -moz-transform: translateY(-96px);
+          -o-transform: translateY(-96px);
+          -ms-transform: translateY(-96px);
+          transform: translateY(-96px);
+  }
+}
+
+
+/* Differents Android : 364x206 */
+@media screen and (min-width: 361px) and (max-width: 384px) {
+  html.isAndroid .fondDetail .detailHaut{
+    height: 103px;
+  }
+  html.isAndroid .fondDetail .detailHaut .visuel img.loaderVideo{
+    width:46px;
+    height: 46px;  
+    padding-top:24px;
+  }
+  html.isAndroid .fondDetail .detailHaut .partage img {
+    padding-top: 26px;
+    height: 46px! important;
+  }
+
+  html.isAndroid .fondDetail .detailBas{
+    height: 103px;
+  }
+  html.isAndroid .fondDetail .detailBas .descriptif {
+    height: 80px;
+    font-size: 12px;
+    line-height: 16px;
+    padding-top:10px;
+  }
+
+  html.isAndroid .th-wrap .th-part {
+          height: 103px;
+  }
+
+  html.isAndroid .th-wrap .th-part:nth-child(2){
+          -webkit-transform-origin: center bottom;	
+          -webkit-transform: translateY(-103px) translateZ(-103px) rotateX(-90deg);
+          -moz-transform-origin: center bottom;	
+          -moz-transform: translateY(-103px) translateZ(-103px) rotateX(-90deg);
+          -o-transform-origin: center bottom;	
+          -o-transform: translateY(-103px) translateZ(-103px) rotateX(-90deg);
+          -ms-transform-origin: center bottom;	
+          -ms-transform: translateY(-103px) translateZ(-103px) rotateX(-90deg);
+          transform-origin: center bottom;	
+          transform: translateY(-103px) translateZ(-103px) rotateX(-90deg);
+  }
+
+  html.isAndroid .th-wrap .th-part:nth-child(3) {
+          -webkit-transform-origin: center top;	
+          -webkit-transform: translateY(-103px) translateZ(-103px) rotateX(90deg);
+          -moz-transform-origin: center top;	
+          -moz-transform: translateY(-103px) translateZ(-103px) rotateX(90deg);
+          -o-transform-origin: center top;	
+          -o-transform: translateY(-103px) translateZ(-103px) rotateX(90deg);
+          -ms-transform-origin: center top;	
+          -ms-transform: translateY(-103px) translateZ(-103px) rotateX(90deg);
+          transform-origin: center top;	
+          transform: translateY(-103px) translateZ(-103px) rotateX(90deg);
+  }
+
+  html.isAndroid .th-wrap .th-part:nth-child(4) {
+          -webkit-transform: translateY(-206px);
+          -moz-transform: translateY(-206px);
+          -o-transform: translateY(-206px);
+          -ms-transform: translateY(-206px);
+          transform: translateY(-206px);
+          background-position: bottom left;
+  }
+
+  html.isAndroid .th-wrap .th-part:nth-child(3) .th-inner{	
+          margin-top: -103px;
+  }
+
+  html.isAndroid .th-overlay {
+          height: -103px;	
+  }
+
+
+  html.isAndroid .th-wrap.th-active .th-part:nth-child(2),
+  html.isAndroid .th-wrap.th-active .th-part:nth-child(3){
+          -webkit-transform: translateY(-103px) translateZ(0px) rotateX(0deg);
+          -moz-transform: translateY(-103px) translateZ(0px) rotateX(0deg);
+          -o-transform: translateY(-103px) translateZ(0px) rotateX(0deg);
+          -ms-transform: translateY(-103px) translateZ(0px) rotateX(0deg);
+          transform: translateY(-103px) translateZ(0px) rotateX(0deg);
+  }
+
+  html.isAndroid .th-wrap.th-active .th-part:nth-child(1),
+  html.isAndroid .th-wrap.th-active .th-part:nth-child(4){
+          -webkit-transform: translateY(-103px);
+          -moz-transform: translateY(-103px);
+          -o-transform: translateY(-103px);
+          -ms-transform: translateY(-103px);
+          transform: translateY(-103px);
+  }
+}
+
+/* Differents Android : 780x442 */
+@media screen and (min-width: 385px) and (max-width: 800px) {
+  html.isAndroid .fondDetail .detailHaut{
+    height: 221px;
+  }
+  html.isAndroid .fondDetail .detailHaut .visuel img.loaderVideo{
+    width:80px;
+    height: 80px;  
+    padding-top:70px;
+  }
+  html.isAndroid .fondDetail .detailHaut .partage img {
+    padding-top: 72px;
+    height: 56px! important;
+  }
+
+  html.isAndroid .fondDetail .detailBas{
+    height: 221px;
+  }
+  html.isAndroid .fondDetail .detailBas .descriptif {
+    height: 190px;
+    font-size: 16px;
+    line-height: 20px;   
+  }
+
+  html.isAndroid .th-wrap .th-part {
+          height: 221px;
+  }
+
+  html.isAndroid .th-wrap .th-part:nth-child(2){
+          -webkit-transform-origin: center bottom;	
+          -webkit-transform: translateY(-221px) translateZ(-221px) rotateX(-90deg);
+          -moz-transform-origin: center bottom;	
+          -moz-transform: translateY(-221px) translateZ(-221px) rotateX(-90deg);
+          -o-transform-origin: center bottom;	
+          -o-transform: translateY(-221px) translateZ(-221px) rotateX(-90deg);
+          -ms-transform-origin: center bottom;	
+          -ms-transform: translateY(-221px) translateZ(-221px) rotateX(-90deg);
+          transform-origin: center bottom;	
+          transform: translateY(-221px) translateZ(-221px) rotateX(-90deg);
+  }
+
+  html.isAndroid .th-wrap .th-part:nth-child(3) {
+          -webkit-transform-origin: center top;	
+          -webkit-transform: translateY(-221px) translateZ(-221px) rotateX(90deg);
+          -moz-transform-origin: center top;	
+          -moz-transform: translateY(-221px) translateZ(-221px) rotateX(90deg);
+          -o-transform-origin: center top;	
+          -o-transform: translateY(-221px) translateZ(-221px) rotateX(90deg);
+          -ms-transform-origin: center top;	
+          -ms-transform: translateY(-221px) translateZ(-221px) rotateX(90deg);
+          transform-origin: center top;	
+          transform: translateY(-221px) translateZ(-221px) rotateX(90deg);
+  }
+
+  html.isAndroid .th-wrap .th-part:nth-child(4) {
+          -webkit-transform: translateY(-442px);
+          -moz-transform: translateY(-442px);
+          -o-transform: translateY(-442px);
+          -ms-transform: translateY(-442px);
+          transform: translateY(-442px);
+          background-position: bottom left;
+  }
+
+  html.isAndroid .th-wrap .th-part:nth-child(3) .th-inner{	
+          margin-top: -221px;
+  }
+
+  html.isAndroid .th-overlay {
+          height: -221px;	
+  }
+
+
+  html.isAndroid .th-wrap.th-active .th-part:nth-child(2),
+  html.isAndroid .th-wrap.th-active .th-part:nth-child(3){
+          -webkit-transform: translateY(-221px) translateZ(0px) rotateX(0deg);
+          -moz-transform: translateY(-221px) translateZ(0px) rotateX(0deg);
+          -o-transform: translateY(-221px) translateZ(0px) rotateX(0deg);
+          -ms-transform: translateY(-221px) translateZ(0px) rotateX(0deg);
+          transform: translateY(-221px) translateZ(0px) rotateX(0deg);
+  }
+
+  html.isAndroid .th-wrap.th-active .th-part:nth-child(1),
+  html.isAndroid .th-wrap.th-active .th-part:nth-child(4){
+          -webkit-transform: translateY(-221px);
+          -moz-transform: translateY(-221px);
+          -o-transform: translateY(-221px);
+          -ms-transform: translateY(-221px);
+          transform: translateY(-221px);
+  }
 }

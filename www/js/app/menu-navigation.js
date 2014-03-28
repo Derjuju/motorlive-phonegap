@@ -62,13 +62,13 @@ function MenuNavigation() {
         //height: 200,
 
         // [optional] The width of the menu (when using left/right position)
-        width: largeurDevice,
+        width: largeurDevice-20,
 
         // [optional] Distance from mouse (in pixels) when menu should open
         threshold: window.innerWidth / 4,
 
         // [optional] Distance that appear from the border (in pixels) when menu is closed
-        overlap: 10
+        overlap: 20
       });
     }else{
       self.menuSelector.addClass('no3D');
@@ -187,6 +187,10 @@ function MenuNavigation() {
     $(target).addClass('actif');
     $(target).find('img').attr('src',cdn_visuel_menu+menuJson[indice]["iconOn"]);
   }
+  
+  this.deselectionneElementMenu = function(){
+    desactiveElementMenu();
+  };
    
   this.ouvreMenu = function(){
     if(useTransition3D)

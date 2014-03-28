@@ -66,16 +66,18 @@ function ContenuPrincipal() {
   this.initialise = function(_parent) {
     self.parent = _parent;
     self.contenuSelector = $('.mainContent');
-    self.zoneContenuSelector = self.contenuSelector.find('.zoneContenu');
-    self.detailSelector = $('#detailManager');
+    self.zoneContenuSelector = self.contenuSelector.find('.zoneContenu');   
     
     self.premierChargement = true;
     
-    self.rechercheOuverte = false;
+    self.rechercheOuverte = false;       
     
-    self.largeurEcran = Math.floor(window.innerWidth * 0.9);
+    self.largeurEcran = window.innerWidth-20;//Math.floor(window.innerWidth * 0.9);
     self.largeurVignette = self.largeurEcran;//Math.floor(self.largeurEcran * 0.5);
+    //self.hauteurVignette = Math.floor(170 * self.largeurVignette / 300);
     self.hauteurVignette = Math.floor(170 * self.largeurVignette / 300);
+    
+    //alert(window.innerWidth+" et "+self.largeurVignette+" et "+self.hauteurVignette);    
     
     self.etatPanneaux = 0;
     
@@ -94,17 +96,6 @@ function ContenuPrincipal() {
       self.parent.menuNav.ouvreMenu();
     });
     
-    var zoneRetourArriere;
-    zoneRetourArriere = $('#retourArriere a');
-    zoneRetourArriere.bind('click', function(event){ 
-      event.preventDefault();
-      reculeContenu();
-    });
-    zoneRetourArriere = $('#retourArriereRecherche a');
-    zoneRetourArriere.bind('click', function(event){ 
-      event.preventDefault();
-      reculeContenu();
-    });
     
     var zoneRechercheMenu;
     zoneRechercheMenu = $('#rechercheMenu a');
@@ -143,14 +134,6 @@ function ContenuPrincipal() {
 
       var templateAAfficher = "";
       var typeContenu = "";
-
-      /*if((itemMenu.attr('data-tpl') == 'new')||(itemMenu.attr('data-tpl') == 'mes-infos')){
-        templateAAfficher = itemMenu.attr('data-tpl')+'.html';
-        typeContenu = itemMenu.attr('data-tpl');
-      }else{
-        templateAAfficher = 'liste.html';
-        typeContenu = "liste";
-      }*/
     
       if(itemIndice == -1){
         templateAAfficher = 'new.html';
@@ -163,9 +146,6 @@ function ContenuPrincipal() {
         typeContenu = 'liste';
       }
     
-      //templateAAfficher = menuJson[itemIndice]["tpl"]+'.html';
-      //typeContenu = menuJson[itemIndice]["tpl"];
-      
       // on referme la zone de recherche
       if(self.rechercheOuverte){
         fermeRecherche();
@@ -173,7 +153,7 @@ function ContenuPrincipal() {
 
       self.zoneContenuSelector.load('js/tpl/'+templateAAfficher, function(){
         //navigator.notification.loadingStop();
-        TweenMax.to($("#wrapperAllContent"),1, {left:0, ease:Quart.easeInOut});
+        //TweenMax.to($("#wrapperAllContent"),1, {left:0, ease:Quart.easeInOut});
         /*$('#retourMenu').css('visibility','visible');
         $('#retourArriere').css('visibility','hidden');
         $('#suivante').css('visibility','hidden');
@@ -251,8 +231,6 @@ function ContenuPrincipal() {
     if(_containerListe == "rubrique")
     {
       zoneCible = self.zoneContenuSelector.find('.visuels');
-    }else{
-      zoneCible = $("#wrapperRecherche .zoneContenu").find('.visuels');
     }
     //zoneCible.addClass('small');
     var html = "";
@@ -289,9 +267,6 @@ function ContenuPrincipal() {
     if(_containerListe == "rubrique")
     {
       zoneCible = self.zoneContenuSelector.find('.visuels');
-    }else{
-      zoneCible = $("#wrapperRecherche .zoneContenu").find('.visuels');
-      //cdn_visuel_substitution = cdn_visuel_small;
     }
     
     zoneCible.find('img').each(function(){      
@@ -307,19 +282,9 @@ function ContenuPrincipal() {
       self.premierChargement = false;
       
       
-      /*
-      // ajout de l'element iScroll pour gérer le contenu
-      setTimeout(function () { 
-        myScroll = new iScroll('wrapper',{ zoom:true, bounce:false, hScrollbar:false, hScroll:false}); 
-        myScrollRecherche = new iScroll('wrapperRecherche',{ zoom:true, bounce:false, hScrollbar:false, hScroll:false}); 
-        updateHeightInner();
-      }, 100);
-      */
-     
-     myScrollers = new Array();
+      myScrollers = new Array();
      setTimeout(function () { 
-        myScrollers[0] = new iScroll('wrapper',{ zoom:true, bounce:false, hScrollbar:false, hScroll:false}); 
-        myScrollers[1] = new iScroll('wrapperRecherche',{ zoom:true, bounce:false, hScrollbar:false, hScroll:false}); 
+        myScrollers[0] = new iScroll('wrapper',{ zoom:true, bounce:false, hScrollbar:false, hScroll:false});         
         updateHeightInner();
       },100);  
      
@@ -398,28 +363,7 @@ function ContenuPrincipal() {
     //TweenMax.to($("#formRecherche"),1, {right:"0%", ease:Quart.easeInOut, onComplete:activeFocusRecherche});    
     TweenMax.to($("#fondHeaderRecherche"),0.5, {width:"240px", delay:0.5, ease:Quart.easeInOut, onComplete:activeFocusRecherche});    
     TweenMax.to($("#motcle"), 0.5, {opacity:'1'});
-    TweenMax.to($("#formRecherche"), 0.5, {opacity:'1'});
-    
-    var decaleVers = window.innerWidth;
-    if(self.ficheDetailOuverte){
-      self.etatPanneaux = 2;
-      //decaleVers = decaleVers*2;
-    }else{
-      self.etatPanneaux = 1;
-    }
-    decaleVers = decaleVers*self.etatPanneaux;
-    
-    TweenMax.to($("#wrapperAllContent"),0.5, {left:-decaleVers, ease:Quart.easeInOut});
-    
-      /*$('#retourMenu').css('visibility','hidden');
-      $('#retourArriere').css('visibility','visible');
-      $('#suivante').css('visibility','visible');
-      $('#precedente').css('visibility','visible');
-      $('#partage').css('visibility','visible');*/
-    
-    // déplace tout l'ensemble des 3 zones
-    //TweenMax.to($("#formRecherche"),1, {right:"0%", ease:Quart.easeInOut, onComplete:activeFocusRecherche});
-    
+    TweenMax.to($("#formRecherche"), 0.5, {opacity:'1'});    
   }
   
   function activeFocusRecherche(){
@@ -452,14 +396,19 @@ function ContenuPrincipal() {
           
             if(objJSon["contenu"].length > 0)
             {
-              $("#wrapperRecherche .zoneContenu").load('js/tpl/resultat.html', function(){
-                construitContenuListing(objJSon["contenu"], "recherche");
+              fermeRecherche();
+              myApp.menuNav.deselectionneElementMenu();
+              //$("#wrapperRecherche .zoneContenu").load('js/tpl/resultat.html', function(){
+              self.zoneContenuSelector.load('js/tpl/liste.html', function(){
+                //construitContenuListing(objJSon["contenu"], "recherche");
+                construitContenuListing(objJSon["contenu"], "rubrique");
                 objJSon = null;
               });
+            }else{
+              self.zoneContenuSelector.load('js/tpl/liste.html', function(){
+                // vide la zone
+              });
             }
-          
-          
-              
               
         });
       }
@@ -502,49 +451,24 @@ function ContenuPrincipal() {
   function updateHeightInner() {
     //$('.contents').width((window.innerWidth*3)+30);
     $('.contents').width(window.innerWidth);
-    $('#wrapperAllContent').width((window.innerWidth*3)+30);
+    //$('#wrapperAllContent').width((window.innerWidth*3)+30);
+    $('#wrapperAllContent').width((window.innerWidth));
     //$('.fondHeader').width(window.innerWidth);
     
     
     self.contenuSelector.height(window.innerHeight);
     if(useTransition3D)
     {
-      self.contenuSelector.width((window.innerWidth - 10));
-      self.contenuSelector.css('margin-left','10px');
+      self.contenuSelector.width((window.innerWidth - 20));
+      self.contenuSelector.css('margin-left','20px');
     }else{
       self.contenuSelector.width(window.innerWidth);
     }
     
-    if(self.ficheDetailOuverte){
-      $('#detailManager').width(window.innerWidth);
-    }else{
-      $('#detailManager').width(0);
-    }
-    $('#detailManager').height(window.innerHeight);
-    
-    $('.mainContentRecherche').width(window.innerWidth);
-    $('.mainContentRecherche').height(window.innerHeight);
-    //self.zoneContenuSelector.height(window.innerHeight);
-    
     $("#wrapper").height(window.innerHeight);
-    $("#wrapperRecherche").height(window.innerHeight);
-	
-        
-    /*
-    myScroll.refresh();
-    myScrollRecherche.refresh();
-    // remonte le scroll en 0, 0 en 0 ms
-    myScroll.scrollTo(0, 0, 0);
-    myScrollRecherche.scrollTo(0, 0, 0);
-    */
-    if(self.rechercheOuverte)
-    {
-      myScrollers[1].refresh();
-      myScrollers[1].scrollTo(0, 0, 0);
-    }else{
-      myScrollers[0].refresh();
-      myScrollers[0].scrollTo(0, 0, 0);
-    }
+    
+    myScrollers[0].refresh();
+    myScrollers[0].scrollTo(0, 0, 0);
   }
   
   

@@ -70,45 +70,12 @@ function FicheDetail() {
             
       var titre = self.objetFiche["titre"].split('<br>')[0];
       var reg=new RegExp("(<br>)", "g");
-      
-      // customisation de la fiche detail
-      //self.detailSelector.find('.titre').html('<h1>'+titre+'...</h1>');
-      
-      /*
-      // modification dimension en fonction du téléphone
-      var hauteurElementsUI = 131;
-      var hauteurPossible = window.innerHeight - hauteurElementsUI;
-      var largeurPossible = window.innerWidth;
-      
-      self.largeurImposee = 140; //300;
-      self.hauteurImposee = 70; //170;
-      
-      if(largeurPossible > 560){
-        if(hauteurPossible > 315){
-          self.largeurImposee = 260;
-          self.hauteurImposee = 130;
-        }
-      }
-      
-      
-      var codeVideo = self.objetFiche["idvideo"];
-      var playerVideo = '';
-      var urlSrcVideo = '';
-      if(self.objetFiche["videosrc"] == "youtube")
-      {
-        //playerVideo = '<iframe width="'+largeurImposee+'" height="'+hauteurImposee+'" src="http://www.youtube.com/embed/'+codeVideo+'" frameborder="0" allowfullscreen></iframe> ';
-        urlSrcVideo = 'http://www.youtube.com/v/'+codeVideo;
-        playerVideo = '<object width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'"><param name="movie" value="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR"><param name="allowFullScreen" value="true"><param name="allowscriptaccess" value="always"><embed src="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'"/></object>';
-        
-        // cette ligne en dessous ne marche pas
-        //playerVideo += '<iframe title="'+titre+'" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'" src="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR" frameborder="0" allowfullscreen></iframe>"';
-        
-      }
-      setTimeout(function(){ self.detailSelector.find('.visuel').html(playerVideo);}, 200);
-      */
      
-     if(self.detailSelector.find('.visuel').html() != '<img src="img/ui/loader2b.gif" height="40" width="40">')
-        self.detailSelector.find('.visuel').html('<img src="img/ui/loader2b.gif" height="40" width="40">');
+     var dimensionLoader = 40;
+     if(IS_IPAD) { dimensionLoader = 80; }
+     
+     if(self.detailSelector.find('.visuel').html() != '<img src="img/ui/loader2b.gif" class="loaderVideo">')
+        self.detailSelector.find('.visuel').html('<img src="img/ui/loader2b.gif" class="loaderVideo">');
      
      setTimeout(function(){ajouteVideo();}, 100);
       
@@ -125,17 +92,27 @@ function FicheDetail() {
   function ajouteVideo(){
       // modification dimension en fonction du téléphone
       var hauteurElementsUI = 131;
-      var hauteurPossible = window.innerHeight - hauteurElementsUI;
-      var largeurPossible = window.innerWidth;
+      var hauteurPossible = self.detailSelector.find('.detailHaut').height()-10;
+      var largeurPossible = self.detailSelector.find('.detailHaut .visuel').width();
       
       self.largeurImposee = 140; //300;
       self.hauteurImposee = 70; //170;
       
-      if(largeurPossible > 560){
+      /*if(largeurPossible > 560){
         if(hauteurPossible > 315){
           self.largeurImposee = 260;
           self.hauteurImposee = 130;
         }
+      }*/
+      var ratioA = (hauteurPossible/largeurPossible);
+      var ratioB = (largeurPossible/hauteurPossible);
+      
+      if(ratioA >= ratioB){
+        self.largeurImposee = largeurPossible;
+        self.hauteurImposee = largeurPossible*ratioA;
+      }else{
+        self.largeurImposee = hauteurPossible*ratioB;
+        self.hauteurImposee = hauteurPossible;
       }
       
       
@@ -154,9 +131,13 @@ function FicheDetail() {
         // cette ligne en dessous ne marche pas
         //playerVideo += '<iframe title="'+titre+'" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'" src="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR" frameborder="0" allowfullscreen></iframe>"';
         
-        urlSrcVideo = 'http://www.youtube.com/embed/'+codeVideo+"?autoplay=1&controls=0&showinfo=0&rel=0";
-        playerVideo = '<iframe title="'+titre+'" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'" src="'+urlSrcVideo+'" frameborder="0" allowfullscreen></iframe>';
-        
+        if(IS_ANDROID) {
+          urlSrcVideo = 'http://www.youtube.com/v/'+codeVideo;
+          playerVideo = '<object width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'"><param name="movie" value="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR"><param name="allowFullScreen" value="true"><param name="allowscriptaccess" value="always"><param name="bgcolor" value="#000000"><embed src="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" bgcolor="#000000" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'"/></object>';        
+        }else{
+          urlSrcVideo = 'http://www.youtube.com/embed/'+codeVideo+"?autoplay=1&controls=0&showinfo=0&rel=0";
+          playerVideo = '<iframe title="'+titre+'" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'" src="'+urlSrcVideo+'" frameborder="0" allowfullscreen></iframe>';
+        }
       }
       
       setTimeout(function(){ 
@@ -165,19 +146,7 @@ function FicheDetail() {
         self.detailSelector.find('.visuel').css('display','block');
       }, 500);
   };
-  
-  /*function fermerDetail(element){
-    // désactive navigation
-    self.parent.parent.menuNav.activeMenu();
-    
-    var vignette = $(element);
-    vignette.removeClass('selected');
-    
-    TweenMax.to(self.detailSelector,1, {left:"100%", opacity:0, ease:Quart.easeInOut, onComplete:libereFicheDetail});
-    //self.detailSelector.animate({'opacity':0, 'left':'100%'},500, function(){
-    //  libereFicheDetail();
-    //});
-  }*/
+
   
   this.libereFicheDetail = function(){
     self.detailSelector.removeClass('affiche');
@@ -205,32 +174,6 @@ function FicheDetail() {
     
   }
   
-  
-  function chargeVideo(direction){
-    
-    self.indiceElement = parseInt(self.indiceElement)+parseInt(direction);
-    if(self.indiceElement < 0) self.indiceElement = 0;
-    if(self.indiceElement > self.parent.donneesJsonListing.length-1) self.indiceElement = self.parent.donneesJsonListing.length-1;
-    
-    $('#precedente').css('display','none');
-    $('#suivante').css('display','none');
-    if(self.indiceElement > 0){
-      $('#precedente').css('display','block');
-    }
-    if(self.indiceElement < self.parent.donneesJsonListing.length-1){
-      $('#suivante').css('display','block');
-    }
-    
-    var nouvelleDirection
-    if(direction > 0)
-    {
-      nouvelleDirection = -window.innerHeight;
-    }else{
-      nouvelleDirection = window.innerHeight;
-    }
-    //TweenMax.to(self.detailSelector, 0.5, {opacity:'0', marginTop:nouvelleDirection, ease:Quart.easeInOut, onComplete:initialiseNouvelleFiche}); 
-    TweenMax.to(self.detailSelector, 0.5, {marginTop:nouvelleDirection, ease:Quart.easeInOut, onComplete:initialiseNouvelleFiche}); 
-  }
   
   function initialiseNouvelleFiche(){
     self.idFiche = self.parent.donneesJsonListing[self.indiceElement]["id"];

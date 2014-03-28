@@ -45,6 +45,7 @@ var useTransition3D = true;
 
 var IS_ANDROID = navigator.userAgent.match( /android/gi ),
     IS_IPHONE = navigator.userAgent.match( /iphone/gi ),
+    IS_IPAD = navigator.userAgent.match( /iPad/gi ),
     IS_IOS = navigator.userAgent.match( /(iPad|iPhone|iPod)/i );
     
 // url des services
@@ -130,6 +131,12 @@ function MyApplication(){
   // constructeur
   this.initialise = function() {
     //navigator.splashscreen.show();
+    
+    self.menuNav = null;
+    
+    self.verifieUsage3D();
+    debugAndroidKeyboardOnStart();
+    
     connexion = new Connexion();   
     self.gestionnairePub = new GestionnairePubs();
     self.gestionnairePub.initialise(self);
@@ -138,7 +145,6 @@ function MyApplication(){
     //$("#app").css('width',window.innerWidth+"px");
     //$("#app").css('height',window.innerHeight+"px");
     
-    self.verifieUsage3D();
     
     self.demarrageApplication = true;
     self.verifieDonneesServeur();
@@ -150,12 +156,26 @@ function MyApplication(){
     }else{
       useTransition3D = false;
     }
-    // pas de bonne gestion du menu en 3D sous Android
+    // pas de bonne gestion du menu en 3D sous Android       
     if(IS_ANDROID) { 
       useTransition3D = false;
       $("html").removeClass("csstransforms3d");
+      $("html").addClass("isAndroid");
+    }
+    if(IS_IPAD) {
+      $("html").addClass("isiPad");
+    }
+    if(IS_IPHONE) {
+      $("html").addClass("isiPhone");
     }
     
+    
+  }
+  
+  function debugAndroidKeyboardOnStart(){
+    $.bind('showkeyboard', function(){alert("ouvert");
+       $.unbind('showkeyboard');
+    });
   }
   
   this.verifieDonneesServeur = function(){
