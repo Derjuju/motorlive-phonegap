@@ -475,7 +475,7 @@ function ContenuPrincipal() {
   function toggleView(cible){ 
     if( !isAnimating ) {
       $newwrapper = $(cible).parent();   
-      if(self.rechercheOuverte)
+      /*if(self.rechercheOuverte)
       {
         if(($wrapperRecherche != null)&&($wrapperRecherche.attr("data-id") != $newwrapper.attr("data-id"))){        
           var cibleOld = $wrapperRecherche.find('img.th-face');
@@ -492,6 +492,13 @@ function ContenuPrincipal() {
           $newwrapper = $(cible).parent();
           lanceToggleView(cible);
         }
+      }*/
+      if(($wrapper != null)&&($wrapper.attr("data-id") != $newwrapper.attr("data-id"))){        
+        var cibleOld = $wrapper.find('img.th-face');
+        lanceToggleView(cibleOld);
+      }else{
+        $newwrapper = $(cible).parent();
+        lanceToggleView(cible);
       }
     }
   }
@@ -514,12 +521,13 @@ function ContenuPrincipal() {
                 if( notsupported ) {
                   $temp_wrapper.removeClass( 'th-active' ).children( 'div.th-inner' ).hide();
                   isAnimating = false;
-                  if(self.rechercheOuverte)
+                  /*if(self.rechercheOuverte)
                   {
                     $wrapperRecherche = $temp_wrapper;
                   }else{
                     $wrapper = $temp_wrapper;
-                  }
+                  }*/
+                  $wrapper = $temp_wrapper;
                   return false;
                 }
               }else{                
@@ -533,12 +541,13 @@ function ContenuPrincipal() {
                 if( notsupported ) {
                   $temp_wrapper.addClass( 'th-active' ).children( 'div.th-inner' ).show();
                   isAnimating = false;
-                  if(self.rechercheOuverte)
+                  /*if(self.rechercheOuverte)
                   {
                     $wrapperRecherche = $temp_wrapper;
                   }else{
                     $wrapper = $temp_wrapper;
-                  }
+                  }*/
+                  $wrapper = $temp_wrapper;
                   return false;
                 }
               }
@@ -587,12 +596,13 @@ function ContenuPrincipal() {
             $(cibleImage).bind('click', function(){ toggleView(this); });
             
             // animation sur ancienne cible ?            
-            if(self.rechercheOuverte)
+            /*if(self.rechercheOuverte)
             {
               $wrapperRecherche = $temp_wrapper;
             }else{
               $wrapper = $temp_wrapper;
-            }
+            }*/
+            $wrapper = $temp_wrapper;
             if($temp_wrapper.attr("data-id") != $newwrapper.attr("data-id")){           
               var cible = $newwrapper.find('img.th-face');
               lanceToggleView(cible);
