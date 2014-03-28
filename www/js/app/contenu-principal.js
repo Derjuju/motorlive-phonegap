@@ -41,6 +41,7 @@ function ContenuPrincipal() {
   var rechercheOuverte;
   
   var donneesJsonListing;
+  var donneesJsonRecherche;
   
   // gestion effet origami
   var $wrapper, $newwrapper;
@@ -61,6 +62,8 @@ function ContenuPrincipal() {
       notsupported = !Modernizr.csstransforms || !Modernizr.csstransforms3d || !Modernizr.csstransitions;
   
   LAST_NEWS = 10;
+  var indiceDebutGlobal, indiceDebut = 0;
+  var resetScroll;
   
   // constructeur
   this.initialise = function(_parent) {
@@ -82,6 +85,9 @@ function ContenuPrincipal() {
     self.etatPanneaux = 0;
     
     self.lastNews = LAST_NEWS;
+    
+    self.indiceDebut = self.indiceDebutGlobal = 0;
+    self.resetScroll = true;
     
     //updateHeightInner();
     
@@ -150,19 +156,10 @@ function ContenuPrincipal() {
       if(self.rechercheOuverte){
         fermeRecherche();
       }
+      self.rechercheOuverte = false;
 
       self.zoneContenuSelector.load('js/tpl/'+templateAAfficher, function(){
-        //navigator.notification.loadingStop();
-        //TweenMax.to($("#wrapperAllContent"),1, {left:0, ease:Quart.easeInOut});
-        /*$('#retourMenu').css('visibility','visible');
-        $('#retourArriere').css('visibility','hidden');
-        $('#suivante').css('visibility','hidden');
-        $('#precedente').css('visibility','hidden');
-        $('#partage').css('visibility','hidden');*/
-        
-        /*if(self.ficheDetailOuverte){
-          ficheDetail.libereFicheDetail();
-        }*/
+
         contenuRempli(typeContenu);
       });
     
@@ -197,36 +194,74 @@ function ContenuPrincipal() {
       catIndice = menuJson[itemIndice]["id"];
     }
     
-    var donneesTemp = new Array();
-    for(var i = 0; i<donneesJson.length; i++)
+    //construitContenuListing(donneesTemp, "rubrique");
+    self.indiceDebut = 0;
+    self.indiceDebutGlobal = 0;
+    self.donneesJsonListing = new Array();
+    self.resetScroll = true;
+    infiniteScrollUpdate("rubrique", rubriqueCherchee, catIndice);
+    
+  }
+  
+  
+  
+  function infiniteScrollUpdate(_containerListe, rubriqueCherchee, catIndice){  
+    var compteurNouveau = 0;
+    
+    if(self.rechercheOuverte)
     {
-      // rubrique de la home ? alors on prend les X plus récentes
-      if(rubriqueCherchee == 0)
+      for(var i = self.indiceDebutGlobal; i<self.donneesJsonRecherche.length; i++)
       {
-        // tant qu'on a pas notre quota de lastNews, on prend
-        if(donneesTemp.length < self.lastNews)
+          self.indiceDebutGlobal++;
+          // tant qu'on a pas notre quota, on prend
+          if(compteurNouveau < self.lastNews)
+          {
+            self.donneesJsonListing.push(self.donneesJsonRecherche[i]);
+            compteurNouveau++
+          }else{
+            break;
+          }
+      }
+    }else{
+    
+      for(var i = self.indiceDebutGlobal; i<donneesJson.length; i++)
+      {
+        self.indiceDebutGlobal++;
+        // rubrique de la home ? alors on prend les X plus récentes
+        if(rubriqueCherchee == 0)
         {
-          donneesTemp.push(donneesJson[i]);
+          // tant qu'on a pas notre quota, on prend
+          if(compteurNouveau < self.lastNews)
+          {
+            self.donneesJsonListing.push(donneesJson[i]);
+            compteurNouveau++
+          }else{
+            break;
+          }
         }else{
-          break;
-        }
-      }else{
-        // conversion en tableau de nombre et non de string
-        // sinon on a le bug : 1 est dans 1 et dans 10 aussi
-        var cat = donneesJson[i]['cat'].split(',').map(Number);         
-        //if($.inArray(rubriqueCherchee, cat) > -1)
-        if($.inArray(catIndice, cat) > -1)
-        {
-          donneesTemp.push(donneesJson[i]);
+          // conversion en tableau de nombre et non de string
+          // sinon on a le bug : 1 est dans 1 et dans 10 aussi
+          var cat = donneesJson[i]['cat'].split(',').map(Number);         
+          //if($.inArray(rubriqueCherchee, cat) > -1)
+          if($.inArray(catIndice, cat) > -1)
+          {
+            // tant qu'on a pas notre quota, on prend
+            if(compteurNouveau < self.lastNews)
+            {
+              self.donneesJsonListing.push(donneesJson[i]);
+              compteurNouveau++
+            }else{
+              break;
+            }
+          }
         }
       }
     }
+    if(compteurNouveau>0) construitContenuListing(_containerListe, rubriqueCherchee, catIndice);
     
-    construitContenuListing(donneesTemp, "rubrique");
   }
   
-  function construitContenuListing(_donneesJson, _containerListe){
-    self.donneesJsonListing = _donneesJson;
+  function construitContenuListing(_containerListe, rubriqueCherchee, catIndice){
     var zoneCible;
     if(_containerListe == "rubrique")
     {
@@ -234,28 +269,37 @@ function ContenuPrincipal() {
     }
     //zoneCible.addClass('small');
     var html = "";
-    var position = 0;
-    for(var i = 0; i<self.donneesJsonListing.length; i++)
+    var position = self.indiceDebut;
+    for(var i = self.indiceDebut; i<self.donneesJsonListing.length; i++)
     {
-      html += insereVignette(self.donneesJsonListing[i],i,position);
+      var inViewClass = (i == self.donneesJsonListing.length-1)? true : false;
+      html += insereVignette(self.donneesJsonListing[i],i,position, inViewClass);
       position++;
+      self.indiceDebut++;
     }
-    
-    zoneCible.html(html);
+    var htmlExistant = zoneCible.html();
+    htmlExistant += html;
+    zoneCible.html(htmlExistant);
     
     //zoneCible.find('img').bind('click', function(){ clickSurVignette(this); });
     zoneCible.find('img.th-face').bind('click', function(){ toggleView(this); });
     
+    // ajout de l'écouteur de fin de liste
+    //if(!self.rechercheOuverte) 
+    activeDetectionFinDeListe(_containerListe, rubriqueCherchee, catIndice);
     
     contenuPret(_containerListe);
     
   }
   
-  function insereVignette(elementVignette,indice,position){
+  function insereVignette(elementVignette,indice,position, inViewClass){
     var html = "";    
     //html+='<img data-id="'+indice+'" data-position="'+position+'" src="'+cdn_visuel+'images/preview/'+elementVignette["preview"]+'">';    
     //html+='<img data-id="'+indice+'" data-position="'+position+'" src="img/vignette-vide.png" height="'+self.hauteurVignette+'" width="'+self.largeurVignette+'">';    
-    html+='<div class="th-wrap" data-id="'+indice+'" data-view="face" style="height:'+self.hauteurVignette+'px;width:100%;"><img class="th-face" data-id="'+indice+'" data-position="'+position+'" src="img/vignette-vide.png" height="'+self.hauteurVignette+'" width="'+self.largeurVignette+'"><div class="th-inner" style="display: none;"></div></div>';    
+    
+    var classInView = (inViewClass)? 'inViewDetect':'';
+    
+    html+='<div class="th-wrap '+classInView+'" data-id="'+indice+'" data-view="face" style="height:'+self.hauteurVignette+'px;width:100%;"><img class="th-face nouveau" data-id="'+indice+'" data-position="'+position+'" src="img/vignette-vide.png" height="'+self.hauteurVignette+'" width="'+self.largeurVignette+'"><div class="th-inner" style="display: none;"></div></div>';    
     return html;
   }
   
@@ -269,10 +313,41 @@ function ContenuPrincipal() {
       zoneCible = self.zoneContenuSelector.find('.visuels');
     }
     
-    zoneCible.find('img').each(function(){      
+    var delai = 0;
+    var delaiPas = 250;
+    
+    zoneCible.find('img.nouveau').each(function(){  
+      $(this).css('opacity',0);
       $(this).attr('src', cdn_visuel_substitution+self.donneesJsonListing[$(this).attr('data-id')]["id"]+'/'+self.donneesJsonListing[$(this).attr('data-id')]["preview"]) ;     
+      $(this).removeClass('nouveau');
+      //setTimeout(function(){TweenMax.to($(this), 0.5, {opacity:'1', ease:Quart.easeInOut});}, delai);
+      TweenMax.to($(this), 0.5, {opacity:'1', ease:Quart.easeInOut, delay:(delai/1000)});
+      
+      delai+=delaiPas;
     });
     
+  }
+  
+  function activeDetectionFinDeListe(_containerListe, rubriqueCherchee, catIndice){
+    var zoneCible;
+    if(_containerListe == "rubrique")
+    {
+      zoneCible = self.zoneContenuSelector.find('.visuels').find('.inViewDetect');
+    }
+    zoneCible.bind('inview', function(event, isInView, visiblePartX, visiblePartY) {
+      if (isInView) {
+          zoneCible.removeClass('inViewDetect');
+          // on retire l'écouteur d'événement
+          zoneCible.unbind('inview');
+          
+          // et on demande de charger la suite si disponible.
+          self.resetScroll = false;
+          setTimeout(function(){infiniteScrollUpdate(_containerListe, rubriqueCherchee, catIndice);},100); 
+      } 
+      else {
+      // element has gone out of viewport
+          }
+      });
   }
   
   function contenuPret(_containerListe){ 
@@ -283,7 +358,7 @@ function ContenuPrincipal() {
       
       
       myScrollers = new Array();
-     setTimeout(function () { 
+      setTimeout(function () { 
         myScrollers[0] = new iScroll('wrapper',{ zoom:true, bounce:false, hScrollbar:false, hScroll:false});         
         updateHeightInner();
       },100);  
@@ -294,7 +369,7 @@ function ContenuPrincipal() {
       }, 2000);  
       
     }else{
-      // mise à jour des dimensions + appel au iscroll refresh  
+      // mise à jour des dimensions + appel au iscroll refresh        
       setTimeout(function () { 
         updateHeightInner();
       },100);  
@@ -372,7 +447,7 @@ function ContenuPrincipal() {
   }
   
   function fermeRecherche(){
-    self.rechercheOuverte = false;
+    //self.rechercheOuverte = false;
     //TweenMax.to($("#formRecherche"), 0.5, {right:'-60%'});
     TweenMax.to($("#fondHeaderRecherche"), 0.5, {width:'60px'});
     TweenMax.to($("#motcle"), 0.5, {opacity:'0'});
@@ -400,9 +475,16 @@ function ContenuPrincipal() {
               myApp.menuNav.deselectionneElementMenu();
               //$("#wrapperRecherche .zoneContenu").load('js/tpl/resultat.html', function(){
               self.zoneContenuSelector.load('js/tpl/liste.html', function(){
-                //construitContenuListing(objJSon["contenu"], "recherche");
-                construitContenuListing(objJSon["contenu"], "rubrique");
+                self.donneesJsonRecherche = objJSon["contenu"];
                 objJSon = null;
+                
+                self.indiceDebut = 0;
+                self.indiceDebutGlobal = 0;
+                self.donneesJsonListing = new Array();
+                self.resetScroll = true;
+
+                infiniteScrollUpdate("rubrique", 0, 0);
+                
               });
             }else{
               self.zoneContenuSelector.load('js/tpl/liste.html', function(){
@@ -467,11 +549,10 @@ function ContenuPrincipal() {
     
     $("#wrapper").height(window.innerHeight);
     
+    if(self.resetScroll) myScrollers[0].scrollTo(0, 0, 0);
     myScrollers[0].refresh();
-    myScrollers[0].scrollTo(0, 0, 0);
   }
-  
-  
+ 
   function toggleView(cible){ 
     if( !isAnimating ) {
       $newwrapper = $(cible).parent();   
