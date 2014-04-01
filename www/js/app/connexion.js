@@ -249,8 +249,8 @@ function Connexion() {
                   dataType: "json",
                   async:true
                 }).done(function(data){   
-                      // envoi du token pour notification terminé                        
-                      navigator.notification.alert(data, null, 'DEBUG : data', 'OK');    
+                      // envoi du token pour notification terminé    
+                      //navigator.notification.alert(data, null, 'DEBUG : data', 'OK');    
                     }
                 );
       
