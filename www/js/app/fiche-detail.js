@@ -131,13 +131,15 @@ function FicheDetail() {
         // cette ligne en dessous ne marche pas
         //playerVideo += '<iframe title="'+titre+'" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'" src="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR" frameborder="0" allowfullscreen></iframe>"';
         
-        if(IS_ANDROID) {
+        /*if(IS_ANDROID) {
           urlSrcVideo = 'http://www.youtube.com/v/'+codeVideo;
           playerVideo = '<object width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'"><param name="movie" value="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR"><param name="allowFullScreen" value="true"><param name="allowscriptaccess" value="always"><param name="bgcolor" value="#000000"><embed src="'+urlSrcVideo+'?fs=1&amp;hl=fr_FR" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" bgcolor="#000000" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'"/></object>';        
         }else{
           urlSrcVideo = 'http://www.youtube.com/embed/'+codeVideo+"?autoplay=1&controls=0&showinfo=0&rel=0";
           playerVideo = '<iframe title="'+titre+'" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'" src="'+urlSrcVideo+'" frameborder="0" allowfullscreen></iframe>';
-        }
+        }*/
+        urlSrcVideo = 'http://www.youtube.com/embed/'+codeVideo+"?autoplay=1&controls=0&showinfo=0&rel=0";
+        playerVideo = '<iframe title="'+titre+'" width="'+self.largeurImposee+'" height="'+self.hauteurImposee+'" src="'+urlSrcVideo+'" frameborder="0" allowfullscreen></iframe>';
       }
       
       setTimeout(function(){ 

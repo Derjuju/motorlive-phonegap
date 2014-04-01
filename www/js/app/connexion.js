@@ -242,8 +242,8 @@ function Connexion() {
     {
       etatApplication = true;
       
-      navigator.notification.alert(_plateform);  
-      navigator.notification.alert(_token);  
+      navigator.notification.alert(_plateform, null, 'DEBUG : _plateform', 'OK');  
+      navigator.notification.alert(_token, null, 'DEBUG : _token', 'OK');  
       
         $.ajax({
                   type: 'POST',
@@ -253,7 +253,7 @@ function Connexion() {
                   async:true
                 }).done(function(data){   
                       // envoi du token pour notification terminé                        
-                      navigator.notification.alert(data);  
+                      navigator.notification.alert(data, null, 'DEBUG : data', 'OK');    
                     }
                 );
       
