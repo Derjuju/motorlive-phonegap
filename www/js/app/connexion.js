@@ -236,13 +236,13 @@ function Connexion() {
   }
   
   
-  this.subscribeToNotification = function(_plateform, _token){
+  this.subscribeToNotification = function(_platform, _token){
     var etatApplication = false;
     if(this.testConnectivite())
     {
       etatApplication = true;
       
-      navigator.notification.alert(_plateform, null, 'DEBUG : _plateform', 'OK');  
+      navigator.notification.alert(_platform, null, 'DEBUG : _platform', 'OK');  
       navigator.notification.alert(_token, null, 'DEBUG : _token', 'OK');  
       
         $.ajax({
