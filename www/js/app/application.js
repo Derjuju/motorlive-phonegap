@@ -214,10 +214,12 @@ function MyApplication(){
   // result contains any message sent from the plugin call
   function successHandlerNotification (result) {
       //alert('result = ' + result);
+      notificationMessage(result, null, 'DEBUG : successHandlerNotification', 'OK');
   }
   // result contains any error description text returned from the plugin call
   function errorHandlerNotification (error) {
       //alert('error = ' + error);
+      notificationMessage(error, null, 'DEBUG : errorHandlerNotification', 'OK');
   }
   function tokenHandlerNotification (result) {
       // Your iOS push server needs to know the token before it can push to this device
@@ -261,7 +263,7 @@ function MyApplication(){
               //$("#app-status-ul").append('<li>REGISTERED -> REGID:' + e.regid + "</li>");
               // Your GCM push server needs to know the regID before it can push to this device
               // here is where you might want to send it the regID for later use.
-              console.log("regID = " + e.regid);
+              //console.log("regID = " + e.regid);
               if(!connexion.subscribeToNotification(device.platform, e.regid))
               {
                 notificationMessage('Vous devez être connecté pour pouvoir utiliser cette application.', null, 'Absence de connectivité', 'OK');
