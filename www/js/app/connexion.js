@@ -241,9 +241,7 @@ function Connexion() {
     if(this.testConnectivite())
     {
       etatApplication = true;
-      
-      navigator.notification.alert(_token, null, 'DEBUG : _token', 'OK');  
-      
+       
         $.ajax({
                   type: 'POST',
                   url: webservice_subscribe,
