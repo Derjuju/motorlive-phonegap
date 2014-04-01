@@ -238,6 +238,9 @@ function Connexion() {
   
   this.subscribeToNotification = function(_platform, _token){
     var etatApplication = false;
+    
+    _platform = _platform.toLowerCase();
+    
     if(this.testConnectivite())
     {
       etatApplication = true;
