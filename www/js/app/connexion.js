@@ -235,4 +235,30 @@ function Connexion() {
     //console.log("permanentStorage.getItem( data-version ) : "+permanentStorage.getItem("data-version"));
   }
   
+  
+  this.subscribeToNotification = function(_plateform, _token){
+    var etatApplication = false;
+    if(this.testConnectivite())
+    {
+      etatApplication = true;
+      
+        $.ajax({
+                  type: 'POST',
+                  url: webservice_subscribe,
+                  data: {platform:_platform, token:_token},
+                  dataType: "json",
+                  async:true
+                }).done(function(data){   
+                      // envoi du token pour notification terminé
+                    }
+                );
+      
+    }else{
+      // pas de connexion tourne en local
+      etatApplication = false;
+    }    
+    return etatApplication;
+  }
+  
+  
 }
