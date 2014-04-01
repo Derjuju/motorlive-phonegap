@@ -313,7 +313,7 @@ function ContenuPrincipal() {
       zoneCible = self.zoneContenuSelector.find('.visuels');
     }
     
-    var delai = 0;
+    /*var delai = 0;
     var delaiPas = 250;
     
     zoneCible.find('img.nouveau').each(function(){  
@@ -321,11 +321,20 @@ function ContenuPrincipal() {
       $(this).attr('src', cdn_visuel_substitution+self.donneesJsonListing[$(this).attr('data-id')]["id"]+'/'+self.donneesJsonListing[$(this).attr('data-id')]["preview"]) ;     
       $(this).removeClass('nouveau');
       //setTimeout(function(){TweenMax.to($(this), 0.5, {opacity:'1', ease:Quart.easeInOut});}, delai);
-      TweenMax.to($(this), 0.5, {opacity:'1', ease:Quart.easeInOut, delay:(delai/1000)});
+      //setTimeout(function(){ TweenMax.to($(this), 0.5, {opacity:'1', ease:Quart.easeInOut, delay:(delai/1000)});}, 100);
       
-      delai+=delaiPas;
+      setTimeout(joueEffetAffichage($(this), delai),100);
+      //delai+=delaiPas;
     });
-    
+    */
+   zoneCible.find('img.nouveau').each(function(){  
+      $(this).attr('src', cdn_visuel_substitution+self.donneesJsonListing[$(this).attr('data-id')]["id"]+'/'+self.donneesJsonListing[$(this).attr('data-id')]["preview"]) ;     
+      $(this).removeClass('nouveau');      
+    });
+  }
+  
+  function joueEffetAffichage(cible, delai){
+    TweenMax.to($(cible), 0.5, {opacity:'1', ease:Quart.easeInOut, delay:(delai/1000)});
   }
   
   function activeDetectionFinDeListe(_containerListe, rubriqueCherchee, catIndice){

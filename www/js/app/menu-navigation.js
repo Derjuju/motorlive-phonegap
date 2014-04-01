@@ -62,7 +62,7 @@ function MenuNavigation() {
         //height: 200,
 
         // [optional] The width of the menu (when using left/right position)
-        width: largeurDevice-20,
+        width: largeurDevice,//-20,
 
         // [optional] Distance from mouse (in pixels) when menu should open
         threshold: window.innerWidth / 4,
