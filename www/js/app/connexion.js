@@ -242,6 +242,9 @@ function Connexion() {
     {
       etatApplication = true;
       
+      navigator.notification.alert(_plateform);  
+      navigator.notification.alert(_token);  
+      
         $.ajax({
                   type: 'POST',
                   url: webservice_subscribe,
@@ -249,7 +252,8 @@ function Connexion() {
                   dataType: "json",
                   async:true
                 }).done(function(data){   
-                      // envoi du token pour notification terminé
+                      // envoi du token pour notification terminé                        
+                      navigator.notification.alert(data);  
                     }
                 );
       
