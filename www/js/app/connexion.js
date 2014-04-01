@@ -242,7 +242,6 @@ function Connexion() {
     {
       etatApplication = true;
       
-      navigator.notification.alert(_platform, null, 'DEBUG : _platform', 'OK');  
       navigator.notification.alert(_token, null, 'DEBUG : _token', 'OK');  
       
         $.ajax({
