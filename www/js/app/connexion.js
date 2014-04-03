@@ -244,7 +244,6 @@ function Connexion() {
     if(this.testConnectivite())
     {
       etatApplication = true;
-    	navigator.notification.alert(_platform, null, "DEBUG : _platform", "ok");
     	navigator.notification.alert(_token, null, "DEBUG : token", "ok");
         $.ajax({
                   type: 'POST',
