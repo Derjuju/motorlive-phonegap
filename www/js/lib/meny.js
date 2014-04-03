@@ -147,7 +147,7 @@ var Meny = {
 						// Primary transform:
 						menuTransformOrigin = '100% 50%';
 						//menuTransformClosed = 'translateX( -100% ) translateX( '+ config.overlap +'px ) scale( 1.01 ) rotateY( -30deg )';
-						menuTransformClosed = 'translateX( -'+ (config.width - config.overlap) +'px ) scale( 1.01 ) rotateY( -30deg )';
+						menuTransformClosed = 'translateX( -'+ (config.width - config.overlap - 10) +'px ) scale( 1.01 ) rotateY( -30deg ) translateZ(20px)';
 						//translateZ(20px)
 						//translateX(30px)
 						
