@@ -43,7 +43,7 @@ function MenuNavigation() {
   	
     self.pullDownEl = document.getElementById('pullDown');
     self.pullDownOffset = self.pullDownEl.offsetHeight;
-    
+
     self.menuSelector = $('.navigation');
     
     if(useTransition3D)
@@ -62,7 +62,7 @@ function MenuNavigation() {
         //height: 200,
 
         // [optional] The width of the menu (when using left/right position)
-        width: largeurDevice-20,
+        width: largeurDevice,
 
         // [optional] Distance from mouse (in pixels) when menu should open
         threshold: window.innerWidth / 4,

@@ -146,10 +146,15 @@ var Meny = {
 					default:
 						// Primary transform:
 						menuTransformOrigin = '100% 50%';
-						menuTransformClosed = 'translateX( -100% ) translateX( '+ config.overlap +'px ) scale( 1.01 ) rotateY( -30deg )';
+						//menuTransformClosed = 'translateX( -100% ) translateX( '+ config.overlap +'px ) scale( 1.01 ) rotateY( -30deg )';
+						menuTransformClosed = 'translateX( -'+ (config.width - config.overlap) +'px ) scale( 1.01 ) rotateY( -30deg )';
+						//translateZ(20px)
+						//translateX(30px)
+						
 						contentsTransformOrigin = '0 50%';
 						//contentsTransformOpened = 'translateX( '+ config.width +'px ) rotateY( 15deg )';
-						contentsTransformOpened = 'translateX( '+ config.width +'px ) rotateY( 25deg )';
+						//contentsTransformOpened = 'translateX( '+ config.width +'px ) rotateY( 25deg )';
+						contentsTransformOpened = 'translateX( '+ (config.width - config.overlap) +'px ) rotateY( 25deg )';
 
 						// Position fallback:
 						menuStyleClosed = { left: '-' + (config.width-config.overlap) + 'px' };
@@ -259,8 +264,6 @@ var Meny = {
 				// Shorthand
 				var style = dom.contents.style;
 				
-				style.position = 'relative';
-				style.display = 'block';
 				style.zIndex = 1;
 
 				if( supports3DTransforms ) {
