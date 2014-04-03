@@ -239,7 +239,7 @@ var Meny = {
 
 				style.position = 'fixed';
 				style.display = 'block';
-				style.zIndex = 1;
+				style.zIndex = 10;
 
 				if( supports3DTransforms ) {
 					style[ Meny.prefix( 'transform' ) ] = menuTransformClosed;
@@ -258,6 +258,10 @@ var Meny = {
 			function setupContents() {
 				// Shorthand
 				var style = dom.contents.style;
+				
+				style.position = 'relative';
+				style.display = 'block';
+				style.zIndex = 1;
 
 				if( supports3DTransforms ) {
 					style[ Meny.prefix( 'transform' ) ] = contentsTransformClosed;
