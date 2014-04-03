@@ -39,6 +39,7 @@ function ContenuPrincipal() {
   var hauteurVignette;
   
   var rechercheOuverte;
+  var utiliseListingRecherche;
   
   var donneesJsonListing;
   var donneesJsonRecherche;
@@ -73,7 +74,8 @@ function ContenuPrincipal() {
     
     self.premierChargement = true;
     
-    self.rechercheOuverte = false;       
+    self.rechercheOuverte = false;   
+    self.utiliseListingRecherche = false;    
     
     self.largeurEcran = window.innerWidth-20;//Math.floor(window.innerWidth * 0.9);
     self.largeurVignette = self.largeurEcran;//Math.floor(self.largeurEcran * 0.5);
@@ -157,6 +159,7 @@ function ContenuPrincipal() {
         fermeRecherche();
       }
       self.rechercheOuverte = false;
+      self.utiliseListingRecherche = false;
 
       self.zoneContenuSelector.load('js/tpl/'+templateAAfficher, function(){
 
@@ -208,7 +211,7 @@ function ContenuPrincipal() {
   function infiniteScrollUpdate(_containerListe, rubriqueCherchee, catIndice){  
     var compteurNouveau = 0;
     
-    if(self.rechercheOuverte)
+    if(self.utiliseListingRecherche)
     {
       for(var i = self.indiceDebutGlobal; i<self.donneesJsonRecherche.length; i++)
       {
@@ -456,7 +459,7 @@ function ContenuPrincipal() {
   }
   
   function fermeRecherche(){
-    //self.rechercheOuverte = false;
+    self.rechercheOuverte = false;
     //TweenMax.to($("#formRecherche"), 0.5, {right:'-60%'});
     TweenMax.to($("#fondHeaderRecherche"), 0.5, {width:'60px'});
     TweenMax.to($("#motcle"), 0.5, {opacity:'0'});
@@ -491,6 +494,8 @@ function ContenuPrincipal() {
                 self.indiceDebutGlobal = 0;
                 self.donneesJsonListing = new Array();
                 self.resetScroll = true;
+                
+                self.utiliseListingRecherche = true;
 
                 infiniteScrollUpdate("rubrique", 0, 0);
                 
