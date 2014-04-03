@@ -214,12 +214,12 @@ function MyApplication(){
   // result contains any message sent from the plugin call
   function successHandlerNotification (result) {
       //alert('result = ' + result);
-      notificationMessage(result, null, 'DEBUG : successHandlerNotification', 'OK');
+      //notificationMessage(result, null, 'DEBUG : successHandlerNotification', 'OK');
   }
   // result contains any error description text returned from the plugin call
   function errorHandlerNotification (error) {
       //alert('error = ' + error);
-      notificationMessage(error, null, 'DEBUG : errorHandlerNotification', 'OK');
+      //notificationMessage(error, null, 'DEBUG : errorHandlerNotification', 'OK');
   }
   function tokenHandlerNotification (result) {
       // Your iOS push server needs to know the token before it can push to this device

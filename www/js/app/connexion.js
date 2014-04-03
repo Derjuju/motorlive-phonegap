@@ -244,7 +244,6 @@ function Connexion() {
     if(this.testConnectivite())
     {
       etatApplication = true;
-    	navigator.notification.alert(_token, null, "DEBUG : token", "ok");
         $.ajax({
                   type: 'POST',
                   url: webservice_subscribe,
@@ -252,9 +251,8 @@ function Connexion() {
                   dataType: "json",
                   async:true
                 }).done(function(data){   
-                      // envoi du token pour notification terminé    
-                      //navigator.notification.alert(data, null, 'DEBUG : data', 'OK');    
-    					navigator.notification.alert(data, null, "DEBUG : data", "ok");  
+                      // envoi du token pour notification terminé       
+    					navigator.notification.alert(data, null, 'DEBUG : data', 'OK');  
                     }
                 );
       
