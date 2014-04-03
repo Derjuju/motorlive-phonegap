@@ -252,8 +252,6 @@ function Connexion() {
                   async:true
                 }).done(function(data){   
                       // envoi du token pour notification terminé       
-    					//navigator.notification.alert(data, null, 'DEBUG : data', 'OK');  
-    					$('body').html(data);
                     }
                 );
       
