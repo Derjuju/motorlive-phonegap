@@ -194,7 +194,7 @@ function MyApplication(){
         pushNotification.register(
             successHandlerNotification,
             errorHandlerNotification, {
-                "senderID":"replace_with_sender_id",
+                "senderID":"364386454951",
                 "ecb":"onNotificationGCM"
             });
     }
